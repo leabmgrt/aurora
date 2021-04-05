@@ -239,6 +239,7 @@ struct CloudLoadBalancerServiceHTTP {
 }
 
 struct CloudLoadBalancerTarget {
+    var id: UUID = UUID()
     var type: CloudLoadBalancerTargetType
     var server: CloudLoadBalancerTargetServer
     var health_status: [CloudLoadBalancerTargetHealthStatus]
