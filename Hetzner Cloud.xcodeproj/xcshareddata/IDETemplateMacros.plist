@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+        <key>FILEHEADER</key>
+        <string>
+// Hetzner Cloud App (___PACKAGENAME___)
+// File created by ___FULLUSERNAME___ on ___DATE___.
+//
+// Licensed under the MIT License
+// Copyright © 2020 Adrian Baumgart. All rights reserved.
+//
+// https://git.abmgrt.dev/exc_bad_access/hetznercloudapp-ios
+//</string>
+</dict>
+</plist>
