@@ -11,13 +11,12 @@
 import SwiftUI
 
 struct ProjectLoadBalancerDetailTargetView: View {
-    
     @ObservedObject var controller: ProjectLoadBalancerDetailTargetController
-    
+
     var body: some View {
         if controller.project != nil && controller.loadBalancer != nil {
             List {
-                ForEach(controller.loadBalancer!.targets.filter({ $0.type == .server }), id: \.id) { target in
+                ForEach(controller.loadBalancer!.targets.filter { $0.type == .server }, id: \.id) { target in
                     let targetServer = controller.getServerById(target.server.id)
                     if targetServer != nil {
                         VStack(alignment: .leading) {
@@ -31,15 +30,12 @@ struct ProjectLoadBalancerDetailTargetView: View {
                                 ProjectLoadBalancerDetailHealthStatusBadge(mix: controller.getHealthCheckMixByServerId(targetServer!.id), showNumbers: true)
                             }
                         }.padding([.top, .bottom], 4)
-                    }
-                    else {
+                    } else {
                         Text("Something went wrong while loading the server (ID: \(target.server.id))").italic().padding(6)
                     }
-                    
                 }
             }.navigationBarTitle(Text("Targets"))
-        }
-        else {
+        } else {
             Text("Something went wrong here. Please try again.")
         }
     }
@@ -48,20 +44,19 @@ struct ProjectLoadBalancerDetailTargetView: View {
 class ProjectLoadBalancerDetailTargetController: ObservableObject {
     @Published var project: CloudProject?
     @Published var loadBalancer: CloudLoadBalancer?
-    
+
     init(project: CloudProject, loadBalancer: CloudLoadBalancer) {
         self.project = project
         self.loadBalancer = loadBalancer
     }
-    
-    func getServerById(_ id: Int) -> CloudServer? {
-            return project!.servers.first(where: { $0.id == id })
-    }
-    
-    func getHealthCheckMixByServerId(_ id: Int) -> ProjectLoadBalancerDetailHealthCheckMix {
 
+    func getServerById(_ id: Int) -> CloudServer? {
+        return project!.servers.first(where: { $0.id == id })
+    }
+
+    func getHealthCheckMixByServerId(_ id: Int) -> ProjectLoadBalancerDetailHealthCheckMix {
         guard let target = loadBalancer?.targets.first(where: { $0.type == .server && $0.server.id == id }) else { return .init(amountHealthy: 0, amountFailed: 0) }
-        
+
         let healthyChecks = target.health_status.filter { $0.status == "healthy" }.count
         let unhealthyChecks = target.health_status.filter { $0.status == "unhealthy" }.count
 

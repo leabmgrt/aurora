@@ -173,6 +173,7 @@ struct CloudLoadBalancerProtection {
 }
 
 struct CloudLoadBalancerService {
+    var id = UUID()
     var `protocol`: CloudLoadBalancerServiceProtocol
     var listen_port: Int
     var destination_port: Int
@@ -193,6 +194,7 @@ struct CloudLoadBalancerService {
 struct CloudLoadBalancerServiceHealthCheck {
     var `protocol`: CloudLoadBalancerServiceHealthCheckProtocol
     var port: Int
+    var interval: Int
     var timeout: Int
     var retries: Int
     var http: CloudLoadBalancerServiceHealthCheckHTTP?
@@ -200,6 +202,7 @@ struct CloudLoadBalancerServiceHealthCheck {
     init(_ json: JSON) {
         self.protocol = CloudLoadBalancerServiceHealthCheckProtocol(rawValue: json["protocol"].string!)!
         port = json["port"].int!
+        interval = json["interval"].int!
         timeout = json["timeout"].int!
         retries = json["retries"].int!
         http = json["http"] != .null ? .init(json["http"]) : nil
@@ -239,7 +242,7 @@ struct CloudLoadBalancerServiceHTTP {
 }
 
 struct CloudLoadBalancerTarget {
-    var id: UUID = UUID()
+    var id = UUID()
     var type: CloudLoadBalancerTargetType
     var server: CloudLoadBalancerTargetServer
     var health_status: [CloudLoadBalancerTargetHealthStatus]

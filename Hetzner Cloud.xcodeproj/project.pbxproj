@@ -44,7 +44,6 @@
 		3A6A17A12610E3C800BAE1ED /* CloudFloatingIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A17A02610E3C800BAE1ED /* CloudFloatingIP.swift */; };
 		3A6A17A92610F3FA00BAE1ED /* CloudFirewall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A17A82610F3FA00BAE1ED /* CloudFirewall.swift */; };
 		3A7E2AD4261888C800F41F04 /* ProjectServerDetailDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E2AD3261888C800F41F04 /* ProjectServerDetailDeleteView.swift */; };
-		3A98AF722615F4C300EF895B /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3A98AF712615F4C300EF895B /* SwiftUICharts */; };
 		3A98AF772615F4D800EF895B /* ProjectServerDetailGraphsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A98AF762615F4D800EF895B /* ProjectServerDetailGraphsView.swift */; };
 		3A9B455D2612303E007E2EA4 /* EZAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B455C2612303E007E2EA4 /* EZAlertController.swift */; };
 		3A9B456226123118007E2EA4 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B456126123118007E2EA4 /* UITableView.swift */; };
@@ -56,6 +55,7 @@
 		3AC9E318261A1621003EAC36 /* HetznerCloudAPI_Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */; };
 		3AC9E31D261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */; };
 		3AE03A2F261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */; };
+		3AE03A37261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */; };
 		3AE18DB5261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */; };
 		3AE18DBA261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */; };
 /* End PBXBuildFile section */
@@ -127,6 +127,7 @@
 		3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Network.swift; sourceTree = "<group>"; };
 		3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_FloatingIP.swift; sourceTree = "<group>"; };
 		3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailTargetView.swift; sourceTree = "<group>"; };
+		3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailServicesView.swift; sourceTree = "<group>"; };
 		3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_LoadBalancer.swift; sourceTree = "<group>"; };
 		3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailGraphsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,7 +138,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A54A34A2612236600F99693 /* RealmSwift in Frameworks */,
-				3A98AF722615F4C300EF895B /* SwiftUICharts in Frameworks */,
 				3A41A9C6260E783100EF7526 /* SwiftyJSON in Frameworks */,
 				3A54A35E261225BD00F99693 /* SwiftKeychainWrapper in Frameworks */,
 				3A9B456B26123317007E2EA4 /* Alamofire in Frameworks */,
@@ -234,6 +234,7 @@
 				3A00B3C7260FAF49000864C2 /* ProjectLoadBalancerDetailViewController.swift */,
 				3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */,
 				3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */,
+				3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */,
 			);
 			path = "Load Balancers";
 			sourceTree = "<group>";
@@ -387,7 +388,6 @@
 				3A54A34B2612236600F99693 /* Realm */,
 				3A54A35D261225BD00F99693 /* SwiftKeychainWrapper */,
 				3A9B456A26123317007E2EA4 /* Alamofire */,
-				3A98AF712615F4C300EF895B /* SwiftUICharts */,
 			);
 			productName = "Hetzner Cloud";
 			productReference = 3A41A960260E464200EF7526 /* Hetzner Cloud.app */;
@@ -466,7 +466,6 @@
 				3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				3A54A35C261225BD00F99693 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				3A9B456926123317007E2EA4 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				3A98AF702615F4C300EF895B /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 3A41A961260E464200EF7526 /* Products */;
 			projectDirPath = "";
@@ -534,6 +533,7 @@
 				3A68A26B2619EB8800107533 /* ProjectServerDetailBackupsView.swift in Sources */,
 				3A54A3442612229A00F99693 /* HCAppCache.swift in Sources */,
 				3A00B3D7260FAF69000864C2 /* ProjectFirewallDetailViewController.swift in Sources */,
+				3AE03A37261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift in Sources */,
 				3A41A9B7260E707300EF7526 /* CloudServer.swift in Sources */,
 				3A00B3D2260FAF61000864C2 /* ProjectNetworkDetailViewController.swift in Sources */,
 				3A190D7E2618C504003405A6 /* ProjectServerDetailPowerView.swift in Sources */,
@@ -914,14 +914,6 @@
 				minimumVersion = 4.0.1;
 			};
 		};
-		3A98AF702615F4C300EF895B /* XCRemoteSwiftPackageReference "ChartView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.5;
-			};
-		};
 		3A9B456926123317007E2EA4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -957,11 +949,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3A54A35C261225BD00F99693 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
-		};
-		3A98AF712615F4C300EF895B /* SwiftUICharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3A98AF702615F4C300EF895B /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
 		};
 		3A9B456A26123317007E2EA4 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

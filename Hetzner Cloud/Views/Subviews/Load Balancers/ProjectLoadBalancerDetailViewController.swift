@@ -144,7 +144,7 @@ struct ProjectLoadBalancerDetailView: View {
                             ProjectLoadBalancerDetailTargetView(controller: .init(project: controller.project!, loadBalancer: controller.loadBalancer!))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Services") {
-                            Text("Destination")
+                            ProjectLoadBalancerDetailServicesView(controller: .init(project: controller.project!, loadBalancer: controller.loadBalancer!))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Networking") {
                             Text("Destination")
@@ -172,22 +172,22 @@ struct ProjectLoadBalancerDetailHealthStatusBadge: View {
             if mix.amountFailed == 0 && mix.amountHealthy > 0 {
                 HStack {
                     Image(systemName: "checkmark").foregroundColor(.white)
-                    Text("\(showNumbers ? "\(mix.amountHealthy)/\((mix.amountHealthy + mix.amountFailed))" : "Healthy")").foregroundColor(.white)
+                    Text("\(showNumbers ? "\(mix.amountHealthy)/\(mix.amountHealthy + mix.amountFailed)" : "Healthy")").foregroundColor(.white)
                 }.padding(6).background(Color.green).cornerRadius(12)
             } else if mix.amountFailed > 0 && mix.amountHealthy > 0 {
                 HStack {
                     Image(systemName: "exclamationmark.triangle").foregroundColor(.white)
-                    Text("\(showNumbers ? "\(mix.amountHealthy)/\((mix.amountHealthy + mix.amountFailed))" : "Mixed")").foregroundColor(.white)
+                    Text("\(showNumbers ? "\(mix.amountHealthy)/\(mix.amountHealthy + mix.amountFailed)" : "Mixed")").foregroundColor(.white)
                 }.padding(6).background(Color.orange).cornerRadius(12)
             } else if mix.amountFailed > 0 && mix.amountHealthy == 0 {
                 HStack {
                     Image(systemName: "xmark.circle").foregroundColor(.white)
-                    Text("\(showNumbers ? "\(mix.amountHealthy)/\((mix.amountHealthy + mix.amountFailed))" : "Unhealthy")").foregroundColor(.white)
+                    Text("\(showNumbers ? "\(mix.amountHealthy)/\(mix.amountHealthy + mix.amountFailed)" : "Unhealthy")").foregroundColor(.white)
                 }.padding(6).background(Color.red).cornerRadius(12)
             } else {
                 HStack {
                     Image(systemName: "questionmark.circle").foregroundColor(.white)
-                    Text("\(showNumbers ? "\(mix.amountHealthy)/\((mix.amountHealthy + mix.amountFailed))" : "Unknown")").foregroundColor(.white)
+                    Text("\(showNumbers ? "\(mix.amountHealthy)/\(mix.amountHealthy + mix.amountFailed)" : "Unknown")").foregroundColor(.white)
                 }.padding(6).background(Color.gray).cornerRadius(12)
             }
         }
