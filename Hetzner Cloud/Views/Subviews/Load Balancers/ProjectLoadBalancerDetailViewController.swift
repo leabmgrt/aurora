@@ -138,7 +138,7 @@ struct ProjectLoadBalancerDetailView: View {
                     }.padding([.top, .bottom])
                     Group {
                         ProjectServerDetailOtherOptionsView(title: "Graphs") {
-                            Text("Destination")
+                            ProjectLoadBalancerDetailGraphsView(controller: .init(project: controller.project!, loadBalancer: controller.loadBalancer!))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Targets") {
                             Text("Destination")

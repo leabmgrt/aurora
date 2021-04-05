@@ -343,6 +343,52 @@ enum CloudLoadBalancerAlgorithmType: String {
     }
 }
 
+struct CloudLoadBalancerMetrics {
+    var start: Date
+    var end: Date
+    var step: Double
+    var time_series: [CloudLoadBalancerMetricsTimeSeries]
+
+    init(_ json: JSON) {
+        let dateFormatter = ISO8601DateFormatter()
+        start = dateFormatter.date(from: json["start"].string!.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression))!
+        end = dateFormatter.date(from: json["end"].string!)!
+        step = json["step"].double!
+        time_series = json["time_series"].map { key, json in
+            CloudLoadBalancerMetricsTimeSeries(json, key: key)
+        }
+    }
+
+    static let example: CloudLoadBalancerMetrics = {
+        let json = ExampleJSON.cloudLoadBalancerMetrics
+
+        let data = json.data(using: .utf8)
+        let parsedJSON = try? JSON(data: data!)
+        let cloudLoadBalancerMetrics = CloudLoadBalancerMetrics(parsedJSON!["metrics"])
+        return cloudLoadBalancerMetrics
+    }()
+}
+
+struct CloudLoadBalancerMetricsTimeSeries {
+    var name: String
+    var values: [CloudLoadBalancerMetricsTimeSeriesValue]
+
+    init(_ json: JSON, key: String) {
+        name = key
+        values = json["values"].arrayValue.map { CloudLoadBalancerMetricsTimeSeriesValue($0) }
+    }
+}
+
+struct CloudLoadBalancerMetricsTimeSeriesValue {
+    var date: Date
+    var value: Double
+
+    init(_ json: JSON) {
+        date = Date(timeIntervalSince1970: TimeInterval(json[0].int!))
+        value = Double(json[1].string!)!
+    }
+}
+
 enum CloudLoadBalancerServiceProtocol: String {
     case tcp, http, https
 }

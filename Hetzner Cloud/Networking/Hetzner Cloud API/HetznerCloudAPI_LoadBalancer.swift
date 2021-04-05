@@ -57,4 +57,23 @@ extension HetznerCloudAPI {
             callback(response)
         }
     }
+
+    func loadLoadBalancerMetrics(_ id: Int, minutes: Int, step: Int = 1000, callback: @escaping (Result<CloudLoadBalancerMetrics, HCAPIError>) -> Void) {
+        if cloudAppPreventNetworkActivityUseSampleData { return callback(.success(.example)) }
+
+        let isoDateSubtracted = ISO8601DateFormatter().string(from: Calendar.current.date(byAdding: .minute, value: -minutes, to: Date())!)
+        let isoDateCurrent = ISO8601DateFormatter().string(from: Date())
+
+        AF.request("https://api.hetzner.cloud/v1/load_balancers/\(id)/metrics?type=open_connections,connections_per_second,requests_per_second,bandwidth&start=\(isoDateSubtracted)&end=\(isoDateCurrent)&step=\(step)", headers: [
+            "Authorization": "Bearer \(apikey!)",
+        ]).responseJSON { [self] response in
+            if let error = responseCheck(response) {
+                return callback(.failure(error))
+            } else {
+                let json = JSON(response.data!)
+                let metrics = CloudLoadBalancerMetrics(json["metrics"])
+                return callback(.success(metrics))
+            }
+        }
+    }
 }
