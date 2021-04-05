@@ -204,7 +204,7 @@ extension ServerListViewController: UICollectionViewDelegate {
         } else if indexPath.section == 3 { // Floating IPs
             let detailController = ProjectFloatingIPDetailController(project: project!, floatingip: project!.floatingIPs[indexPath.row - 1])
             let detailView = UIHostingController(rootView: ProjectFloatingIPDetailView(controller: detailController))
-            
+
             splitViewController?.showsSecondaryOnlyButton = true
             let detailNavigationController = UINavigationController(rootViewController: detailView)
             detailNavigationController.navigationBar.prefersLargeTitles = true
@@ -222,14 +222,17 @@ extension ServerListViewController: UICollectionViewDelegate {
         } else if indexPath.section == 5 { // Network
             let detailController = ProjectNetworkDetailController(project: project!, network: project!.networks[indexPath.row - 1])
             let detailView = UIHostingController(rootView: ProjectNetworkDetailView(controller: detailController))
-            
+
             splitViewController?.showsSecondaryOnlyButton = true
             let detailNavigationController = UINavigationController(rootViewController: detailView)
             detailNavigationController.navigationBar.prefersLargeTitles = true
             splitViewController?.setViewController(detailNavigationController, for: .secondary)
         } else { // Load Balancers
-            let vc = ProjectLoadBalancerDetailViewController()
-            let detailNavigationController = UINavigationController(rootViewController: vc)
+            let detailController = ProjectLoadBalancerDetailController(project: project!, loadBalancer: project!.loadBalancers[indexPath.row - 1])
+            let detailView = UIHostingController(rootView: ProjectLoadBalancerDetailView(controller: detailController))
+
+            splitViewController?.showsSecondaryOnlyButton = true
+            let detailNavigationController = UINavigationController(rootViewController: detailView)
             detailNavigationController.navigationBar.prefersLargeTitles = true
             splitViewController?.setViewController(detailNavigationController, for: .secondary)
         }

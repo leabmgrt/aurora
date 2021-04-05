@@ -8,8 +8,8 @@
 // https://git.abmgrt.dev/exc_bad_access/hetznercloudapp-ios
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 class ProjectFloatingIPDetailViewController: UIViewController {
     override func viewDidLoad() {
@@ -19,10 +19,9 @@ class ProjectFloatingIPDetailViewController: UIViewController {
 }
 
 struct ProjectFloatingIPDetailView: View {
-    
     @ObservedObject var controller: ProjectFloatingIPDetailController
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
         if controller.project != nil && controller.floatingip != nil {
             ScrollView {
@@ -39,17 +38,16 @@ struct ProjectFloatingIPDetailView: View {
                                 }
                                 if controller.floatingip!.server != nil {
                                     HStack {
-                                        Text("Assigned to: ") + Text("\(controller.project!.servers.first(where: { $0.id == controller.floatingip!.server!})?.name ?? "unknown")").bold()
+                                        Text("Assigned to: ") + Text("\(controller.project!.servers.first(where: { $0.id == controller.floatingip!.server! })?.name ?? "unknown")").bold()
                                         Image(systemName: "checkmark.circle").foregroundColor(.green)
                                     }
-                                }
-                                else {
+                                } else {
                                     HStack {
                                         Text("Unassigned").foregroundColor(.gray).italic()
                                         Image(systemName: "xmark.circle").foregroundColor(.red)
                                     }
                                 }
-                                
+
                                 if controller.floatingip!.blocked {
                                     HStack {
                                         Text("Blocked").foregroundColor(.red)
@@ -76,7 +74,7 @@ struct ProjectFloatingIPDetailView: View {
                                     Text("Type: ") + Text("\(controller.floatingip!.type.getHumanName())").bold()
                                     Spacer()
                                 }
-                                ForEach(controller.floatingip!.dns_ptr, id: \.ip) { (dnsptr) in
+                                ForEach(controller.floatingip!.dns_ptr, id: \.ip) { dnsptr in
                                     HStack(alignment: .top) {
                                         Image(systemName: "number")
                                         Text("Reverse DNS (\(dnsptr.ip)): ") + Text("\(dnsptr.dns_ptr)").bold()
@@ -85,7 +83,7 @@ struct ProjectFloatingIPDetailView: View {
                                 }
                             }
                         }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
-                        
+
                         Group {
                             VStack(alignment: .leading) {
                                 HStack {
@@ -101,8 +99,7 @@ struct ProjectFloatingIPDetailView: View {
                     }.padding([.top, .bottom])
                 }.padding()
             }.navigationBarTitle(Text("\(controller.floatingip!.name)"))
-        }
-        else {
+        } else {
             Text("wait... something went wrong. Please try again. Sowwyy >.<")
         }
     }
@@ -111,7 +108,7 @@ struct ProjectFloatingIPDetailView: View {
 class ProjectFloatingIPDetailController: ObservableObject {
     @Published var project: CloudProject? = nil
     @Published var floatingip: CloudFloatingIP? = nil
-    
+
     init(project: CloudProject, floatingip: CloudFloatingIP) {
         self.project = project
         self.floatingip = floatingip

@@ -37,15 +37,13 @@ struct ProjectFirewallDetailView: View {
                                     Image(systemName: "checkmark").foregroundColor(.white)
                                     Text("Fully applied").foregroundColor(.white)
                                 }.padding(6).background(Color.green).cornerRadius(12)
-                            }
-                            else {
+                            } else {
                                 HStack {
                                     Image(systemName: "exclamationmark.triangle").foregroundColor(.white)
                                     Text("Partially applied").foregroundColor(.white)
                                 }.padding(6).background(Color.orange).cornerRadius(12)
                             }
-                        }
-                        else {
+                        } else {
                             Text("Not applied").foregroundColor(.white).padding(6).background(Color.gray).cornerRadius(12)
                         }
                     }
@@ -58,48 +56,44 @@ struct ProjectFirewallDetailView: View {
                     List {
                         Section(header: Text("Inbound")) {
                             if controller.firewall!.rules.filter({ $0.direction == .in }).count > 0 {
-                                ForEach(controller.firewall!.rules.filter({ $0.direction == .in }), id: \.id) { (rule) in
+                                ForEach(controller.firewall!.rules.filter { $0.direction == .in }, id: \.id) { rule in
                                     VStack(alignment: .leading) {
                                         Text("\(rule.protocol.rawValue.uppercased()) ").bold() + Text("\(rule.port != nil ? String(rule.port!) : "")")
                                         CloudFirewallTagView(ips: rule.source_ips)
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 Text("All inbound traffic will be dropped.").italic()
                             }
                         }
                         Section(header: Text("Outbound")) {
                             if controller.firewall!.rules.filter({ $0.direction == .out }).count > 0 {
-                                ForEach(controller.firewall!.rules.filter({ $0.direction == .out }), id: \.id) { (rule) in
+                                ForEach(controller.firewall!.rules.filter { $0.direction == .out }, id: \.id) { rule in
                                     VStack(alignment: .leading) {
                                         Text("\(rule.protocol.rawValue.uppercased()) ").bold() + Text("\(rule.port != nil ? String(rule.port!) : "")")
                                         CloudFirewallTagView(ips: rule.destination_ips)
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 Text("All outbound traffic is allowed.").italic()
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     if controller.appliedServers().count != 0 {
                         List {
-                            ForEach(controller.appliedServers(), id: \.id) { (appliedServer) in
+                            ForEach(controller.appliedServers(), id: \.id) { appliedServer in
                                 VStack(alignment: .leading) {
                                     HStack {
                                         Circle().foregroundColor(getServerStatusColor(appliedServer.status)).frame(width: 20, height: 20, alignment: .center).shadow(color: getServerStatusColor(appliedServer.status), radius: 3, x: 0, y: 0)
                                         Text("\(appliedServer.name) ").bold() + Text("(\(appliedServer.public_net.ipv4.ip))").foregroundColor(.gray).italic()
                                     }
-                                    if appliedServer.public_net.firewalls.first(where: {$0.id == controller.firewall!.id})!.status == .pending {
+                                    if appliedServer.public_net.firewalls.first(where: { $0.id == controller.firewall!.id })!.status == .pending {
                                         HStack {
                                             Image(systemName: "exclamationmark.triangle").foregroundColor(.white)
                                             Text("Pending").foregroundColor(.white)
                                         }.padding(6).background(Color.orange).cornerRadius(12)
-                                    }
-                                    else {
+                                    } else {
                                         HStack {
                                             Image(systemName: "checkmark").foregroundColor(.white)
                                             Text("Applied").foregroundColor(.white)
@@ -108,8 +102,7 @@ struct ProjectFirewallDetailView: View {
                                 }.padding([.top, .bottom], 4)
                             }
                         }
-                    }
-                    else {
+                    } else {
                         VStack {
                             Spacer()
                             Text("No resources").bold().font(.title2)
@@ -135,7 +128,7 @@ struct CloudFirewallTagView: View {
             GeometryReader { geometry in
                 self.generateContent(in: geometry)
             }
-        } .frame(height: totalHeight)
+        }.frame(height: totalHeight)
     }
 
     private func generateContent(in g: GeometryProxy) -> some View {
@@ -147,8 +140,7 @@ struct CloudFirewallTagView: View {
                 self.item(for: tag)
                     .padding([.horizontal, .vertical], 4)
                     .alignmentGuide(.leading, computeValue: { d in
-                        if (abs(width - d.width) > g.size.width)
-                        {
+                        if abs(width - d.width) > g.size.width {
                             width = 0
                             height -= d.height
                         }
@@ -160,7 +152,7 @@ struct CloudFirewallTagView: View {
                         }
                         return result
                     })
-                    .alignmentGuide(.top, computeValue: {d in
+                    .alignmentGuide(.top, computeValue: { _ in
                         let result = height
                         if tag == self.ips.last! {
                             height = 0
@@ -177,16 +169,14 @@ struct CloudFirewallTagView: View {
         if text == "0.0.0.0/0" {
             newText = "Any IPv4"
             isItalic = true
-        }
-        else if text == "::/0" {
+        } else if text == "::/0" {
             newText = "Any IPv6"
             isItalic = true
-        }
-        else {
+        } else {
             newText = text
             isItalic = false
         }
-        
+
         if isItalic {
             return Text(newText)
                 .italic()
@@ -195,8 +185,7 @@ struct CloudFirewallTagView: View {
                 .background(Color(UIColor.systemGray3))
                 .foregroundColor(Color.white)
                 .cornerRadius(5)
-        }
-        else {
+        } else {
             return Text(newText)
                 .padding(.all, 5)
                 .font(.body)
@@ -220,21 +209,21 @@ struct CloudFirewallTagView: View {
 class ProjectFirewallDetailController: ObservableObject {
     @Published var project: CloudProject? = nil
     @Published var firewall: CloudFirewall? = nil
-    
+
     func isFullyApplied() -> Bool {
-        let firewallAppliedToServerIDs: [Int] = firewall!.applied_to.map { Int($0.server.id ) }
+        let firewallAppliedToServerIDs: [Int] = firewall!.applied_to.map { Int($0.server.id) }
         var isFullyApplied = true
         for server in project!.servers.filter({ firewallAppliedToServerIDs.contains($0.id) }) {
-            if let serverfirewall = server.public_net.firewalls.first(where: { $0.id == firewall!.id}) {
+            if let serverfirewall = server.public_net.firewalls.first(where: { $0.id == firewall!.id }) {
                 if serverfirewall.status == .pending { isFullyApplied = false }
             }
         }
         return isFullyApplied
     }
-    
+
     func appliedServers() -> [CloudServer] {
-        let firewallAppliedToServerIDs: [Int] = firewall!.applied_to.map { Int($0.server.id ) }
-        return project!.servers.filter({ firewallAppliedToServerIDs.contains($0.id) })
+        let firewallAppliedToServerIDs: [Int] = firewall!.applied_to.map { Int($0.server.id) }
+        return project!.servers.filter { firewallAppliedToServerIDs.contains($0.id) }
     }
 }
 

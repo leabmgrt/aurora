@@ -173,12 +173,13 @@ struct CloudLoadBalancerProtection {
 }
 
 struct CloudLoadBalancerService {
+    var id = UUID()
     var `protocol`: CloudLoadBalancerServiceProtocol
     var listen_port: Int
     var destination_port: Int
     var proxyprotocol: Bool
     var health_check: CloudLoadBalancerServiceHealthCheck
-    var http: CloudLoadBalancerServiceHTTP
+    var http: CloudLoadBalancerServiceHTTP?
 
     init(_ json: JSON) {
         self.protocol = CloudLoadBalancerServiceProtocol(rawValue: json["protocol"].string!)!
@@ -186,23 +187,25 @@ struct CloudLoadBalancerService {
         destination_port = json["destination_port"].int!
         proxyprotocol = json["proxyprotocol"].bool!
         health_check = .init(json["health_check"])
-        http = .init(json["http"])
+        http = json["http"] != .null ? .init(json["http"]) : nil
     }
 }
 
 struct CloudLoadBalancerServiceHealthCheck {
     var `protocol`: CloudLoadBalancerServiceHealthCheckProtocol
     var port: Int
+    var interval: Int
     var timeout: Int
     var retries: Int
-    var http: CloudLoadBalancerServiceHealthCheckHTTP
+    var http: CloudLoadBalancerServiceHealthCheckHTTP?
 
     init(_ json: JSON) {
         self.protocol = CloudLoadBalancerServiceHealthCheckProtocol(rawValue: json["protocol"].string!)!
         port = json["port"].int!
+        interval = json["interval"].int!
         timeout = json["timeout"].int!
         retries = json["retries"].int!
-        http = .init(json["http"])
+        http = json["http"] != .null ? .init(json["http"]) : nil
     }
 }
 
@@ -239,22 +242,23 @@ struct CloudLoadBalancerServiceHTTP {
 }
 
 struct CloudLoadBalancerTarget {
+    var id = UUID()
     var type: CloudLoadBalancerTargetType
     var server: CloudLoadBalancerTargetServer
     var health_status: [CloudLoadBalancerTargetHealthStatus]
     var use_private_ip: Bool
-    var label_selector: CloudLoadBalancerTargetLabelSelector
-    var ip: CloudLoadBalancerTargetIP
-    var targets: [CloudLoadBalancerTargetTarget]
+    var label_selector: CloudLoadBalancerTargetLabelSelector?
+    var ip: CloudLoadBalancerTargetIP?
+    var targets: [CloudLoadBalancerTargetTarget]?
 
     init(_ json: JSON) {
         type = CloudLoadBalancerTargetType(rawValue: json["type"].string!)!
         server = .init(json["server"])
         health_status = json["health_status"].arrayValue.map { CloudLoadBalancerTargetHealthStatus($0) }
         use_private_ip = json["use_private_ip"].bool!
-        label_selector = .init(json["label_selector"])
-        ip = .init(json["ip"])
-        targets = json["targets"].arrayValue.map { CloudLoadBalancerTargetTarget($0) }
+        label_selector = json["label_selector"] != .null ? .init(json["label_selector"]) : nil
+        ip = json["ip"] != .null ? .init(json["ip"]) : nil
+        targets = json["targets"] != .null ? json["targets"].arrayValue.map { CloudLoadBalancerTargetTarget($0) } : nil
     }
 }
 
@@ -334,6 +338,59 @@ struct CloudLoadBalancerAlgorithm {
 
 enum CloudLoadBalancerAlgorithmType: String {
     case round_robin, least_connections
+
+    func humanString() -> String {
+        switch self {
+        case .round_robin: return "Round Robin"
+        case .least_connections: return "Least Connections"
+        }
+    }
+}
+
+struct CloudLoadBalancerMetrics {
+    var start: Date
+    var end: Date
+    var step: Double
+    var time_series: [CloudLoadBalancerMetricsTimeSeries]
+
+    init(_ json: JSON) {
+        let dateFormatter = ISO8601DateFormatter()
+        start = dateFormatter.date(from: json["start"].string!.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression))!
+        end = dateFormatter.date(from: json["end"].string!)!
+        step = json["step"].double!
+        time_series = json["time_series"].map { key, json in
+            CloudLoadBalancerMetricsTimeSeries(json, key: key)
+        }
+    }
+
+    static let example: CloudLoadBalancerMetrics = {
+        let json = ExampleJSON.cloudLoadBalancerMetrics
+
+        let data = json.data(using: .utf8)
+        let parsedJSON = try? JSON(data: data!)
+        let cloudLoadBalancerMetrics = CloudLoadBalancerMetrics(parsedJSON!["metrics"])
+        return cloudLoadBalancerMetrics
+    }()
+}
+
+struct CloudLoadBalancerMetricsTimeSeries {
+    var name: String
+    var values: [CloudLoadBalancerMetricsTimeSeriesValue]
+
+    init(_ json: JSON, key: String) {
+        name = key
+        values = json["values"].arrayValue.map { CloudLoadBalancerMetricsTimeSeriesValue($0) }
+    }
+}
+
+struct CloudLoadBalancerMetricsTimeSeriesValue {
+    var date: Date
+    var value: Double
+
+    init(_ json: JSON) {
+        date = Date(timeIntervalSince1970: TimeInterval(json[0].int!))
+        value = Double(json[1].string!)!
+    }
 }
 
 enum CloudLoadBalancerServiceProtocol: String {

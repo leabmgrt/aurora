@@ -93,7 +93,7 @@ struct CloudFloatingIPProtection {
 
 enum CloudFloatingIPType: String {
     case ipv4, ipv6
-    
+
     func getHumanName() -> String {
         switch self {
         case .ipv4: return "IPv4"

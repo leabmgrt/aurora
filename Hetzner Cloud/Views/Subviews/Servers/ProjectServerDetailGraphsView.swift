@@ -213,9 +213,8 @@ struct ServerGraphShape: Shape {
     var dataPoints: [ServerGraphDataPoint]
 
     func path(in rect: CGRect) -> Path {
-        
         // This was way too complicated and idk what I did so please don't ask me how it works. Example values really helped me so uncomment the print statements below if you need them.
-        
+
         let lowestXValue = CGFloat(dataPoints.sorted(by: { $0.date < $1.date }).first!.date.timeIntervalSince1970)
         let highestXValue = CGFloat(dataPoints.sorted(by: { $0.date > $1.date }).first!.date.timeIntervalSince1970)
         var highestYValue = dataPoints.sorted(by: { $0.value > $1.value }).first!.value + (dataPoints.sorted(by: { $0.value > $1.value }).first!.value * 0.1)

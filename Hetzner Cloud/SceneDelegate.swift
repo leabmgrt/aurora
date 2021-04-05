@@ -41,8 +41,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @available(iOS 14.0, *)
     func loadSplitViewController() {
         cloudAppSplitViewController = GlobalSplitViewController(style: .tripleColumn)
-        cloudAppSplitViewController.preferredDisplayMode = .twoBesideSecondary //.twoBesideSecondary
-        cloudAppSplitViewController.preferredSplitBehavior = .tile //.tile
+        cloudAppSplitViewController.preferredDisplayMode = .twoBesideSecondary // .twoBesideSecondary
+        cloudAppSplitViewController.preferredSplitBehavior = .tile // .tile
 
         cloudAppSplitViewController.setViewController(ProjectListViewController(), for: .primary)
         let vc1 = UIViewController()

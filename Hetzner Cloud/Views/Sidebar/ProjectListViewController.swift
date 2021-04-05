@@ -26,7 +26,6 @@ class ProjectListViewController: UIViewController {
     }
 
     @objc func createNewProjectButton() {
-        
         if cloudAppPreventNetworkActivityUseSampleData {
             EZAlertController.alert("Development mode active", message: "The app currently uses example data and doesn't communicate with the Hetzner Cloud API.\n\nIf you're a normal user, please report this issue immediately.\n\nIf you're a developer, change \"cloudAppPreventNetworkActivityUseSampleData\" inside \"SceneDelegate.swift\" to \"false\"")
             return

@@ -49,7 +49,7 @@ struct CloudNetwork {
 }
 
 struct CloudNetworkSubnet {
-    var id: UUID = UUID()
+    var id = UUID()
     var type: CloudNetworkSubnetType
     var ip_range: String
     var network_zone: String
@@ -64,7 +64,7 @@ struct CloudNetworkSubnet {
 }
 
 struct CloudNetworkRoute {
-    var id: UUID = UUID()
+    var id = UUID()
     var destination: String
     var gateway: String
 
