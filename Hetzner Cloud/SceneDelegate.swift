@@ -15,7 +15,7 @@ import UIKit
 var cloudAppSplitViewController: GlobalSplitViewController!
 
 /// This variable prevents all network activities and caching. The app will use sample data and won't communicate with Hetzner. Intended for development
-var cloudAppPreventNetworkActivityUseSampleData: Bool = true
+var cloudAppPreventNetworkActivityUseSampleData: Bool = false
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -41,8 +41,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @available(iOS 14.0, *)
     func loadSplitViewController() {
         cloudAppSplitViewController = GlobalSplitViewController(style: .tripleColumn)
-        cloudAppSplitViewController.preferredDisplayMode = .twoBesideSecondary //.twoBesideSecondary
-        cloudAppSplitViewController.preferredSplitBehavior = .tile //.tile
+        cloudAppSplitViewController.preferredDisplayMode = .twoBesideSecondary // .twoBesideSecondary
+        cloudAppSplitViewController.preferredSplitBehavior = .tile // .tile
 
         cloudAppSplitViewController.setViewController(ProjectListViewController(), for: .primary)
         let vc1 = UIViewController()

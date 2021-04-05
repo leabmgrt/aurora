@@ -70,29 +70,42 @@ class HetznerCloudAPI {
                 dispatchGroup.leave()
             }
         }
-        
+
         dispatchGroup.enter()
         loadNetworks { [self] networkResult in
             switch networkResult {
-            case .success(let networks):
+            case let .success(networks):
                 project.networks = networks
                 project.networks.sort(by: { $0.name < $1.name })
                 dispatchGroup.leave()
-            case .failure(let networkError):
+            case let .failure(networkError):
                 latestError = networkError
                 dispatchGroup.leave()
             }
         }
-        
+
         dispatchGroup.enter()
         loadFloatingIPs { [self] floatingipResult in
             switch floatingipResult {
-            case .success(let floatingips):
+            case let .success(floatingips):
                 project.floatingIPs = floatingips
                 project.floatingIPs.sort(by: { $0.name < $1.name })
                 dispatchGroup.leave()
-            case .failure(let floatingipError):
+            case let .failure(floatingipError):
                 latestError = floatingipError
+                dispatchGroup.leave()
+            }
+        }
+
+        dispatchGroup.enter()
+        loadLoadBalancers { [self] loadBalancerResult in
+            switch loadBalancerResult {
+            case let .success(loadBalancers):
+                project.loadBalancers = loadBalancers
+                project.loadBalancers.sort(by: { $0.name < $1.name })
+                dispatchGroup.leave()
+            case let .failure(loadBalancerError):
+                latestError = loadBalancerError
                 dispatchGroup.leave()
             }
         }
