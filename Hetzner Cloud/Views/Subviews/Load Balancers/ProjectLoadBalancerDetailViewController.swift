@@ -146,15 +146,15 @@ struct ProjectLoadBalancerDetailView: View {
                         ProjectServerDetailOtherOptionsView(title: "Services") {
                             ProjectLoadBalancerDetailServicesView(controller: .init(project: controller.project!, loadBalancer: controller.loadBalancer!))
                         }
-                        ProjectServerDetailOtherOptionsView(title: "Networking") {
-                            Text("Destination")
-                        }
-                        ProjectServerDetailOtherOptionsView(title: "Rescale") {
-                            Text("Destination")
-                        }
-                        ProjectServerDetailOtherOptionsView(title: "Delete") {
-                            Text("Destination")
-                        }
+                        /* ProjectServerDetailOtherOptionsView(title: "Networking") {
+                             Text("Destination")
+                         }
+                         ProjectServerDetailOtherOptionsView(title: "Rescale") {
+                             Text("Destination")
+                         }
+                         ProjectServerDetailOtherOptionsView(title: "Delete") {
+                             Text("Destination")
+                         } */
                     }
                 }.padding()
             }.navigationBarTitle(Text("\(controller.loadBalancer!.name)"))
@@ -177,7 +177,7 @@ struct ProjectLoadBalancerDetailHealthStatusBadge: View {
             } else if mix.amountFailed > 0 && mix.amountHealthy > 0 {
                 HStack {
                     Image(systemName: "exclamationmark.triangle").foregroundColor(.white)
-                    Text("\(showNumbers ? "\(mix.amountHealthy)/\(mix.amountHealthy + mix.amountFailed)" : "Mixed")").foregroundColor(.white)
+                    Text("\(showNumbers ? "\(mix.amountHealthy)/\(mix.amountHealthy + mix.amountFailed)" : "Mixed")").foregroundColor(.white).fixedSize(horizontal: true, vertical: false)
                 }.padding(6).background(Color.orange).cornerRadius(12)
             } else if mix.amountFailed > 0 && mix.amountHealthy == 0 {
                 HStack {
@@ -205,7 +205,7 @@ struct ProgressCircleOverlay: View {
             .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
             .foregroundColor(color)
             .rotationEffect(Angle(degrees: 270.0))
-            .animation(.linear(duration: 0.5))
+        // .animation(.linear(duration: 0.5))
     }
 }
 

@@ -41,13 +41,25 @@ struct ProjectNetworkDetailView: View {
                     if controller.getServersInNetwork().count > 0 {
                         List {
                             ForEach(controller.getServersInNetwork(), id: \.id) { server in
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Circle().foregroundColor(getServerStatusColor(server.status)).frame(width: 20, height: 20, alignment: .center).shadow(color: getServerStatusColor(server.status), radius: 3, x: 0, y: 0)
-                                        Text("\(server.name)").bold().font(.title3)
-                                    }
-                                    Text("Private IP: ").bold() + Text("\(server.private_net.filter { $0.network == controller.network!.id }.first!.ip)")
-                                }.padding([.top, .bottom], 4)
+                                if let serverCloud = server.object as? CloudServer {
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            Circle().foregroundColor(getServerStatusColor(serverCloud.status)).frame(width: 20, height: 20, alignment: .center).shadow(color: getServerStatusColor(serverCloud.status), radius: 3, x: 0, y: 0)
+                                            Text("\(serverCloud.name)").bold().font(.title3)
+                                        }
+                                        Text("Private IP: ").bold() + Text("\(serverCloud.private_net.filter { $0.network == controller.network!.id }.first!.ip)")
+                                    }.padding([.top, .bottom], 4)
+                                } else if let serverLB = server.object as? CloudLoadBalancer {
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            ProjectLoadBalancerDetailHealthStatusBadge(mix: controller.getHealthCheckMix(serverLB), showNumbers: true)
+                                            Text("\(serverLB.name)").bold().font(.title3)
+                                        }
+                                        Text("Private IP: ").bold() + Text("\(serverLB.private_net.filter { $0.network == controller.network!.id }.first!.ip)")
+                                    }.padding([.top, .bottom], 4)
+                                } else {
+                                    Text("Failed to parse server").italic()
+                                }
                             }
                         }
                     } else {
@@ -63,17 +75,29 @@ struct ProjectNetworkDetailView: View {
                         ForEach(controller.network!.subnets, id: \.id) { subnet in
                             Section(header: Text("\(subnet.ip_range) (\(subnet.network_zone.lowercased()))")) {
                                 ForEach(controller.getServersInSubnet(subnet.id), id: \.id) { server in
-                                    VStack(alignment: .leading) {
-                                        HStack {
-                                            Circle().foregroundColor(getServerStatusColor(server.status)).frame(width: 20, height: 20, alignment: .center).shadow(color: getServerStatusColor(server.status), radius: 3, x: 0, y: 0)
-                                            Text("\(server.name)").bold().font(.title3)
-                                        }
-                                        Text("Private IP: ").bold() + Text("\(server.private_net.filter { $0.network == controller.network!.id }.first!.ip)")
-                                        if server.private_net.filter({ $0.network == controller.network!.id }).first!.alias_ips.count > 0 {
-                                            Text("Alias IPs:")
-                                            CloudFirewallTagView(ips: server.private_net.filter { $0.network == controller.network!.id }.first!.alias_ips)
-                                        }
-                                    }.padding([.top, .bottom], 4)
+                                    if let serverCloud = server.object as? CloudServer {
+                                        VStack(alignment: .leading) {
+                                            HStack {
+                                                Circle().foregroundColor(getServerStatusColor(serverCloud.status)).frame(width: 20, height: 20, alignment: .center).shadow(color: getServerStatusColor(serverCloud.status), radius: 3, x: 0, y: 0)
+                                                Text("\(serverCloud.name)").bold().font(.title3)
+                                            }
+                                            Text("Private IP: ").bold() + Text("\(serverCloud.private_net.filter { $0.network == controller.network!.id }.first!.ip)")
+                                            if serverCloud.private_net.filter({ $0.network == controller.network!.id }).first!.alias_ips.count > 0 {
+                                                Text("Alias IPs:")
+                                                CloudFirewallTagView(ips: serverCloud.private_net.filter { $0.network == controller.network!.id }.first!.alias_ips)
+                                            }
+                                        }.padding([.top, .bottom], 4)
+                                    } else if let serverLB = server.object as? CloudLoadBalancer {
+                                        VStack(alignment: .leading) {
+                                            HStack {
+                                                ProjectLoadBalancerDetailHealthStatusBadge(mix: controller.getHealthCheckMix(serverLB), showNumbers: true)
+                                                Text("\(serverLB.name)").bold().font(.title3)
+                                            }
+                                            Text("Private IP: ").bold() + Text("\(serverLB.private_net.filter { $0.network == controller.network!.id }.first!.ip)")
+                                        }.padding([.top, .bottom], 4)
+                                    } else {
+                                        Text("Failed to parse server").italic()
+                                    }
                                 }
                             }
                         }
@@ -113,11 +137,14 @@ class ProjectNetworkDetailController: ObservableObject {
         self.network = network
     }
 
-    func getServersInNetwork() -> [CloudServer] {
-        return project!.servers.filter { $0.private_net.contains(where: { $0.network == network!.id }) }
+    func getServersInNetwork() -> [NetworkServer] {
+        var array = [NetworkServer]()
+        array.append(contentsOf: project!.servers.filter { $0.private_net.contains(where: { $0.network == network!.id }) }.map { NetworkServer(id: $0.id, object: $0) })
+        array.append(contentsOf: project!.loadBalancers.filter { $0.private_net.contains(where: { $0.network == network!.id }) }.map { NetworkServer(id: $0.id, object: $0) })
+        return array
     }
 
-    func getServersInSubnet(_ subnet: UUID) -> [CloudServer] {
+    func getServersInSubnet(_ subnet: UUID) -> [NetworkServer] {
         let serversInNetwork = getServersInNetwork()
         let subnetByID = network!.subnets.first(where: { $0.id == subnet })! // This is the subnet we need
 
@@ -132,11 +159,30 @@ class ProjectNetworkDetailController: ObservableObject {
 
         print(subnetIPRangeToDetectOtherServersInSubnet)
 
-        var serversInSubnet = serversInNetwork.filter { $0.private_net.first(where: { $0.network == network!.id })!.ip.starts(with: subnetIPRangeToDetectOtherServersInSubnet) }
-        serversInSubnet.append(contentsOf: serversInNetwork.filter { $0.private_net.first(where: { $0.network == network!.id })!.alias_ips.filter { $0.starts(with: subnetIPRangeToDetectOtherServersInSubnet) }.count != 0 })
+        var serversInSubnet: [NetworkServer] = serversInNetwork.filter { $0.object is CloudServer }.map { $0.object as! CloudServer }.filter { $0.private_net.first(where: { $0.network == network!.id })!.ip.starts(with: subnetIPRangeToDetectOtherServersInSubnet) }.map { NetworkServer(id: $0.id, object: $0) }
+        serversInSubnet.append(contentsOf: serversInNetwork.filter { $0.object is CloudServer }.map { $0.object as! CloudServer }.filter { $0.private_net.first(where: { $0.network == network!.id })!.alias_ips.filter { $0.starts(with: subnetIPRangeToDetectOtherServersInSubnet) }.count != 0 }.map { NetworkServer(id: $0.id, object: $0) })
+
+        serversInSubnet.append(contentsOf: serversInNetwork.filter { $0.object is CloudLoadBalancer }.map { $0.object as! CloudLoadBalancer }.filter { $0.private_net.first(where: { $0.network == network!.id })!.ip.starts(with: subnetIPRangeToDetectOtherServersInSubnet) }.map { NetworkServer(id: $0.id, object: $0) })
 
         return serversInSubnet
 
         // this was painful
     }
+
+    func getHealthCheckMix(_ loadBalancer: CloudLoadBalancer) -> ProjectLoadBalancerDetailHealthCheckMix {
+        var healthyChecks = 0
+        var unhealthyChecks = 0
+
+        for target in loadBalancer.targets {
+            healthyChecks += target.health_status.filter { $0.status == "healthy" }.count
+            unhealthyChecks += target.health_status.filter { $0.status == "unhealthy" }.count
+        }
+
+        return .init(amountHealthy: healthyChecks, amountFailed: unhealthyChecks)
+    }
+}
+
+struct NetworkServer {
+    var id: Int
+    var object: Any
 }
