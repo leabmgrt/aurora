@@ -22,6 +22,8 @@ class ProjectListViewController: UIViewController {
     override func viewWillAppear(_: Bool) {
         navigationItem.title = "Projects"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .automatic
+        navigationController?.navigationBar.sizeToFit()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewProjectButton))
     }
 
@@ -68,6 +70,7 @@ class ProjectListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         tableView = UITableView(frame: view.frame, style: .insetGrouped)
         tableView.delegate = self
         tableView.dataSource = self

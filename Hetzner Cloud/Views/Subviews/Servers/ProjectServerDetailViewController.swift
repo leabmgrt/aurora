@@ -50,7 +50,7 @@ struct ProjectServerDetailView: View {
 
                     }.padding(.bottom)
                 }
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 350))], alignment: .center, spacing: nil, pinnedViews: [], content: {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: [], content: {
                     Group {
                         VStack {
                             HStack {

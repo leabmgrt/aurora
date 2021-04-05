@@ -34,11 +34,13 @@ class ServerListViewController: UIViewController {
 
     override func viewWillAppear(_: Bool) {
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .automatic
+        navigationController?.navigationBar.sizeToFit()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .systemBackground
         navigationItem.title = project != nil ? project!.name : "unknown" // PROJECT NAME
         configureHierarchy()
         configureDataSource()

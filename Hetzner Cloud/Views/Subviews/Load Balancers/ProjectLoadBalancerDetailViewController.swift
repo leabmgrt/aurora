@@ -32,7 +32,7 @@ struct ProjectLoadBalancerDetailView: View {
                             ProjectLoadBalancerDetailHealthStatusBadge(mix: controller.getHealthCheckMix())
                         }
                     }
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))], alignment: .center, spacing: 10, pinnedViews: []) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: []) {
                         Group {
                             VStack {
                                 HStack {

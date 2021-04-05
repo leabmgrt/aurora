@@ -53,7 +53,7 @@ struct ProjectLoadBalancerDetailGraphsView: View {
                     }
                     ScrollView {
                         Group {
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))], alignment: .center, spacing: nil, pinnedViews: [], content: {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), alignment: .top)], alignment: .center, spacing: nil, pinnedViews: [], content: {
                                 ForEach(controller.metrics!.time_series.sorted(by: { $0.name < $1.name }), id: \.name) { series in
                                     ServerGraph(title: series.name, dataPoints: getGraphData(series)).padding()
                                 }

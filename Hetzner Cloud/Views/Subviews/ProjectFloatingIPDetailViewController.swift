@@ -57,7 +57,7 @@ struct ProjectFloatingIPDetailView: View {
                             }
                         }
                     }
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 350))], alignment: .center, spacing: 10, pinnedViews: []) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 350), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: []) {
                         Group {
                             VStack {
                                 HStack {
