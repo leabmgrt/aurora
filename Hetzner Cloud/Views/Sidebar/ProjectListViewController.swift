@@ -25,6 +25,16 @@ class ProjectListViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.sizeToFit()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewProjectButton))
+        navigationController?.isToolbarHidden = false
+        toolbarItems = [UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openSettings))]
+    }
+    
+    @objc func openSettings() {
+        let settingsController = SettingsController()
+        let settingsViewHC = UIHostingController(rootView: SettingsView(controller: settingsController))
+        let settingsNavigationController = UINavigationController(rootViewController: settingsViewHC)
+        settingsNavigationController.navigationBar.prefersLargeTitles = true
+        present(settingsNavigationController, animated: true, completion: nil)
     }
 
     @objc func createNewProjectButton() {
