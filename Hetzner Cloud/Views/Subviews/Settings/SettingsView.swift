@@ -28,6 +28,15 @@ struct SettingsView: View {
                             SettingsSideIcon(image: "faceid", text: "Biometrics")
                         }.padding(4).disabled(!controller.biometricAuthAllowed)
                     }
+                    
+                    Section(header: Text("Developer"), footer: Text("Enabling this option will prevent any network activity and load sample data stored within the app (Good for testing)")) {
+                        Toggle(isOn: $controller.developerModeEnabled) {
+                            SettingsSideIcon(image: "staroflife.circle", text: "Developer mode")
+                        }.padding(4).alert(isPresented: $controller.developerModeSuccessNotice) {
+                            Alert(title: Text("Done!"), message: Text("You'll have to restart the app for the change to take effect."), dismissButton: .cancel())
+                        }
+                    }
+                    
                     Section(header: Text("Legal")) {
                         Button {
                             let url = URL(string: "https://example.com")!
@@ -37,7 +46,7 @@ struct SettingsView: View {
                         } label: {
                             SettingsSideIcon(image: "lock", text: "Privacy policy")
                         }
-                        NavigationLink(destination: Text("legal notice")) {
+                        NavigationLink(destination: LegalNoticeView()) {
                             SettingsSideIcon(image: "briefcase", text: "Legal notice")
                         }
                     }
@@ -107,7 +116,21 @@ class SettingsController: ObservableObject {
             }
         }
     }
+    
     @Published var biometricAuthAllowed: Bool = false
+    
+    @Published var developerModeEnabled: Bool = false {
+        didSet {
+            if !isLoadingInformation {
+                UserDefaults.standard.set(developerModeEnabled, forKey: "devmodeEnabled")
+                developerModeSuccessNotice = true
+            }
+        }
+    }
+    
+    @Published var developerModeSuccessNotice: Bool = false
+    
+    
     @Published var versionText: String = ""
     
     @Published var isLoadingInformation = false
@@ -132,6 +155,8 @@ class SettingsController: ObservableObject {
         else {
             biometricAuthAllowed = false
         }
+        
+        developerModeEnabled = UserDefaults.standard.bool(forKey: "devmodeEnabled")
         
         isLoadingInformation = false
     }

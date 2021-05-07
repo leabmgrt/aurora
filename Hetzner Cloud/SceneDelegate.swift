@@ -16,7 +16,7 @@ import LocalAuthentication
 @available(iOS 14.0, *)
 var cloudAppSplitViewController: GlobalSplitViewController!
 
-/// This variable prevents all network activities and caching. The app will use sample data and won't communicate with Hetzner. Intended for development
+/// This variable prevents all network activities and caching. The app will use sample data and won't communicate with Hetzner. Intended for development (and developer mode)
 var cloudAppPreventNetworkActivityUseSampleData: Bool = false
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -29,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         firstLaunchRoutine()
 
+        cloudAppPreventNetworkActivityUseSampleData = UserDefaults.standard.bool(forKey: "devmodeEnabled")
         window?.rootViewController = loadInitialViewController() // UINavigationController(rootViewController: ProjectListViewController())
         window?.makeKeyAndVisible()
         verifyBiometricAuthentication()

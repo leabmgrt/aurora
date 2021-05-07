@@ -9,7 +9,7 @@
 //
 
 import SwiftUI
-//import SwiftUICharts
+import SwiftUICharts
 
 struct ProjectServerDetailGraphsView: View {
     @ObservedObject var controller: ProjectServerDetailGraphsController

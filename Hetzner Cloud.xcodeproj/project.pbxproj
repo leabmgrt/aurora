@@ -53,6 +53,7 @@
 		3AB8A6222610FBA5000567C3 /* CloudLoadBalancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB8A6212610FBA5000567C3 /* CloudLoadBalancer.swift */; };
 		3AC0D6862612372200EB819E /* HetznerCloudAPI_Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0D6852612372200EB819E /* HetznerCloudAPI_Server.swift */; };
 		3AC230FD261DFB77000700AA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC230FC261DFB77000700AA /* SettingsView.swift */; };
+		3AC577D02645A7E4000E3F91 /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC577CF2645A7E4000E3F91 /* LegalNoticeView.swift */; };
 		3AC9E318261A1621003EAC36 /* HetznerCloudAPI_Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */; };
 		3AC9E31D261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */; };
 		3AE03A2F261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */; };
@@ -125,6 +126,7 @@
 		3AB8A6212610FBA5000567C3 /* CloudLoadBalancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudLoadBalancer.swift; sourceTree = "<group>"; };
 		3AC0D6852612372200EB819E /* HetznerCloudAPI_Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Server.swift; sourceTree = "<group>"; };
 		3AC230FC261DFB77000700AA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3AC577CF2645A7E4000E3F91 /* LegalNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
 		3AC9742526132B5F000AAAA2 /* Hetzner Cloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hetzner Cloud.entitlements"; sourceTree = "<group>"; };
 		3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Network.swift; sourceTree = "<group>"; };
 		3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_FloatingIP.swift; sourceTree = "<group>"; };
@@ -359,18 +361,51 @@
 			isa = PBXGroup;
 			children = (
 				3AC230FC261DFB77000700AA /* SettingsView.swift */,
+				3AC577CF2645A7E4000E3F91 /* LegalNoticeView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		3AC577CB2645A187000E3F91 /* Delete */ = {
+			isa = PBXGroup;
+			children = (
+				3A7E2AD3261888C800F41F04 /* ProjectServerDetailDeleteView.swift */,
+			);
+			path = Delete;
+			sourceTree = "<group>";
+		};
+		3AC577CC2645A18F000E3F91 /* Backups */ = {
+			isa = PBXGroup;
+			children = (
+				3A68A26A2619EB8800107533 /* ProjectServerDetailBackupsView.swift */,
+			);
+			path = Backups;
+			sourceTree = "<group>";
+		};
+		3AC577CD2645A1A5000E3F91 /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				3A98AF762615F4D800EF895B /* ProjectServerDetailGraphsView.swift */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
+		3AC577CE2645A1B2000E3F91 /* Power */ = {
+			isa = PBXGroup;
+			children = (
+				3A190D7D2618C504003405A6 /* ProjectServerDetailPowerView.swift */,
+			);
+			path = Power;
 			sourceTree = "<group>";
 		};
 		3ACD371A2615EE1700C5B36C /* Servers */ = {
 			isa = PBXGroup;
 			children = (
 				3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */,
-				3A98AF762615F4D800EF895B /* ProjectServerDetailGraphsView.swift */,
-				3A7E2AD3261888C800F41F04 /* ProjectServerDetailDeleteView.swift */,
-				3A190D7D2618C504003405A6 /* ProjectServerDetailPowerView.swift */,
-				3A68A26A2619EB8800107533 /* ProjectServerDetailBackupsView.swift */,
+				3AC577CE2645A1B2000E3F91 /* Power */,
+				3AC577CD2645A1A5000E3F91 /* Graphs */,
+				3AC577CC2645A18F000E3F91 /* Backups */,
+				3AC577CB2645A187000E3F91 /* Delete */,
 			);
 			path = Servers;
 			sourceTree = "<group>";
@@ -539,6 +574,7 @@
 				3A0A58D8261B189A00000C37 /* ExampleJSON.swift in Sources */,
 				3A1379EA26123535002EAFA7 /* HCAPIError.swift in Sources */,
 				3A41A968260E464200EF7526 /* ProjectListViewController.swift in Sources */,
+				3AC577D02645A7E4000E3F91 /* LegalNoticeView.swift in Sources */,
 				3A7E2AD4261888C800F41F04 /* ProjectServerDetailDeleteView.swift in Sources */,
 				3A6A17A12610E3C800BAE1ED /* CloudFloatingIP.swift in Sources */,
 				3A00B3E1260FAF80000864C2 /* ProjectServerDetailViewController.swift in Sources */,
