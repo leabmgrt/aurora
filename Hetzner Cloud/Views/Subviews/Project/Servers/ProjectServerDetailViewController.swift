@@ -100,7 +100,7 @@ struct ProjectServerDetailView: View {
                             }.padding(.bottom)
 
                             Text("City: ") + Text("\(controller.server!.datacenter.location.city)").bold()
-                            Text("Datacenter: ") + Text("\(controller.server!.datacenter.location.description)").bold()
+                            Text("Datacenter: ") + Text("\(controller.server!.datacenter.description)").bold()
                             Text("Country: ") + Text("\(controller.server!.datacenter.location.country)").bold()
                         }
                     }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
