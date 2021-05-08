@@ -52,14 +52,8 @@ struct ProjectServerDetailBackupsView: View {
                                         }
                                         Text("Created: ").bold() + Text("\(RelativeDateTimeFormatter().localizedString(for: backup.created, relativeTo: Date()))")
                                         Text("Disk size: ").bold() + Text("\(String(format: "%.2f", backup.image_size ?? 0)) GB")
-                                        /*HStack {
-                                            Text("hi")
-                                        }.frame(width: geometry.size.width)*/
                                         Divider()
                                     }.padding(4)
-                                    /*GeometryReader(content: { geometry in
-                                        
-                                    })//.frame(height: 36)*/
                                 }.padding([.leading, .trailing])
                             }
                             else {

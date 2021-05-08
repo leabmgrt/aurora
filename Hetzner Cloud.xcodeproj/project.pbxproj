@@ -15,6 +15,8 @@
 		3A00B3D7260FAF69000864C2 /* ProjectFirewallDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3D6260FAF69000864C2 /* ProjectFirewallDetailViewController.swift */; };
 		3A00B3DC260FAF77000864C2 /* ProjectSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3DB260FAF77000864C2 /* ProjectSecurityViewController.swift */; };
 		3A00B3E1260FAF80000864C2 /* ProjectServerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */; };
+		3A05A8732646E375003C6D0D /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3A05A8722646E375003C6D0D /* ConfettiSwiftUI */; };
+		3A05A8742646E375003C6D0D /* ConfettiSwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 3A05A8722646E375003C6D0D /* ConfettiSwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3A0A58D8261B189A00000C37 /* ExampleJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A58D7261B189A00000C37 /* ExampleJSON.swift */; };
 		3A1379E42612339C002EAFA7 /* HetznerCloudAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1379E32612339C002EAFA7 /* HetznerCloudAPI.swift */; };
 		3A1379EA26123535002EAFA7 /* HCAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1379E926123535002EAFA7 /* HCAPIError.swift */; };
@@ -80,6 +82,20 @@
 			remoteInfo = "Hetzner Cloud";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3A05A8752646E376003C6D0D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3A05A8742646E375003C6D0D /* ConfettiSwiftUI in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3A00B3B4260FAA5D000864C2 /* ServerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +167,7 @@
 				3A9B456B26123317007E2EA4 /* Alamofire in Frameworks */,
 				3A54A34C2612236600F99693 /* Realm in Frameworks */,
 				3A41A9A1260E471D00EF7526 /* SnapKit in Frameworks */,
+				3A05A8732646E375003C6D0D /* ConfettiSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +289,7 @@
 				3A54A3632612301900F99693 /* Extensions */,
 				3AF3B6E726122262006BE70C /* Caching */,
 				3A00B3BC260FAF0B000864C2 /* Views */,
-				3A41A9A5260E479700EF7526 /* Structures */,
+				3A41A9A5260E479700EF7526 /* Data Structures */,
 				3A41A963260E464200EF7526 /* AppDelegate.swift */,
 				3A41A965260E464200EF7526 /* SceneDelegate.swift */,
 				3A41A96C260E464400EF7526 /* Assets.xcassets */,
@@ -300,7 +317,7 @@
 			path = "Hetzner CloudUITests";
 			sourceTree = "<group>";
 		};
-		3A41A9A5260E479700EF7526 /* Structures */ = {
+		3A41A9A5260E479700EF7526 /* Data Structures */ = {
 			isa = PBXGroup;
 			children = (
 				3A41A9A6260E47A200EF7526 /* CloudProject.swift */,
@@ -312,7 +329,7 @@
 				3AA896F02610F86F00188F74 /* CloudNetwork.swift */,
 				3AB8A6212610FBA5000567C3 /* CloudLoadBalancer.swift */,
 			);
-			path = Structures;
+			path = "Data Structures";
 			sourceTree = "<group>";
 		};
 		3A54A3502612237600F99693 /* Objects */ = {
@@ -435,6 +452,7 @@
 				3A41A95C260E464200EF7526 /* Sources */,
 				3A41A95D260E464200EF7526 /* Frameworks */,
 				3A41A95E260E464200EF7526 /* Resources */,
+				3A05A8752646E376003C6D0D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -448,6 +466,7 @@
 				3A54A34B2612236600F99693 /* Realm */,
 				3A54A35D261225BD00F99693 /* SwiftKeychainWrapper */,
 				3A9B456A26123317007E2EA4 /* Alamofire */,
+				3A05A8722646E375003C6D0D /* ConfettiSwiftUI */,
 			);
 			productName = "Hetzner Cloud";
 			productReference = 3A41A960260E464200EF7526 /* Hetzner Cloud.app */;
@@ -526,6 +545,7 @@
 				3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				3A54A35C261225BD00F99693 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				3A9B456926123317007E2EA4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				3A05A8712646E375003C6D0D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 			);
 			productRefGroup = 3A41A961260E464200EF7526 /* Products */;
 			projectDirPath = "";
@@ -790,6 +810,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.abmgrt.Hetzner-Cloud";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -812,6 +833,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.abmgrt.Hetzner-Cloud";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -946,6 +968,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3A05A8712646E375003C6D0D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
+			};
+		};
 		3A41A99F260E471D00EF7526 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -989,6 +1019,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3A05A8722646E375003C6D0D /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A05A8712646E375003C6D0D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
 		3A41A9A0260E471D00EF7526 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A41A99F260E471D00EF7526 /* XCRemoteSwiftPackageReference "SnapKit" */;

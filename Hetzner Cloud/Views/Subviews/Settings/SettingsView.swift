@@ -11,10 +11,13 @@
 import SwiftUI
 import LocalAuthentication
 import SwiftKeychainWrapper
+import ConfettiSwiftUI
 
 struct SettingsView: View {
     
     @ObservedObject var controller: SettingsController
+    @State var versionEasterEggCountdown = -5
+    var showCake: Bool = (0...10).randomElement()! == 0
     
     var body: some View {
         Group {
@@ -71,12 +74,16 @@ struct SettingsView: View {
 
                     }
                     
-                    Section(header: Text("About"), footer: (0...10).randomElement()! == 0 ? Text("The cake is a lie").foregroundColor(.secondary).italic().font(.footnote) : Text("")) {
-                        Text("\(controller.versionText)").foregroundColor(.secondary).font(.footnote)
-                        Text("© 2021, Adrian Baumgart").foregroundColor(.secondary).font(.footnote)
-                        if (0...10).randomElement()! == 0 {
-                            
+                    Section(header: Text("About"), footer: showCake ? Text("Thank you for using the app! (✿◠‿◠)\n\n") + Text("The cake is a lie").foregroundColor(.secondary).italic().font(.footnote) : Text("Thank you for using the app! (✿◠‿◠)")) {
+                        ZStack {
+                            Text("\(controller.versionText)").foregroundColor(.secondary).font(.footnote).onTapGesture {
+                                versionEasterEggCountdown += 1
+                            }
+                            if versionEasterEggCountdown > 0 {
+                                ConfettiCannon(counter: $versionEasterEggCountdown, radius: 120, repetitions: 5, repetitionInterval: 0.3)
+                            }
                         }
+                        //Text("© 2021, Adrian Baumgart").foregroundColor(.secondary).font(.footnote)
                     }
                 }.listStyle(InsetGroupedListStyle())
             }

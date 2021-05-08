@@ -177,8 +177,6 @@ func getServerStatusColor(_ status: CloudServerStatus) -> Color {
         return .orange
     case .unknown:
         return .gray
-    default:
-        return .gray
     }
 }
 

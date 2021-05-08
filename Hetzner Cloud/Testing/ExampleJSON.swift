@@ -12,7 +12,7 @@ import Foundation
 
 /*
  What is this?
- ===============
+ ==============
 
  This is a file containing example responses from the Hetzner Cloud API. They're used when `cloudAppPreventNetworkActivityUseSampleData` inside SceneDelegate.swift is set to `true`.
  */
