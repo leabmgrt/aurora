@@ -22,7 +22,8 @@ struct CloudServer {
     var private_net: [CloudServerPrivateNet]
     var server_type: CloudServerType
     var datacenter: HetznerDatacenter
-    var image: CloudServerImage
+    var image: CloudServerImage?
+    var backups: [CloudServerImage]
     var iso: CloudServerISO?
     var rescue_enabled: Bool
     var locked: Bool
@@ -45,7 +46,8 @@ struct CloudServer {
         private_net = json["private_net"].arrayValue.map { CloudServerPrivateNet($0) }
         server_type = .init(json["server_type"])
         datacenter = .init(json["datacenter"])
-        image = .init(json["image"])
+        image = json["image"] != .null ? .init(json["image"]) : nil
+        backups = []
         iso = json["iso"] != .null ? .init(json["iso"]) : nil
         rescue_enabled = json["rescue_enabled"].bool!
         locked = json["locked"].bool!

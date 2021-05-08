@@ -113,7 +113,7 @@ struct ProjectServerDetailView: View {
                             ProjectServerDetailGraphsView(controller: .init(project: controller.project!, server: controller.server!))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Backups") {
-                            Text("Destination")
+                            ProjectServerDetailBackupsView(controller: .init(project: controller.project!, server: controller.server!))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Snapshots") {
                             Text("Destination")

@@ -18,6 +18,7 @@ struct ProjectServerDetailDeleteView: View {
     var body: some View {
         if controller.project != nil && controller.server != nil {
             ScrollView {
+                AppReadOnlyDisclaimerView()
                 Group {
                     Group {
                         VStack(alignment: .leading) {

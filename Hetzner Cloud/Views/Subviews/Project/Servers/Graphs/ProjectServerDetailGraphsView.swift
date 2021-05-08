@@ -143,7 +143,6 @@ class ProjectServerDetailGraphsController: ObservableObject {
     }
 
     func loadData() {
-        print("time to load")
         metrics = nil
         project.api!.loadServerMetrics(server.id, minutes: selectedDuration, step: selectedAmountOfSteps) { result in
             switch result {

@@ -56,6 +56,55 @@ extension HetznerCloudAPI {
             callback(response)
         }
     }
+    
+    func loadServerBackups(_ serverId: Int, callback: @escaping (Result<[CloudServerImage], HCAPIError>) -> Void) {
+        if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([])) }
+        
+        loadServerBackupsNetworkCall(page: nil, server: serverId) { [self] firstResponse in
+            if let error = responseCheck(firstResponse) {
+                return callback(.failure(error))
+            }
+            else {
+                let json = JSON(firstResponse.data!)
+                var backups: [CloudServerImage] = json["images"].arrayValue.map { CloudServerImage($0) }
+                let lastPage = json["meta"]["pagination"]["last_page"].int!
+                if lastPage > 1 {
+                    let dispatchGroup = DispatchGroup()
+                    for page in 2 ... lastPage {
+                        dispatchGroup.enter()
+                        loadServerBackupsNetworkCall(page: page, server: serverId) { backupResponse in
+                            if let error2 = responseCheck(backupResponse) {
+                                dispatchGroup.leave()
+                                return callback(.failure(error2))
+                            }
+                            else {
+                                let json2 = JSON(backupResponse.data!)
+                                backups.append(contentsOf: json2["images"].arrayValue.map { CloudServerImage($0) })
+                                dispatchGroup.leave()
+                            }
+                        }
+                    }
+                    
+                    dispatchGroup.notify(queue: .main) {
+                        return callback(.success(backups))
+                    }
+                }
+                else {
+                    return callback(.success(backups))
+                }
+            }
+        }
+        
+    }
+    
+    private func loadServerBackupsNetworkCall(page: Int?, server: Int, callback: @escaping (AFDataResponse<Any>) -> Void) {
+        AF.request("https://api.hetzner.cloud/v1/images?type=backup&bound_to=\(server)&per_page=50\(page != nil ? "&page=\(page!)" : "")", headers: [
+                    "Authorization": "Bearer \(apikey!)",
+        ]).responseJSON { response in
+            callback(response)
+        }
+        
+    }
 
     func loadServerMetrics(_ id: Int, minutes: Int, step: Int = 1000, callback: @escaping (Result<CloudServerMetrics, HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success(.example)) }
@@ -75,4 +124,6 @@ extension HetznerCloudAPI {
             }
         }
     }
+    
+    
 }

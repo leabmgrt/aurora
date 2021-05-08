@@ -16,6 +16,7 @@ struct ProjectServerDetailPowerView: View {
     var body: some View {
         if controller.project != nil && controller.server != nil {
             ScrollView {
+                AppReadOnlyDisclaimerView()
                 Group {
                     Group {
                         VStack(alignment: .leading) {
@@ -71,5 +72,13 @@ class ProjectServerDetailPowerController: ObservableObject {
     init(project: CloudProject, server: CloudServer) {
         self.project = project
         self.server = server
+    }
+}
+
+struct AppReadOnlyDisclaimerView: View {
+    var body: some View {
+        Group {
+            Text("Currently the app is read-only. This will change with a future update. Until then, the buttons below won't do anything ;)").foregroundColor(.white).padding()
+        }.background(Rectangle().fill(Color.accentColor)).cornerRadius(12).padding([.leading, .trailing]).padding([.top, .bottom], 4)
     }
 }
