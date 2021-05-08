@@ -195,7 +195,7 @@ struct CloudServerTypePriceValues {
 }
 
 struct CloudServerImage {
-    var id: String
+    var id: Int
     var type: CloudServerImageType
     var status: CloudServerImageStatus
     var name: String?
@@ -213,7 +213,7 @@ struct CloudServerImage {
     var labels: [String: String]
 
     init(_ json: JSON) {
-        id = "\(json["id"].int!)"
+        id = json["id"].int!
         type = CloudServerImageType(rawValue: json["type"].string!)!
         status = CloudServerImageStatus(rawValue: json["status"].string!)!
         name = json["name"].string
@@ -235,11 +235,11 @@ struct CloudServerImage {
 }
 
 struct CloudServerImageCreatedFrom {
-    var id: String
+    var id: Int
     var name: String
 
     init(_ json: JSON) {
-        id = "\(json["id"].int!)"
+        id = json["id"].int!
         name = json["name"].string!
     }
 }

@@ -11,13 +11,102 @@
 import SwiftUI
 
 struct ProjectServerDetailSnapshotsView: View {
+    
+    @ObservedObject var controller: ProjectServerDetailSnapshotsController
+    @Environment(\.colorScheme) var colorScheme
+
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            if controller.project != nil && controller.server != nil {
+                Group {
+                    if controller.snapshots != nil {
+                        ScrollView {
+                            AppReadOnlyDisclaimerView()
+                            Group {
+                                Group {
+                                    VStack(alignment: .leading) {
+                                        Text("Snapshots").bold().font(.title)
+                                        Text("Snapshots are instant copies of your servers disks.")
+                                        Text("You can create a new server from a snapshot and even transfer them to a different project.")
+                                        Text("It's recommended to power down your server before creating a backup to ensure data consistency on the disks.")
+                                        Text("Snapshots cost 0.0119€/GB/month.")
+
+                                        Button(action: {}, label: {
+                                            Text("Take snapshot").bold().padding().foregroundColor(.white).background(Color.accentColor).cornerRadius(7)
+                                        }).padding(.top)
+                                        
+                                    }
+                                }.frame(minWidth: 0,
+                                        maxWidth: .infinity,
+                                        alignment: .topLeading)
+                            }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2).padding()
+                            
+                            if controller.snapshots!.count > 0 {
+                                ForEach(controller.snapshots!.sorted(by: { $0.created > $1.created }), id: \.id) { snapshot in
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            Circle().foregroundColor(getServerStatusColor(snapshot.status == .available ? .running : .starting)).frame(width: 25, height: 25, alignment: .center).shadow(color: getServerStatusColor(snapshot.status == .available ? .running : .starting), radius: 3, x: 0, y: 0)
+                                            Text("\(snapshot.description)").bold()
+                                            Spacer()
+                                        }
+                                        Text("Created: ").bold() + Text("\(RelativeDateTimeFormatter().localizedString(for: snapshot.created, relativeTo: Date()))")
+                                        Text("Disk size: ").bold() + Text("\(String(format: "%.2f", snapshot.image_size ?? 0)) GB")
+                                        Divider()
+                                    }.padding(4)
+                                }.padding([.leading, .trailing])
+                            }
+                            else {
+                                Text("You currently don't have any snapshots. Try creating one!")
+                            }
+                        }
+                    }
+                    else {
+                        VStack {
+                            ProgressView().progressViewStyle(CircularProgressViewStyle())
+                            Text("Loading...").padding()
+                        }
+                    }
+                }.onAppear {
+                    if controller.snapshots == nil {
+                        controller.loadData()
+                    }
+                }
+            }
+            else {
+                Text("Something went wrong, please try again...")
+            }
+        }.navigationTitle(Text("Snapshots"))
     }
+}
+
+class ProjectServerDetailSnapshotsController: ObservableObject {
+    
+    @Published var project: CloudProject? = nil
+    @Published var server: CloudServer? = nil
+    @Published var snapshots: [CloudServerImage]? = nil
+    
+    init(project: CloudProject, server: CloudServer) {
+        self.project = project
+        self.server = server
+        self.snapshots = snapshots
+    }
+    
+    func loadData() {
+        project!.api!.loadServerSnapshots(server!.id) { result in
+            switch result {
+            case let .failure(err):
+                cloudAppSplitViewController.showError(err)
+            case let .success(newsnapshots):
+                self.snapshots = newsnapshots
+            }
+        }
+    }
+    
 }
 
 struct ProjectServerDetailSnapshotsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectServerDetailSnapshotsView()
+        ProjectServerDetailSnapshotsView(controller: .init(project: .example, server: .example))
     }
 }

@@ -109,14 +109,13 @@ struct ProjectServerDetailView: View {
                 Group {
                     Group {
                         ProjectServerDetailOtherOptionsView(title: "Graphs") {
-                            // Text("Destination")
                             ProjectServerDetailGraphsView(controller: .init(project: controller.project!, server: controller.server!))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Backups") {
                             ProjectServerDetailBackupsView(controller: .init(project: controller.project!, server: controller.server!))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Snapshots") {
-                            Text("Destination")
+                            ProjectServerDetailSnapshotsView(controller: .init(project: controller.project!, server: controller.server!))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Load Balancers") {
                             Text("Destination")

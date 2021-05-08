@@ -17,6 +17,7 @@
 		3A00B3E1260FAF80000864C2 /* ProjectServerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */; };
 		3A05A8732646E375003C6D0D /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3A05A8722646E375003C6D0D /* ConfettiSwiftUI */; };
 		3A05A8742646E375003C6D0D /* ConfettiSwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 3A05A8722646E375003C6D0D /* ConfettiSwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3A05A8782646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A05A8772646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift */; };
 		3A0A58D8261B189A00000C37 /* ExampleJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A58D7261B189A00000C37 /* ExampleJSON.swift */; };
 		3A1379E42612339C002EAFA7 /* HetznerCloudAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1379E32612339C002EAFA7 /* HetznerCloudAPI.swift */; };
 		3A1379EA26123535002EAFA7 /* HCAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1379E926123535002EAFA7 /* HCAPIError.swift */; };
@@ -106,6 +107,7 @@
 		3A00B3D6260FAF69000864C2 /* ProjectFirewallDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFirewallDetailViewController.swift; sourceTree = "<group>"; };
 		3A00B3DB260FAF77000864C2 /* ProjectSecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSecurityViewController.swift; sourceTree = "<group>"; };
 		3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailViewController.swift; sourceTree = "<group>"; };
+		3A05A8772646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailSnapshotsView.swift; sourceTree = "<group>"; };
 		3A0A58D7261B189A00000C37 /* ExampleJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleJSON.swift; sourceTree = "<group>"; };
 		3A1379E32612339C002EAFA7 /* HetznerCloudAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI.swift; sourceTree = "<group>"; };
 		3A1379E926123535002EAFA7 /* HCAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAPIError.swift; sourceTree = "<group>"; };
@@ -214,6 +216,14 @@
 				3AC230FA261DFB3A000700AA /* Project */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		3A05A8762646F80D003C6D0D /* Snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				3A05A8772646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift */,
+			);
+			path = Snapshots;
 			sourceTree = "<group>";
 		};
 		3A0A58D6261B188C00000C37 /* Testing */ = {
@@ -425,6 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */,
+				3A05A8762646F80D003C6D0D /* Snapshots */,
 				3AC577CE2645A1B2000E3F91 /* Power */,
 				3AC577CD2645A1A5000E3F91 /* Graphs */,
 				3AC577CC2645A18F000E3F91 /* Backups */,
@@ -612,6 +623,7 @@
 				3A00B3C8260FAF49000864C2 /* ProjectLoadBalancerDetailViewController.swift in Sources */,
 				3A6940E72618BEAF00490E82 /* HetznerCloudAPI_Volume.swift in Sources */,
 				3AE03A2F261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift in Sources */,
+				3A05A8782646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift in Sources */,
 				3AE18DB5261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift in Sources */,
 				3A68A26B2619EB8800107533 /* ProjectServerDetailBackupsView.swift in Sources */,
 				3A54A3442612229A00F99693 /* HCAppCache.swift in Sources */,
