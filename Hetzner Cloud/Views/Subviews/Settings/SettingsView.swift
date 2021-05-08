@@ -39,7 +39,7 @@ struct SettingsView: View {
                     
                     Section(header: Text("Legal")) {
                         Button {
-                            let url = URL(string: "https://example.com")!
+                            let url = URL(string: "https://go.abmgrt.dev/IsaHi8")!
                             if UIApplication.shared.canOpenURL(url) {
                                 UIApplication.shared.open(url)
                             }
