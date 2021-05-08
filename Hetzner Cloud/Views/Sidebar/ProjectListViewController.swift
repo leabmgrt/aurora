@@ -162,7 +162,12 @@ extension ProjectListViewController: UITableViewDelegate {
             // finished loading
             let serverListVC = ServerListViewController()
             serverListVC.project = selectedproject.project
-            splitViewController?.setViewController(UINavigationController(rootViewController: serverListVC), for: .supplementary)
+            if let collapsed = splitViewController?.isCollapsed, collapsed {
+                navigationController?.pushViewController(serverListVC, animated: true)
+            }
+            else {
+                splitViewController?.setViewController(UINavigationController(rootViewController: serverListVC), for: .supplementary)
+            }
         } else if !selectedproject.didLoad && !selectedproject.connectionError && selectedproject.error == nil {
             // didn't load yet, chill
             EZAlertController.alert("Not loaded", message: "Please wait until all information was fetched from the API.")

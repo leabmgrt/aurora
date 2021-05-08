@@ -64,6 +64,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         vc2.view.backgroundColor = .systemBackground
         cloudAppSplitViewController.setViewController(vc2, for: .secondary)
         cloudAppSplitViewController.setViewController(vc1, for: .supplementary)
+        cloudAppSplitViewController.setViewController(UINavigationController(rootViewController: ProjectListViewController()), for: .compact)
     }
     
     func verifyBiometricAuthentication() {

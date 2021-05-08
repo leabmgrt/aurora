@@ -36,6 +36,7 @@ class ServerListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.sizeToFit()
+        navigationController?.isToolbarHidden = true
     }
 
     override func viewDidLoad() {
@@ -185,59 +186,47 @@ class ServerListViewController: UIViewController {
 
 extension ServerListViewController: UICollectionViewDelegate {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        var detailView: UIViewController?
+        
+        
         if indexPath.section == 0 { // Server list
-            // splitViewController?.setViewController(secondaryViewControllers[indexPath.row], for: .secondary)
+            detailView = UIViewController()
         } else if indexPath.section == 1 { // Servers
             let detailController = ProjectServerDetailController(project: project!, server: project!.servers[indexPath.row - 1])
-            let detailView = UIHostingController(rootView: ProjectServerDetailView(controller: detailController)) // ProjectServerDetailViewController()
-
-            splitViewController?.showsSecondaryOnlyButton = true
-            let detailNavigationController = UINavigationController(rootViewController: detailView)
-            detailNavigationController.navigationBar.prefersLargeTitles = true
-            splitViewController?.setViewController(detailNavigationController, for: .secondary)
+            detailView = UIHostingController(rootView: ProjectServerDetailView(controller: detailController))
+            
         } else if indexPath.section == 2 { // Volumes
             let detailController = ProjectVolumeDetailController(project: project!, volume: project!.volumes[indexPath.row - 1])
-            let detailView = UIHostingController(rootView: ProjectVolumeDetailView(controller: detailController))
-
-            splitViewController?.showsSecondaryOnlyButton = true
-            let detailNavigationController = UINavigationController(rootViewController: detailView)
-            detailNavigationController.navigationBar.prefersLargeTitles = true
-            splitViewController?.setViewController(detailNavigationController, for: .secondary)
+            detailView = UIHostingController(rootView: ProjectVolumeDetailView(controller: detailController))
         } else if indexPath.section == 3 { // Floating IPs
             let detailController = ProjectFloatingIPDetailController(project: project!, floatingip: project!.floatingIPs[indexPath.row - 1])
-            let detailView = UIHostingController(rootView: ProjectFloatingIPDetailView(controller: detailController))
-
-            splitViewController?.showsSecondaryOnlyButton = true
-            let detailNavigationController = UINavigationController(rootViewController: detailView)
-            detailNavigationController.navigationBar.prefersLargeTitles = true
-            splitViewController?.setViewController(detailNavigationController, for: .secondary)
+            detailView = UIHostingController(rootView: ProjectFloatingIPDetailView(controller: detailController))
         } else if indexPath.section == 4 { // Firewalls
             let detailController = ProjectFirewallDetailController()
-            let detailView = UIHostingController(rootView: ProjectFirewallDetailView(controller: detailController)) // ProjectServerDetailViewController()
+            detailView = UIHostingController(rootView: ProjectFirewallDetailView(controller: detailController))
 
             detailController.firewall = project!.firewalls[indexPath.row - 1]
             detailController.project = project!
-            splitViewController?.showsSecondaryOnlyButton = true
-            let detailNavigationController = UINavigationController(rootViewController: detailView)
-            detailNavigationController.navigationBar.prefersLargeTitles = true
-            splitViewController?.setViewController(detailNavigationController, for: .secondary)
         } else if indexPath.section == 5 { // Network
             let detailController = ProjectNetworkDetailController(project: project!, network: project!.networks[indexPath.row - 1])
-            let detailView = UIHostingController(rootView: ProjectNetworkDetailView(controller: detailController))
-
-            splitViewController?.showsSecondaryOnlyButton = true
-            let detailNavigationController = UINavigationController(rootViewController: detailView)
-            detailNavigationController.navigationBar.prefersLargeTitles = true
-            splitViewController?.setViewController(detailNavigationController, for: .secondary)
+            detailView = UIHostingController(rootView: ProjectNetworkDetailView(controller: detailController))
         } else { // Load Balancers
             let detailController = ProjectLoadBalancerDetailController(project: project!, loadBalancer: project!.loadBalancers[indexPath.row - 1])
-            let detailView = UIHostingController(rootView: ProjectLoadBalancerDetailView(controller: detailController))
-
-            splitViewController?.showsSecondaryOnlyButton = true
-            let detailNavigationController = UINavigationController(rootViewController: detailView)
+            detailView = UIHostingController(rootView: ProjectLoadBalancerDetailView(controller: detailController))
+        }
+        
+        splitViewController?.showsSecondaryOnlyButton = true
+        
+        if let collapsed = splitViewController?.isCollapsed, collapsed {
+            navigationController?.pushViewController(detailView!, animated: true)
+        }
+        else {
+            let detailNavigationController = UINavigationController(rootViewController: detailView!)
             detailNavigationController.navigationBar.prefersLargeTitles = true
             splitViewController?.setViewController(detailNavigationController, for: .secondary)
         }
+        
     }
 }
 
