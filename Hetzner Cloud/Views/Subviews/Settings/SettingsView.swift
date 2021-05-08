@@ -52,7 +52,7 @@ struct SettingsView: View {
                     }
                     
                     Section(header: Text("Other")) {
-                        NavigationLink(destination: Text("used libraries")) {
+                        NavigationLink(destination: UsedLibrariesView()) {
                             SettingsSideIcon(image: "tray", text: "Used libraries")
                         }
                         Button {
@@ -71,9 +71,12 @@ struct SettingsView: View {
 
                     }
                     
-                    Section(header: Text("About")) {
+                    Section(header: Text("About"), footer: (0...10).randomElement()! == 0 ? Text("The cake is a lie").foregroundColor(.secondary).italic().font(.footnote) : Text("")) {
                         Text("\(controller.versionText)").foregroundColor(.secondary).font(.footnote)
                         Text("© 2021, Adrian Baumgart").foregroundColor(.secondary).font(.footnote)
+                        if (0...10).randomElement()! == 0 {
+                            
+                        }
                     }
                 }.listStyle(InsetGroupedListStyle())
             }

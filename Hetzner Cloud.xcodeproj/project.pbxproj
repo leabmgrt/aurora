@@ -54,8 +54,10 @@
 		3AC0D6862612372200EB819E /* HetznerCloudAPI_Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0D6852612372200EB819E /* HetznerCloudAPI_Server.swift */; };
 		3AC230FD261DFB77000700AA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC230FC261DFB77000700AA /* SettingsView.swift */; };
 		3AC577D02645A7E4000E3F91 /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC577CF2645A7E4000E3F91 /* LegalNoticeView.swift */; };
+		3AC577D22645AE98000E3F91 /* UsedLibrariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC577D12645AE98000E3F91 /* UsedLibrariesView.swift */; };
 		3AC9E318261A1621003EAC36 /* HetznerCloudAPI_Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */; };
 		3AC9E31D261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */; };
+		3ADCEE7B2646A97600567E0F /* UsedLibrariesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADCEE7A2646A97600567E0F /* UsedLibrariesData.swift */; };
 		3AE03A2F261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */; };
 		3AE03A37261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */; };
 		3AE18DB5261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */; };
@@ -127,9 +129,11 @@
 		3AC0D6852612372200EB819E /* HetznerCloudAPI_Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Server.swift; sourceTree = "<group>"; };
 		3AC230FC261DFB77000700AA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3AC577CF2645A7E4000E3F91 /* LegalNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
+		3AC577D12645AE98000E3F91 /* UsedLibrariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedLibrariesView.swift; sourceTree = "<group>"; };
 		3AC9742526132B5F000AAAA2 /* Hetzner Cloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hetzner Cloud.entitlements"; sourceTree = "<group>"; };
 		3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Network.swift; sourceTree = "<group>"; };
 		3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_FloatingIP.swift; sourceTree = "<group>"; };
+		3ADCEE7A2646A97600567E0F /* UsedLibrariesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedLibrariesData.swift; sourceTree = "<group>"; };
 		3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailTargetView.swift; sourceTree = "<group>"; };
 		3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailServicesView.swift; sourceTree = "<group>"; };
 		3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_LoadBalancer.swift; sourceTree = "<group>"; };
@@ -362,6 +366,8 @@
 			children = (
 				3AC230FC261DFB77000700AA /* SettingsView.swift */,
 				3AC577CF2645A7E4000E3F91 /* LegalNoticeView.swift */,
+				3AC577D12645AE98000E3F91 /* UsedLibrariesView.swift */,
+				3ADCEE7A2646A97600567E0F /* UsedLibrariesData.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -576,6 +582,7 @@
 				3A41A968260E464200EF7526 /* ProjectListViewController.swift in Sources */,
 				3AC577D02645A7E4000E3F91 /* LegalNoticeView.swift in Sources */,
 				3A7E2AD4261888C800F41F04 /* ProjectServerDetailDeleteView.swift in Sources */,
+				3AC577D22645AE98000E3F91 /* UsedLibrariesView.swift in Sources */,
 				3A6A17A12610E3C800BAE1ED /* CloudFloatingIP.swift in Sources */,
 				3A00B3E1260FAF80000864C2 /* ProjectServerDetailViewController.swift in Sources */,
 				3A41A964260E464200EF7526 /* AppDelegate.swift in Sources */,
@@ -597,6 +604,7 @@
 				3AE18DBA261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift in Sources */,
 				3A190D842618C98F003405A6 /* GlobalSplitViewController.swift in Sources */,
 				3A00B3C0260FAF3E000864C2 /* ProjectVolumeDetailViewController.swift in Sources */,
+				3ADCEE7B2646A97600567E0F /* UsedLibrariesData.swift in Sources */,
 				3A1379E42612339C002EAFA7 /* HetznerCloudAPI.swift in Sources */,
 				3AC9E318261A1621003EAC36 /* HetznerCloudAPI_Network.swift in Sources */,
 				3A9B456226123118007E2EA4 /* UITableView.swift in Sources */,
