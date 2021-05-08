@@ -10,11 +10,13 @@
 
 import SnapKit
 import UIKit
+import SwiftKeychainWrapper
+import LocalAuthentication
 
 @available(iOS 14.0, *)
 var cloudAppSplitViewController: GlobalSplitViewController!
 
-/// This variable prevents all network activities and caching. The app will use sample data and won't communicate with Hetzner. Intended for development
+/// This variable prevents all network activities and caching. The app will use sample data and won't communicate with Hetzner. Intended for development (and developer mode)
 var cloudAppPreventNetworkActivityUseSampleData: Bool = false
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -24,9 +26,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
+        
+        firstLaunchRoutine()
 
+        cloudAppPreventNetworkActivityUseSampleData = UserDefaults.standard.bool(forKey: "devmodeEnabled")
         window?.rootViewController = loadInitialViewController() // UINavigationController(rootViewController: ProjectListViewController())
         window?.makeKeyAndVisible()
+        verifyBiometricAuthentication()
     }
 
     func loadInitialViewController() -> UIViewController {
@@ -35,6 +41,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return cloudAppSplitViewController
         } else {
             return ProjectListViewController()
+        }
+    }
+    
+    func firstLaunchRoutine() {
+        if !UserDefaults.standard.bool(forKey: "launchedBefore") {
+            KeychainWrapper.standard.removeAllKeys()
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
     }
 
@@ -51,6 +64,58 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         vc2.view.backgroundColor = .systemBackground
         cloudAppSplitViewController.setViewController(vc2, for: .secondary)
         cloudAppSplitViewController.setViewController(vc1, for: .supplementary)
+    }
+    
+    func verifyBiometricAuthentication() {
+        if KeychainWrapper.standard.bool(forKey: "biometricAuthEnabled") ?? false {
+            let rootView = (window?.rootViewController)!
+            let blurStyle: UIBlurEffect.Style = rootView.traitCollection.userInterfaceStyle == .dark ? .dark : .light
+            let blurEffect = UIBlurEffect(style: blurStyle)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            
+            blurEffectView.frame = rootView.view.bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            blurEffectView.alpha = 1.0
+            blurEffectView.tag = 934
+            if rootView.view.viewWithTag(934) != nil { return }
+            
+            rootView.view.addSubview(blurEffectView)
+            blurEffectView.snp.makeConstraints { (make) in
+                make.top.equalTo(rootView.view.snp.top)
+                make.leading.equalTo(rootView.view.snp.leading)
+                make.bottom.equalTo(rootView.view.snp.bottom)
+                make.trailing.equalTo(rootView.view.snp.trailing)
+            }
+            
+            let authContext = LAContext()
+            var authError: NSError?
+            
+            if authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+                authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Unlock the app") { (success, error) in
+                    if success {
+                        DispatchQueue.main.async {
+                            UIView.animate(withDuration: 0.2, animations: {
+                                blurEffectView.alpha = 0.0
+                            }) { _ in
+                                if let blurTag = rootView.view.viewWithTag(934) { blurTag.removeFromSuperview() }
+                            }
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            EZAlertController.alert("Biometric authentication failed", message: "Please try again", actions: [.init(title: "Retry", style: .default, handler: { (_) in
+                                self.verifyBiometricAuthentication()
+                            })])
+                        }
+                    }
+                }
+            }
+            else {
+                EZAlertController.alert("Device error", message: "Biometric authentication is not enabled on your device. Please verify that it's enabled in the device settings", actions: [.init(title: "Retry", style: .default, handler: { (_) in
+                    self.verifyBiometricAuthentication()
+                })])
+            }
+        }
     }
 
     func sceneDidDisconnect(_: UIScene) {
