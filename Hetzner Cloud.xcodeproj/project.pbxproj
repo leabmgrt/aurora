@@ -65,6 +65,7 @@
 		3AE03A37261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */; };
 		3AE18DB5261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */; };
 		3AE18DBA261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */; };
+		3AE2AFFF264824F000B56C2D /* ProjectServerDetailFirewallsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE2AFFE264824F000B56C2D /* ProjectServerDetailFirewallsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +157,7 @@
 		3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailServicesView.swift; sourceTree = "<group>"; };
 		3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_LoadBalancer.swift; sourceTree = "<group>"; };
 		3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailGraphsView.swift; sourceTree = "<group>"; };
+		3AE2AFFE264824F000B56C2D /* ProjectServerDetailFirewallsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailFirewallsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */,
+				3AE2AFFD264824E000B56C2D /* Firewalls */,
 				3A05A8762646F80D003C6D0D /* Snapshots */,
 				3AC577CE2645A1B2000E3F91 /* Power */,
 				3AC577CD2645A1A5000E3F91 /* Graphs */,
@@ -442,6 +445,14 @@
 				3AC577CB2645A187000E3F91 /* Delete */,
 			);
 			path = Servers;
+			sourceTree = "<group>";
+		};
+		3AE2AFFD264824E000B56C2D /* Firewalls */ = {
+			isa = PBXGroup;
+			children = (
+				3AE2AFFE264824F000B56C2D /* ProjectServerDetailFirewallsView.swift */,
+			);
+			path = Firewalls;
 			sourceTree = "<group>";
 		};
 		3AF3B6E726122262006BE70C /* Caching */ = {
@@ -621,6 +632,7 @@
 				3A00B3DC260FAF77000864C2 /* ProjectSecurityViewController.swift in Sources */,
 				3A6A17992610DD7600BAE1ED /* CloudVolume.swift in Sources */,
 				3A00B3C8260FAF49000864C2 /* ProjectLoadBalancerDetailViewController.swift in Sources */,
+				3AE2AFFF264824F000B56C2D /* ProjectServerDetailFirewallsView.swift in Sources */,
 				3A6940E72618BEAF00490E82 /* HetznerCloudAPI_Volume.swift in Sources */,
 				3AE03A2F261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift in Sources */,
 				3A05A8782646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift in Sources */,

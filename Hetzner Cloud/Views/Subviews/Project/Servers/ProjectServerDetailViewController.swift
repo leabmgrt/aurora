@@ -124,7 +124,7 @@ struct ProjectServerDetailView: View {
                             Text("Destination")
                         }
                         ProjectServerDetailOtherOptionsView(title: "Firewalls") {
-                            Text("Destination")
+                            ProjectServerDetailFirewallsView(controller: .init(project: controller.project!, server: controller.server!))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Volumes") {
                             Text("Destination")
