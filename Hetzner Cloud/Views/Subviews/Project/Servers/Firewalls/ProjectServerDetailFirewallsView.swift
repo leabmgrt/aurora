@@ -73,8 +73,8 @@ struct ProjectServerDetailFirewallsView: View {
 
 class ProjectServerDetailFirewallsController: ObservableObject {
     
-    @Published var project: CloudProject!
-    @Published var server: CloudServer!
+    @Published var project: CloudProject
+    @Published var server: CloudServer
     
     init(project: CloudProject, server: CloudServer) {
         self.project = project

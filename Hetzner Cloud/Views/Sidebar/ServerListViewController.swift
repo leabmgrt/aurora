@@ -203,11 +203,8 @@ extension ServerListViewController: UICollectionViewDelegate {
             let detailController = ProjectFloatingIPDetailController(project: project!, floatingip: project!.floatingIPs[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectFloatingIPDetailView(controller: detailController))
         } else if indexPath.section == 4 { // Firewalls
-            let detailController = ProjectFirewallDetailController()
+            let detailController = ProjectFirewallDetailController(project: project!, firewall: project!.firewalls[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectFirewallDetailView(controller: detailController))
-
-            detailController.firewall = project!.firewalls[indexPath.row - 1]
-            detailController.project = project!
         } else if indexPath.section == 5 { // Network
             let detailController = ProjectNetworkDetailController(project: project!, network: project!.networks[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectNetworkDetailView(controller: detailController))

@@ -25,96 +25,92 @@ struct ProjectFirewallDetailView: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        if controller.firewall != nil && controller.project != nil {
-            VStack {
-                HStack {
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        Text("Applied to: ").bold() + Text("\(controller.firewall!.applied_to.count) Resource\(controller.firewall!.applied_to.count != 1 ? "s" : "")")
-                        if controller.firewall!.applied_to.count > 0 {
-                            if controller.isFullyApplied() {
-                                HStack {
-                                    Image(systemName: "checkmark").foregroundColor(.white)
-                                    Text("Fully applied").foregroundColor(.white)
-                                }.padding(6).background(Color.green).cornerRadius(12)
-                            } else {
-                                HStack {
-                                    Image(systemName: "exclamationmark.triangle").foregroundColor(.white)
-                                    Text("Partially applied").foregroundColor(.white)
-                                }.padding(6).background(Color.orange).cornerRadius(12)
+        VStack {
+            HStack {
+                Spacer()
+                VStack(alignment: .trailing) {
+                    Text("Applied to: ").bold() + Text("\(controller.firewall.applied_to.count) Resource\(controller.firewall.applied_to.count != 1 ? "s" : "")")
+                    if controller.firewall.applied_to.count > 0 {
+                        if controller.isFullyApplied() {
+                            HStack {
+                                Image(systemName: "checkmark").foregroundColor(.white)
+                                Text("Fully applied").foregroundColor(.white)
+                            }.padding(6).background(Color.green).cornerRadius(12)
+                        } else {
+                            HStack {
+                                Image(systemName: "exclamationmark.triangle").foregroundColor(.white)
+                                Text("Partially applied").foregroundColor(.white)
+                            }.padding(6).background(Color.orange).cornerRadius(12)
+                        }
+                    } else {
+                        Text("Not applied").foregroundColor(.white).padding(6).background(Color.gray).cornerRadius(12)
+                    }
+                }
+            }
+            Picker(selection: $selectedView, label: Text(""), content: {
+                Text("Rules").tag(0)
+                Text("Resources").tag(1)
+            }).pickerStyle(SegmentedPickerStyle())
+            if selectedView == 0 {
+                List {
+                    Section(header: Text("Inbound")) {
+                        if controller.firewall.rules.filter({ $0.direction == .in }).count > 0 {
+                            ForEach(controller.firewall.rules.filter { $0.direction == .in }, id: \.id) { rule in
+                                VStack(alignment: .leading) {
+                                    Text("\(rule.protocol.rawValue.uppercased()) ").bold() + Text("\(rule.port != nil ? String(rule.port!) : "")")
+                                    CloudFirewallTagView(ips: rule.source_ips)
+                                }
                             }
                         } else {
-                            Text("Not applied").foregroundColor(.white).padding(6).background(Color.gray).cornerRadius(12)
+                            Text("All inbound traffic will be dropped.").italic()
+                        }
+                    }
+                    Section(header: Text("Outbound")) {
+                        if controller.firewall.rules.filter({ $0.direction == .out }).count > 0 {
+                            ForEach(controller.firewall.rules.filter { $0.direction == .out }, id: \.id) { rule in
+                                VStack(alignment: .leading) {
+                                    Text("\(rule.protocol.rawValue.uppercased()) ").bold() + Text("\(rule.port != nil ? String(rule.port!) : "")")
+                                    CloudFirewallTagView(ips: rule.destination_ips)
+                                }
+                            }
+                        } else {
+                            Text("All outbound traffic is allowed.").italic()
                         }
                     }
                 }
-                Picker(selection: $selectedView, label: Text(""), content: {
-                    Text("Rules").tag(0)
-                    Text("Resources").tag(1)
-                }).pickerStyle(SegmentedPickerStyle())
-                if selectedView == 0 {
+            } else {
+                if controller.appliedServers().count != 0 {
                     List {
-                        Section(header: Text("Inbound")) {
-                            if controller.firewall!.rules.filter({ $0.direction == .in }).count > 0 {
-                                ForEach(controller.firewall!.rules.filter { $0.direction == .in }, id: \.id) { rule in
-                                    VStack(alignment: .leading) {
-                                        Text("\(rule.protocol.rawValue.uppercased()) ").bold() + Text("\(rule.port != nil ? String(rule.port!) : "")")
-                                        CloudFirewallTagView(ips: rule.source_ips)
-                                    }
+                        ForEach(controller.appliedServers(), id: \.id) { appliedServer in
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Circle().foregroundColor(getServerStatusColor(appliedServer.status)).frame(width: 20, height: 20, alignment: .center).shadow(color: getServerStatusColor(appliedServer.status), radius: 3, x: 0, y: 0)
+                                    Text("\(appliedServer.name) ").bold() + Text("(\(appliedServer.public_net.ipv4.ip))").foregroundColor(.gray).italic()
                                 }
-                            } else {
-                                Text("All inbound traffic will be dropped.").italic()
-                            }
-                        }
-                        Section(header: Text("Outbound")) {
-                            if controller.firewall!.rules.filter({ $0.direction == .out }).count > 0 {
-                                ForEach(controller.firewall!.rules.filter { $0.direction == .out }, id: \.id) { rule in
-                                    VStack(alignment: .leading) {
-                                        Text("\(rule.protocol.rawValue.uppercased()) ").bold() + Text("\(rule.port != nil ? String(rule.port!) : "")")
-                                        CloudFirewallTagView(ips: rule.destination_ips)
-                                    }
+                                if appliedServer.public_net.firewalls.first(where: { $0.id == controller.firewall.id })!.status == .pending {
+                                    HStack {
+                                        Image(systemName: "exclamationmark.triangle").foregroundColor(.white)
+                                        Text("Pending").foregroundColor(.white)
+                                    }.padding(6).background(Color.orange).cornerRadius(12)
+                                } else {
+                                    HStack {
+                                        Image(systemName: "checkmark").foregroundColor(.white)
+                                        Text("Applied").foregroundColor(.white)
+                                    }.padding(6).background(Color.green).cornerRadius(12)
                                 }
-                            } else {
-                                Text("All outbound traffic is allowed.").italic()
-                            }
+                            }.padding([.top, .bottom], 4)
                         }
                     }
                 } else {
-                    if controller.appliedServers().count != 0 {
-                        List {
-                            ForEach(controller.appliedServers(), id: \.id) { appliedServer in
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Circle().foregroundColor(getServerStatusColor(appliedServer.status)).frame(width: 20, height: 20, alignment: .center).shadow(color: getServerStatusColor(appliedServer.status), radius: 3, x: 0, y: 0)
-                                        Text("\(appliedServer.name) ").bold() + Text("(\(appliedServer.public_net.ipv4.ip))").foregroundColor(.gray).italic()
-                                    }
-                                    if appliedServer.public_net.firewalls.first(where: { $0.id == controller.firewall!.id })!.status == .pending {
-                                        HStack {
-                                            Image(systemName: "exclamationmark.triangle").foregroundColor(.white)
-                                            Text("Pending").foregroundColor(.white)
-                                        }.padding(6).background(Color.orange).cornerRadius(12)
-                                    } else {
-                                        HStack {
-                                            Image(systemName: "checkmark").foregroundColor(.white)
-                                            Text("Applied").foregroundColor(.white)
-                                        }.padding(6).background(Color.green).cornerRadius(12)
-                                    }
-                                }.padding([.top, .bottom], 4)
-                            }
-                        }
-                    } else {
-                        VStack {
-                            Spacer()
-                            Text("No resources").bold().font(.title2)
-                            Text("This firewall isn't applied to any resource").foregroundColor(.gray).padding(.top, 4)
-                            Spacer()
-                        }
+                    VStack {
+                        Spacer()
+                        Text("No resources").bold().font(.title2)
+                        Text("This firewall isn't applied to any resource").foregroundColor(.gray).padding(.top, 4)
+                        Spacer()
                     }
                 }
-            }.padding().navigationBarTitle(Text("\(controller.firewall!.name)"))
-        } else {
-            Text("no data")
-        }
+            }
+        }.padding().navigationBarTitle(Text("\(controller.firewall.name)"))
     }
 }
 
@@ -207,14 +203,19 @@ struct CloudFirewallTagView: View {
 }
 
 class ProjectFirewallDetailController: ObservableObject {
-    @Published var project: CloudProject? = nil
-    @Published var firewall: CloudFirewall? = nil
-
+    @Published var project: CloudProject
+    @Published var firewall: CloudFirewall
+    
+    init(project: CloudProject, firewall: CloudFirewall) {
+        self.project = project
+        self.firewall = firewall
+    }
+    
     func isFullyApplied() -> Bool {
-        let firewallAppliedToServerIDs: [Int] = firewall!.applied_to.map { Int($0.server.id) }
+        let firewallAppliedToServerIDs: [Int] = firewall.applied_to.map { Int($0.server.id) }
         var isFullyApplied = true
-        for server in project!.servers.filter({ firewallAppliedToServerIDs.contains($0.id) }) {
-            if let serverfirewall = server.public_net.firewalls.first(where: { $0.id == firewall!.id }) {
+        for server in project.servers.filter({ firewallAppliedToServerIDs.contains($0.id) }) {
+            if let serverfirewall = server.public_net.firewalls.first(where: { $0.id == firewall.id }) {
                 if serverfirewall.status == .pending { isFullyApplied = false }
             }
         }
@@ -222,8 +223,8 @@ class ProjectFirewallDetailController: ObservableObject {
     }
 
     func appliedServers() -> [CloudServer] {
-        let firewallAppliedToServerIDs: [Int] = firewall!.applied_to.map { Int($0.server.id) }
-        return project!.servers.filter { firewallAppliedToServerIDs.contains($0.id) }
+        let firewallAppliedToServerIDs: [Int] = firewall.applied_to.map { Int($0.server.id) }
+        return project.servers.filter { firewallAppliedToServerIDs.contains($0.id) }
     }
 }
 

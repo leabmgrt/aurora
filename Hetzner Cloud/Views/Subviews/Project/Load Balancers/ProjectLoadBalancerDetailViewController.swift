@@ -23,144 +23,140 @@ struct ProjectLoadBalancerDetailView: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        if controller.project != nil && controller.loadBalancer != nil {
-            ScrollView {
+        ScrollView {
+            Group {
                 Group {
-                    Group {
-                        HStack(alignment: .center) {
-                            Spacer()
-                            ProjectLoadBalancerDetailHealthStatusBadge(mix: controller.getHealthCheckMix())
-                        }
+                    HStack(alignment: .center) {
+                        Spacer()
+                        ProjectLoadBalancerDetailHealthStatusBadge(mix: controller.getHealthCheckMix())
                     }
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: []) {
-                        Group {
-                            VStack {
-                                HStack {
-                                    Text("Configuration (\(controller.loadBalancer!.type.description))").bold().font(.title3)
-                                    Spacer()
-                                }.padding(.bottom)
-                                HStack {
-                                    Image(systemName: "target")
-                                    Text("\(controller.loadBalancer!.targets.count)/\(Int(controller.loadBalancer!.type.max_targets))").bold() + Text(" Targets")
-                                    Spacer()
-                                }
-                                HStack {
-                                    Image(systemName: "gearshape")
-                                    Text("\(controller.loadBalancer!.services.count)/\(Int(controller.loadBalancer!.type.max_services))").bold() + Text(" Services")
-                                    Spacer()
-                                }
-                                HStack {
-                                    Image(systemName: "shield")
-                                    Text("\(controller.getCertificateCount())/\(Int(controller.loadBalancer!.type.max_assigned_certificates))").bold() + Text(" Certificates")
-                                    Spacer()
-                                }
-                                HStack {
-                                    Image(systemName: "network")
-                                    Text("\(Int(controller.loadBalancer!.type.max_connections))").bold() + Text(" Connections")
-                                    Spacer()
-                                }
-                                HStack {
-                                    Image(systemName: "plus.slash.minus")
-                                    Text("Algorithm: ") + Text("\(controller.loadBalancer!.algorithm.type.humanString())").bold()
-                                    Spacer()
-                                }
-                                HStack {
-                                    Image(systemName: "eurosign.circle")
-                                    Text("\(String(format: "%.2f", controller.getMonthlyPrice()))/mo")
-                                    Spacer()
-                                }
-                            }
-                        }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
-
-                        Group {
-                            VStack {
-                                HStack {
-                                    Text("Health status").bold().font(.title3)
-                                    Spacer()
-                                }.padding(.bottom)
-                                HStack {
-                                    ProjectLoadBalancerDetailHealthStatusBadge(mix: controller.getHealthCheckMix())
-                                    Spacer()
-                                }
-                                ZStack {
-                                    Circle()
-                                        .stroke(lineWidth: 12.0)
-                                        .opacity(0.3)
-                                        .foregroundColor(Color.gray)
-
-                                    let mix = controller.getHealthCheckMix()
-                                    let percentageHealthy = Float(mix.amountHealthy) / Float(mix.amountHealthy + mix.amountFailed)
-                                    let percentageFailed = Float(mix.amountFailed) / Float(mix.amountHealthy + mix.amountFailed)
-                                    ProgressCircleOverlay(percentage: percentageHealthy, startingPoint: 0, color: .green)
-                                    ProgressCircleOverlay(percentage: percentageFailed, startingPoint: percentageHealthy, color: .red)
-                                    VStack {
-                                        Text("\(mix.amountHealthy)/\(mix.amountHealthy + mix.amountFailed)").bold()
-                                        Text("Checks").foregroundColor(.gray)
-                                    }
-                                }.frame(width: 90, height: 90, alignment: .center).padding(16).padding(.bottom)
-                            }
-                        }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
-
-                        Group {
-                            VStack {
-                                HStack {
-                                    Text("Network (Public)").bold().font(.title3)
-                                    Spacer()
-                                }.padding(.bottom)
-                                HStack {
-                                    Text("\(controller.loadBalancer!.public_net.enabled ? "Enabled" : "Disabled")").bold().foregroundColor(controller.loadBalancer!.public_net.enabled ? .green : .red)
-                                    Spacer()
-                                }
-                                HStack {
-                                    Text("IPv4: ") + Text("\(controller.loadBalancer!.public_net.ipv4.ip ?? "---")").bold()
-                                    Spacer()
-                                }
-                                HStack {
-                                    Text("IPv6: ") + Text("\(controller.loadBalancer!.public_net.ipv6.ip ?? "---")").bold()
-                                    Spacer()
-                                }
-                            }
-                        }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
-
-                        Group {
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Text("Location").bold().font(.title3)
-                                    Spacer()
-                                }.padding(.bottom)
-
-                                Text("City: ") + Text("\(controller.loadBalancer!.location.city)").bold()
-                                Text("Datacenter: ") + Text("\(controller.loadBalancer!.location.description)").bold()
-                                Text("Country: ") + Text("\(controller.loadBalancer!.location.country)").bold()
-                            }
-                        }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
-
-                    }.padding([.top, .bottom])
+                }
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: []) {
                     Group {
-                        ProjectServerDetailOtherOptionsView(title: "Graphs") {
-                            ProjectLoadBalancerDetailGraphsView(controller: .init(project: controller.project!, loadBalancer: controller.loadBalancer!))
+                        VStack {
+                            HStack {
+                                Text("Configuration (\(controller.loadBalancer.type.description))").bold().font(.title3)
+                                Spacer()
+                            }.padding(.bottom)
+                            HStack {
+                                Image(systemName: "target")
+                                Text("\(controller.loadBalancer.targets.count)/\(Int(controller.loadBalancer.type.max_targets))").bold() + Text(" Targets")
+                                Spacer()
+                            }
+                            HStack {
+                                Image(systemName: "gearshape")
+                                Text("\(controller.loadBalancer.services.count)/\(Int(controller.loadBalancer.type.max_services))").bold() + Text(" Services")
+                                Spacer()
+                            }
+                            HStack {
+                                Image(systemName: "shield")
+                                Text("\(controller.getCertificateCount())/\(Int(controller.loadBalancer.type.max_assigned_certificates))").bold() + Text(" Certificates")
+                                Spacer()
+                            }
+                            HStack {
+                                Image(systemName: "network")
+                                Text("\(Int(controller.loadBalancer.type.max_connections))").bold() + Text(" Connections")
+                                Spacer()
+                            }
+                            HStack {
+                                Image(systemName: "plus.slash.minus")
+                                Text("Algorithm: ") + Text("\(controller.loadBalancer.algorithm.type.humanString())").bold()
+                                Spacer()
+                            }
+                            HStack {
+                                Image(systemName: "eurosign.circle")
+                                Text("\(String(format: "%.2f", controller.getMonthlyPrice()))/mo")
+                                Spacer()
+                            }
                         }
-                        ProjectServerDetailOtherOptionsView(title: "Targets") {
-                            ProjectLoadBalancerDetailTargetView(controller: .init(project: controller.project!, loadBalancer: controller.loadBalancer!))
+                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+
+                    Group {
+                        VStack {
+                            HStack {
+                                Text("Health status").bold().font(.title3)
+                                Spacer()
+                            }.padding(.bottom)
+                            HStack {
+                                ProjectLoadBalancerDetailHealthStatusBadge(mix: controller.getHealthCheckMix())
+                                Spacer()
+                            }
+                            ZStack {
+                                Circle()
+                                    .stroke(lineWidth: 12.0)
+                                    .opacity(0.3)
+                                    .foregroundColor(Color.gray)
+
+                                let mix = controller.getHealthCheckMix()
+                                let percentageHealthy = Float(mix.amountHealthy) / Float(mix.amountHealthy + mix.amountFailed)
+                                let percentageFailed = Float(mix.amountFailed) / Float(mix.amountHealthy + mix.amountFailed)
+                                ProgressCircleOverlay(percentage: percentageHealthy, startingPoint: 0, color: .green)
+                                ProgressCircleOverlay(percentage: percentageFailed, startingPoint: percentageHealthy, color: .red)
+                                VStack {
+                                    Text("\(mix.amountHealthy)/\(mix.amountHealthy + mix.amountFailed)").bold()
+                                    Text("Checks").foregroundColor(.gray)
+                                }
+                            }.frame(width: 90, height: 90, alignment: .center).padding(16).padding(.bottom)
                         }
-                        ProjectServerDetailOtherOptionsView(title: "Services") {
-                            ProjectLoadBalancerDetailServicesView(controller: .init(project: controller.project!, loadBalancer: controller.loadBalancer!))
+                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+
+                    Group {
+                        VStack {
+                            HStack {
+                                Text("Network (Public)").bold().font(.title3)
+                                Spacer()
+                            }.padding(.bottom)
+                            HStack {
+                                Text("\(controller.loadBalancer.public_net.enabled ? "Enabled" : "Disabled")").bold().foregroundColor(controller.loadBalancer.public_net.enabled ? .green : .red)
+                                Spacer()
+                            }
+                            HStack {
+                                Text("IPv4: ") + Text("\(controller.loadBalancer.public_net.ipv4.ip ?? "---")").bold()
+                                Spacer()
+                            }
+                            HStack {
+                                Text("IPv6: ") + Text("\(controller.loadBalancer.public_net.ipv6.ip ?? "---")").bold()
+                                Spacer()
+                            }
                         }
-                        /* ProjectServerDetailOtherOptionsView(title: "Networking") {
-                             Text("Destination")
-                         }
-                         ProjectServerDetailOtherOptionsView(title: "Rescale") {
-                             Text("Destination")
-                         }
-                         ProjectServerDetailOtherOptionsView(title: "Delete") {
-                             Text("Destination")
-                         } */
+                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+
+                    Group {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text("Location").bold().font(.title3)
+                                Spacer()
+                            }.padding(.bottom)
+
+                            Text("City: ") + Text("\(controller.loadBalancer.location.city)").bold()
+                            Text("Datacenter: ") + Text("\(controller.loadBalancer.location.description)").bold()
+                            Text("Country: ") + Text("\(controller.loadBalancer.location.country)").bold()
+                        }
+                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+
+                }.padding([.top, .bottom])
+                Group {
+                    ProjectServerDetailOtherOptionsView(title: "Graphs") {
+                        ProjectLoadBalancerDetailGraphsView(controller: .init(project: controller.project, loadBalancer: controller.loadBalancer))
                     }
-                }.padding()
-            }.navigationBarTitle(Text("\(controller.loadBalancer!.name)"))
-        } else {
-            Text("Oh no... Something went really wrong. Please try again.")
-        }
+                    ProjectServerDetailOtherOptionsView(title: "Targets") {
+                        ProjectLoadBalancerDetailTargetView(controller: .init(project: controller.project, loadBalancer: controller.loadBalancer))
+                    }
+                    ProjectServerDetailOtherOptionsView(title: "Services") {
+                        ProjectLoadBalancerDetailServicesView(controller: .init(project: controller.project, loadBalancer: controller.loadBalancer))
+                    }
+                    /* ProjectServerDetailOtherOptionsView(title: "Networking") {
+                         Text("Destination")
+                     }
+                     ProjectServerDetailOtherOptionsView(title: "Rescale") {
+                         Text("Destination")
+                     }
+                     ProjectServerDetailOtherOptionsView(title: "Delete") {
+                         Text("Destination")
+                     } */
+                }
+            }.padding()
+        }.navigationBarTitle(Text("\(controller.loadBalancer.name)"))
     }
 }
 
@@ -210,8 +206,8 @@ struct ProgressCircleOverlay: View {
 }
 
 class ProjectLoadBalancerDetailController: ObservableObject {
-    @Published var project: CloudProject?
-    @Published var loadBalancer: CloudLoadBalancer?
+    @Published var project: CloudProject
+    @Published var loadBalancer: CloudLoadBalancer
 
     init(project: CloudProject, loadBalancer: CloudLoadBalancer) {
         self.project = project
@@ -222,7 +218,7 @@ class ProjectLoadBalancerDetailController: ObservableObject {
         var healthyChecks = 0
         var unhealthyChecks = 0
 
-        for target in loadBalancer!.targets {
+        for target in loadBalancer.targets {
             healthyChecks += target.health_status.filter { $0.status == "healthy" }.count
             unhealthyChecks += target.health_status.filter { $0.status == "unhealthy" }.count
         }
@@ -232,14 +228,14 @@ class ProjectLoadBalancerDetailController: ObservableObject {
 
     func getCertificateCount() -> Int {
         var certcount = 0
-        for service in loadBalancer!.services {
+        for service in loadBalancer.services {
             certcount += service.http?.certificates.count ?? 0
         }
         return certcount
     }
 
     func getMonthlyPrice() -> Double {
-        return Double(loadBalancer!.type.prices.first(where: { $0.location == loadBalancer!.location.name })!.price_monthly.gross)!
+        return Double(loadBalancer.type.prices.first(where: { $0.location == loadBalancer.location.name })!.price_monthly.gross)!
     }
 }
 

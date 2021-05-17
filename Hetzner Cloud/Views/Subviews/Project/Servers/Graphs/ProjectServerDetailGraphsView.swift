@@ -122,8 +122,8 @@ struct ProjectServerDetailGraphsView_Previews: PreviewProvider {
 }
 
 class ProjectServerDetailGraphsController: ObservableObject {
-    @Published var project: CloudProject!
-    @Published var server: CloudServer!
+    @Published var project: CloudProject
+    @Published var server: CloudServer
     @Published var metrics: CloudServerMetrics? = nil
     @Published var selectedDuration: Int = 60 { // Minutes
         didSet {
