@@ -52,7 +52,7 @@ public struct CloudProject {
         HCAppCache.default.removeProject(self)
     }
 
-    mutating func saveKey(_ key: String, updateCache _: Bool = true) {
+    mutating func saveKey(_ key: String, updateCache: Bool = true) {
         if cloudAppPreventNetworkActivityUseSampleData { return }
         if apikeyReferrer != "" {
             KeychainWrapper.standard.removeObject(forKey: apikeyReferrer) // Remove existing key if the referrer isn't nil
@@ -70,7 +70,7 @@ public struct CloudProject {
 
         KeychainWrapper.standard.set(key, forKey: newReferrer) // save key in keychain
         apikeyReferrer = newReferrer // Set new referrer
-        HCAppCache.default.saveProject(self) // Update cache
+        if updateCache { HCAppCache.default.saveProject(self) } // Update cache
         api = .init(self) // Update API
     }
 
