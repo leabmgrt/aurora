@@ -11,11 +11,9 @@
 import SwiftUI
 
 struct ProjectServerDetailSnapshotsView: View {
-    
     @ObservedObject var controller: ProjectServerDetailSnapshotsController
     @Environment(\.colorScheme) var colorScheme
 
-    
     var body: some View {
         Group {
             if controller.snapshots != nil {
@@ -33,13 +31,12 @@ struct ProjectServerDetailSnapshotsView: View {
                                 Button(action: {}, label: {
                                     Text("Take snapshot").bold().padding().foregroundColor(.white).background(Color.accentColor).cornerRadius(7)
                                 }).padding(.top)
-                                
                             }
                         }.frame(minWidth: 0,
                                 maxWidth: .infinity,
                                 alignment: .topLeading)
                     }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2).padding()
-                    
+
                     if controller.snapshots!.count > 0 {
                         ForEach(controller.snapshots!.sorted(by: { $0.created > $1.created }), id: \.id) { snapshot in
                             VStack(alignment: .leading) {
@@ -53,13 +50,11 @@ struct ProjectServerDetailSnapshotsView: View {
                                 Divider()
                             }.padding(4)
                         }.padding([.leading, .trailing])
-                    }
-                    else {
+                    } else {
                         Text("You currently don't have any snapshots. Try creating one!")
                     }
                 }
-            }
-            else {
+            } else {
                 VStack {
                     ProgressView().progressViewStyle(CircularProgressViewStyle())
                     Text("Loading...").padding()
@@ -74,17 +69,16 @@ struct ProjectServerDetailSnapshotsView: View {
 }
 
 class ProjectServerDetailSnapshotsController: ObservableObject {
-    
     @Published var project: CloudProject
     @Published var server: CloudServer
     @Published var snapshots: [CloudServerImage]? = nil
-    
+
     init(project: CloudProject, server: CloudServer) {
         self.project = project
         self.server = server
-        self.snapshots = snapshots
+        snapshots = snapshots
     }
-    
+
     func loadData() {
         project.api!.loadServerSnapshots(server.id) { result in
             switch result {
@@ -95,7 +89,6 @@ class ProjectServerDetailSnapshotsController: ObservableObject {
             }
         }
     }
-    
 }
 
 struct ProjectServerDetailSnapshotsView_Previews: PreviewProvider {

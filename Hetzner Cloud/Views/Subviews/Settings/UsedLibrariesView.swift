@@ -21,8 +21,8 @@ struct UsedLibrariesView: View {
                     if UIApplication.shared.canOpenURL(library.url) { UIApplication.shared.open(library.url) }
                 }
             }
-            
-            ForEach(Array(AppUsedLibraries.usedLibraries.enumerated()), id: \.offset) { (index, library) in
+
+            ForEach(Array(AppUsedLibraries.usedLibraries.enumerated()), id: \.offset) { index, library in
                 Section(footer: (index == AppUsedLibraries.usedLibraries.count - 1) ? Text("Thank you to all maintainers of these libraries, you're awesome! ^^") : Text("")) {
                     VStack(alignment: .leading) {
                         Text("\(library.name)").bold().font(.headline)

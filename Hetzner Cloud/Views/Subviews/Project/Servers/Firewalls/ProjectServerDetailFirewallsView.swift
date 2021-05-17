@@ -11,10 +11,9 @@
 import SwiftUI
 
 struct ProjectServerDetailFirewallsView: View {
-    
     @ObservedObject var controller: ProjectServerDetailFirewallsController
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
         Group {
             ScrollView {
@@ -30,16 +29,15 @@ struct ProjectServerDetailFirewallsView: View {
                             Button(action: {}, label: {
                                 Text("Apply Firewall").bold().padding().foregroundColor(.white).background(Color.accentColor).cornerRadius(7)
                             }).padding(.top)
-                            
                         }
                     }.frame(minWidth: 0,
                             maxWidth: .infinity,
                             alignment: .topLeading)
                 }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2).padding()
-                
+
                 if controller.server.public_net.firewalls.count > 0 {
                     ForEach(controller.server.public_net.firewalls, id: \.id) { firewall in
-                        let firewallInfo = controller.project.firewalls.first(where: { $0.id == firewall.id})!
+                        let firewallInfo = controller.project.firewalls.first(where: { $0.id == firewall.id })!
                         VStack(alignment: .leading) {
                             HStack {
                                 VStack(alignment: .leading) {
@@ -61,27 +59,24 @@ struct ProjectServerDetailFirewallsView: View {
                             Divider()
                         }.padding(4)
                     }.padding([.leading, .trailing])
-                }
-                else {
+                } else {
                     Text("You currently don't have any firewalls applied to this server. Try applying one!")
                 }
-                
             }
         }.navigationBarTitle(Text("Firewalls"))
     }
 }
 
 class ProjectServerDetailFirewallsController: ObservableObject {
-    
     @Published var project: CloudProject
     @Published var server: CloudServer
-    
+
     init(project: CloudProject, server: CloudServer) {
         self.project = project
         self.server = server
     }
-    
 }
+
 struct ProjectServerDetailFirewallsView_Previews: PreviewProvider {
     static var previews: some View {
         ProjectServerDetailFirewallsView(controller: .init(project: .example, server: .example))

@@ -186,16 +186,14 @@ class ServerListViewController: UIViewController {
 
 extension ServerListViewController: UICollectionViewDelegate {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         var detailView: UIViewController?
-        
-        
+
         if indexPath.section == 0 { // Server list
             detailView = UIViewController()
         } else if indexPath.section == 1 { // Servers
             let detailController = ProjectServerDetailController(project: project!, server: project!.servers[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectServerDetailView(controller: detailController))
-            
+
         } else if indexPath.section == 2 { // Volumes
             let detailController = ProjectVolumeDetailController(project: project!, volume: project!.volumes[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectVolumeDetailView(controller: detailController))
@@ -212,18 +210,16 @@ extension ServerListViewController: UICollectionViewDelegate {
             let detailController = ProjectLoadBalancerDetailController(project: project!, loadBalancer: project!.loadBalancers[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectLoadBalancerDetailView(controller: detailController))
         }
-        
+
         splitViewController?.showsSecondaryOnlyButton = true
-        
+
         if let collapsed = splitViewController?.isCollapsed, collapsed {
             navigationController?.pushViewController(detailView!, animated: true)
-        }
-        else {
+        } else {
             let detailNavigationController = UINavigationController(rootViewController: detailView!)
             detailNavigationController.navigationBar.prefersLargeTitles = true
             splitViewController?.setViewController(detailNavigationController, for: .secondary)
         }
-        
     }
 }
 

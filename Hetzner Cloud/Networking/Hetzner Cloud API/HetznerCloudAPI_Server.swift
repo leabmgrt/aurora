@@ -56,15 +56,14 @@ extension HetznerCloudAPI {
             callback(response)
         }
     }
-    
+
     func loadServerBackups(_ serverId: Int, callback: @escaping (Result<[CloudServerImage], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([])) }
-        
+
         loadServerBackupsNetworkCall(page: nil, server: serverId) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {
                 return callback(.failure(error))
-            }
-            else {
+            } else {
                 let json = JSON(firstResponse.data!)
                 var backups: [CloudServerImage] = json["images"].arrayValue.map { CloudServerImage($0) }
                 let lastPage = json["meta"]["pagination"]["last_page"].int!
@@ -76,44 +75,39 @@ extension HetznerCloudAPI {
                             if let error2 = responseCheck(backupResponse) {
                                 dispatchGroup.leave()
                                 return callback(.failure(error2))
-                            }
-                            else {
+                            } else {
                                 let json2 = JSON(backupResponse.data!)
                                 backups.append(contentsOf: json2["images"].arrayValue.map { CloudServerImage($0) })
                                 dispatchGroup.leave()
                             }
                         }
                     }
-                    
+
                     dispatchGroup.notify(queue: .main) {
                         return callback(.success(backups))
                     }
-                }
-                else {
+                } else {
                     return callback(.success(backups))
                 }
             }
         }
-        
     }
-    
+
     private func loadServerBackupsNetworkCall(page: Int?, server: Int, callback: @escaping (AFDataResponse<Any>) -> Void) {
         AF.request("https://api.hetzner.cloud/v1/images?type=backup&bound_to=\(server)&per_page=50\(page != nil ? "&page=\(page!)" : "")", headers: [
-                    "Authorization": "Bearer \(apikey!)",
+            "Authorization": "Bearer \(apikey!)",
         ]).responseJSON { response in
             callback(response)
         }
-        
     }
-    
+
     func loadServerSnapshots(_ serverId: Int?, callback: @escaping (Result<[CloudServerImage], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([])) }
-        
+
         loadServerSnapshotsNetworkCall(page: nil) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {
                 return callback(.failure(error))
-            }
-            else {
+            } else {
                 let json = JSON(firstResponse.data!)
                 var snapshots: [CloudServerImage] = json["images"].arrayValue.map { CloudServerImage($0) }
                 let lastPage = json["meta"]["pagination"]["last_page"].int!
@@ -125,32 +119,29 @@ extension HetznerCloudAPI {
                             if let error2 = responseCheck(snapshotResponse) {
                                 dispatchGroup.leave()
                                 return callback(.failure(error2))
-                            }
-                            else {
+                            } else {
                                 let json2 = JSON(snapshotResponse.data!)
                                 snapshots.append(contentsOf: json2["images"].arrayValue.map { CloudServerImage($0) })
                                 dispatchGroup.leave()
                             }
                         }
                     }
-                    
+
                     dispatchGroup.notify(queue: .main) {
-                        let filteredSnapshots = (serverId != nil) ? snapshots.filter({ $0.created_from!.id == serverId! }) : snapshots
+                        let filteredSnapshots = (serverId != nil) ? snapshots.filter { $0.created_from!.id == serverId! } : snapshots
                         return callback(.success(filteredSnapshots))
                     }
-                }
-                else {
-                    let filteredSnapshots = (serverId != nil) ? snapshots.filter({ $0.created_from!.id == serverId! }) : snapshots
+                } else {
+                    let filteredSnapshots = (serverId != nil) ? snapshots.filter { $0.created_from!.id == serverId! } : snapshots
                     return callback(.success(filteredSnapshots))
                 }
             }
         }
-        
     }
-    
+
     private func loadServerSnapshotsNetworkCall(page: Int?, callback: @escaping (AFDataResponse<Any>) -> Void) {
         AF.request("https://api.hetzner.cloud/v1/images?type=snapshot&per_page=50\(page != nil ? "&page=\(page!)" : "")", headers: [
-                    "Authorization": "Bearer \(apikey!)",
+            "Authorization": "Bearer \(apikey!)",
         ]).responseJSON { response in
             callback(response)
         }
@@ -174,6 +165,4 @@ extension HetznerCloudAPI {
             }
         }
     }
-    
-    
 }

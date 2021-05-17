@@ -34,7 +34,6 @@ struct ProjectServerDetailBackupsView: View {
                                 Button(action: {}, label: {
                                     Text("Disable backups").bold().padding().foregroundColor(.white).background(Color.gray).cornerRadius(7)
                                 })
-                                
                             }
                         }.frame(minWidth: 0,
                                 maxWidth: .infinity,
@@ -53,29 +52,26 @@ struct ProjectServerDetailBackupsView: View {
                                 Divider()
                             }.padding(4)
                         }.padding([.leading, .trailing])
-                    }
-                    else {
+                    } else {
                         Text("You currently don't have any backups. Try creating one!")
                     }
                 }
-            }
-            else {
+            } else {
                 VStack {
                     ProgressView().progressViewStyle(CircularProgressViewStyle())
                     Text("Loading...").padding()
                 }
             }
         }.navigationBarTitle(Text("Backups"))
-        .onAppear {
-            if controller.backups == nil {
-                controller.loadData()
+            .onAppear {
+                if controller.backups == nil {
+                    controller.loadData()
+                }
             }
-        }
     }
 }
 
 class ProjectServerDetailBackupsController: ObservableObject {
-    
     @Published var project: CloudProject
     @Published var server: CloudServer
     @Published var backups: [CloudServerImage]? = nil
@@ -83,9 +79,9 @@ class ProjectServerDetailBackupsController: ObservableObject {
     init(project: CloudProject, server: CloudServer) {
         self.server = server
         self.project = project
-        self.backups = nil
+        backups = nil
     }
-    
+
     func loadData() {
         project.api!.loadServerBackups(server.id) { result in
             switch result {

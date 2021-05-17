@@ -205,12 +205,12 @@ struct CloudFirewallTagView: View {
 class ProjectFirewallDetailController: ObservableObject {
     @Published var project: CloudProject
     @Published var firewall: CloudFirewall
-    
+
     init(project: CloudProject, firewall: CloudFirewall) {
         self.project = project
         self.firewall = firewall
     }
-    
+
     func isFullyApplied() -> Bool {
         let firewallAppliedToServerIDs: [Int] = firewall.applied_to.map { Int($0.server.id) }
         var isFullyApplied = true

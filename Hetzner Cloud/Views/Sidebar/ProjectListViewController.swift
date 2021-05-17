@@ -28,7 +28,7 @@ class ProjectListViewController: UIViewController {
         navigationController?.isToolbarHidden = false
         toolbarItems = [UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openSettings))]
     }
-    
+
     @objc func openSettings() {
         let settingsController = SettingsController()
         let settingsViewHC = UIHostingController(rootView: SettingsView(controller: settingsController))
@@ -164,8 +164,7 @@ extension ProjectListViewController: UITableViewDelegate {
             serverListVC.project = selectedproject.project
             if let collapsed = splitViewController?.isCollapsed, collapsed {
                 navigationController?.pushViewController(serverListVC, animated: true)
-            }
-            else {
+            } else {
                 splitViewController?.setViewController(UINavigationController(rootViewController: serverListVC), for: .supplementary)
             }
         } else if !selectedproject.didLoad && !selectedproject.connectionError && selectedproject.error == nil {
