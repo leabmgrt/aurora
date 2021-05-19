@@ -117,39 +117,39 @@ struct ProjectServerDetailView: View {
                         ProjectServerDetailOtherOptionsView(title: "Snapshots") {
                             ProjectServerDetailSnapshotsView(controller: .init(project: controller.project, server: controller.server))
                         }
-                        ProjectServerDetailOtherOptionsView(title: "Load Balancers") {
-                            Text("Destination")
-                        }
+                        /* ProjectServerDetailOtherOptionsView(title: "Load Balancers") {
+                             Text("Destination")
+                         } */
                         ProjectServerDetailOtherOptionsView(title: "Networking") {
                             Text("Destination")
                         }
                         ProjectServerDetailOtherOptionsView(title: "Firewalls") {
                             ProjectServerDetailFirewallsView(controller: .init(project: controller.project, server: controller.server))
                         }
-                        ProjectServerDetailOtherOptionsView(title: "Volumes") {
-                            Text("Destination")
-                        }
+                        /* ProjectServerDetailOtherOptionsView(title: "Volumes") {
+                             Text("Destination")
+                         } */
                     }
-                    Group {
-                        ProjectServerDetailOtherOptionsView(title: "Power") {
-                            ProjectServerDetailPowerView(controller: .init(project: controller.project, server: controller.server))
-                        }
-                        ProjectServerDetailOtherOptionsView(title: "Rescue") {
-                            Text("Destination")
-                        }
-                        ProjectServerDetailOtherOptionsView(title: "ISO Images") {
-                            Text("Destination")
-                        }
-                        ProjectServerDetailOtherOptionsView(title: "Rescale") {
-                            Text("Destination")
-                        }
-                        ProjectServerDetailOtherOptionsView(title: "Rebuild") {
-                            Text("Destination")
-                        }
-                        ProjectServerDetailOtherOptionsView(title: "Delete") {
-                            ProjectServerDetailDeleteView(controller: .init(project: controller.project, server: controller.server))
-                        }
-                    }
+                    /* Group {
+                         ProjectServerDetailOtherOptionsView(title: "Power") {
+                             ProjectServerDetailPowerView(controller: .init(project: controller.project, server: controller.server))
+                         }
+                         ProjectServerDetailOtherOptionsView(title: "Rescue") {
+                             Text("Destination")
+                         }
+                         ProjectServerDetailOtherOptionsView(title: "ISO Images") {
+                             Text("Destination")
+                         }
+                         ProjectServerDetailOtherOptionsView(title: "Rescale") {
+                             Text("Destination")
+                         }
+                         ProjectServerDetailOtherOptionsView(title: "Rebuild") {
+                             Text("Destination")
+                         }
+                         ProjectServerDetailOtherOptionsView(title: "Delete") {
+                             ProjectServerDetailDeleteView(controller: .init(project: controller.project, server: controller.server))
+                         }
+                     } */
                 }
             }.padding()
         }.navigationBarTitle(Text("\(controller.server.name)"))

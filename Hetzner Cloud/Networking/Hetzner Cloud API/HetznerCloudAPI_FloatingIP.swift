@@ -22,7 +22,6 @@ extension HetznerCloudAPI {
             } else {
                 let json = JSON(firstResponse.data!)
                 var floatingIPs: [CloudFloatingIP] = json["floating_ips"].arrayValue.map { CloudFloatingIP($0) }
-
                 let lastPage = json["meta"]["pagination"]["last_page"].int!
                 if lastPage > 1 {
                     let dispatchGroup = DispatchGroup()
