@@ -1,0 +1,1086 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A00B3B5260FAA5D000864C2 /* ServerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3B4260FAA5D000864C2 /* ServerListViewController.swift */; };
+		3A00B3C0260FAF3E000864C2 /* ProjectVolumeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3BF260FAF3E000864C2 /* ProjectVolumeDetailViewController.swift */; };
+		3A00B3C8260FAF49000864C2 /* ProjectLoadBalancerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3C7260FAF49000864C2 /* ProjectLoadBalancerDetailViewController.swift */; };
+		3A00B3CD260FAF5A000864C2 /* ProjectFloatingIPDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3CC260FAF5A000864C2 /* ProjectFloatingIPDetailViewController.swift */; };
+		3A00B3D2260FAF61000864C2 /* ProjectNetworkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3D1260FAF61000864C2 /* ProjectNetworkDetailViewController.swift */; };
+		3A00B3D7260FAF69000864C2 /* ProjectFirewallDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3D6260FAF69000864C2 /* ProjectFirewallDetailViewController.swift */; };
+		3A00B3DC260FAF77000864C2 /* ProjectSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3DB260FAF77000864C2 /* ProjectSecurityViewController.swift */; };
+		3A00B3E1260FAF80000864C2 /* ProjectServerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */; };
+		3A05A8732646E375003C6D0D /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3A05A8722646E375003C6D0D /* ConfettiSwiftUI */; };
+		3A05A8742646E375003C6D0D /* ConfettiSwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 3A05A8722646E375003C6D0D /* ConfettiSwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3A05A8782646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A05A8772646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift */; };
+		3A0A58D8261B189A00000C37 /* ExampleJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A58D7261B189A00000C37 /* ExampleJSON.swift */; };
+		3A1379E42612339C002EAFA7 /* HetznerCloudAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1379E32612339C002EAFA7 /* HetznerCloudAPI.swift */; };
+		3A1379EA26123535002EAFA7 /* HCAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1379E926123535002EAFA7 /* HCAPIError.swift */; };
+		3A190D7E2618C504003405A6 /* ProjectServerDetailPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A190D7D2618C504003405A6 /* ProjectServerDetailPowerView.swift */; };
+		3A190D842618C98F003405A6 /* GlobalSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A190D832618C98F003405A6 /* GlobalSplitViewController.swift */; };
+		3A19D869261B1F490041FBED /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A19D868261B1F490041FBED /* README.md */; };
+		3A41A964260E464200EF7526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A963260E464200EF7526 /* AppDelegate.swift */; };
+		3A41A966260E464200EF7526 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A965260E464200EF7526 /* SceneDelegate.swift */; };
+		3A41A968260E464200EF7526 /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A967260E464200EF7526 /* ProjectListViewController.swift */; };
+		3A41A96D260E464400EF7526 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A41A96C260E464400EF7526 /* Assets.xcassets */; };
+		3A41A970260E464400EF7526 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A41A96E260E464400EF7526 /* LaunchScreen.storyboard */; };
+		3A41A97B260E464400EF7526 /* Hetzner_CloudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A97A260E464400EF7526 /* Hetzner_CloudTests.swift */; };
+		3A41A986260E464400EF7526 /* Hetzner_CloudUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A985260E464400EF7526 /* Hetzner_CloudUITests.swift */; };
+		3A41A9A1260E471D00EF7526 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3A41A9A0260E471D00EF7526 /* SnapKit */; };
+		3A41A9A7260E47A200EF7526 /* CloudProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A9A6260E47A200EF7526 /* CloudProject.swift */; };
+		3A41A9B7260E707300EF7526 /* CloudServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A9B6260E707300EF7526 /* CloudServer.swift */; };
+		3A41A9BD260E70F200EF7526 /* HetznerDatacenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A9BC260E70F200EF7526 /* HetznerDatacenter.swift */; };
+		3A41A9C6260E783100EF7526 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3A41A9C5260E783100EF7526 /* SwiftyJSON */; };
+		3A54A3442612229A00F99693 /* HCAppCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A54A3432612229A00F99693 /* HCAppCache.swift */; };
+		3A54A34A2612236600F99693 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A54A3492612236600F99693 /* RealmSwift */; };
+		3A54A34C2612236600F99693 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3A54A34B2612236600F99693 /* Realm */; };
+		3A54A3582612238300F99693 /* RealmCloudProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A54A3572612238300F99693 /* RealmCloudProject.swift */; };
+		3A54A35E261225BD00F99693 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 3A54A35D261225BD00F99693 /* SwiftKeychainWrapper */; };
+		3A68A26B2619EB8800107533 /* ProjectServerDetailBackupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A68A26A2619EB8800107533 /* ProjectServerDetailBackupsView.swift */; };
+		3A6940E72618BEAF00490E82 /* HetznerCloudAPI_Volume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6940E62618BEAF00490E82 /* HetznerCloudAPI_Volume.swift */; };
+		3A6A17992610DD7600BAE1ED /* CloudVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A17982610DD7600BAE1ED /* CloudVolume.swift */; };
+		3A6A17A12610E3C800BAE1ED /* CloudFloatingIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A17A02610E3C800BAE1ED /* CloudFloatingIP.swift */; };
+		3A6A17A92610F3FA00BAE1ED /* CloudFirewall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A17A82610F3FA00BAE1ED /* CloudFirewall.swift */; };
+		3A7E2AD4261888C800F41F04 /* ProjectServerDetailDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E2AD3261888C800F41F04 /* ProjectServerDetailDeleteView.swift */; };
+		3A98AF772615F4D800EF895B /* ProjectServerDetailGraphsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A98AF762615F4D800EF895B /* ProjectServerDetailGraphsView.swift */; };
+		3A9B455D2612303E007E2EA4 /* EZAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B455C2612303E007E2EA4 /* EZAlertController.swift */; };
+		3A9B456226123118007E2EA4 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B456126123118007E2EA4 /* UITableView.swift */; };
+		3A9B456B26123317007E2EA4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9B456A26123317007E2EA4 /* Alamofire */; };
+		3AA896F12610F86F00188F74 /* CloudNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA896F02610F86F00188F74 /* CloudNetwork.swift */; };
+		3AAF49C526124D3D009FEBBC /* HetznerCloudAPI_Firewall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF49C426124D3D009FEBBC /* HetznerCloudAPI_Firewall.swift */; };
+		3AB8A6222610FBA5000567C3 /* CloudLoadBalancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB8A6212610FBA5000567C3 /* CloudLoadBalancer.swift */; };
+		3AC0D6862612372200EB819E /* HetznerCloudAPI_Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0D6852612372200EB819E /* HetznerCloudAPI_Server.swift */; };
+		3AC230FD261DFB77000700AA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC230FC261DFB77000700AA /* SettingsView.swift */; };
+		3AC577D02645A7E4000E3F91 /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC577CF2645A7E4000E3F91 /* LegalNoticeView.swift */; };
+		3AC577D22645AE98000E3F91 /* UsedLibrariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC577D12645AE98000E3F91 /* UsedLibrariesView.swift */; };
+		3AC9E318261A1621003EAC36 /* HetznerCloudAPI_Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */; };
+		3AC9E31D261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */; };
+		3ADCEE7B2646A97600567E0F /* UsedLibrariesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADCEE7A2646A97600567E0F /* UsedLibrariesData.swift */; };
+		3AE03A2F261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */; };
+		3AE03A37261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */; };
+		3AE18DB5261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */; };
+		3AE18DBA261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */; };
+		3AE2AFFF264824F000B56C2D /* ProjectServerDetailFirewallsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE2AFFE264824F000B56C2D /* ProjectServerDetailFirewallsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3A41A977260E464400EF7526 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A41A958260E464200EF7526 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A41A95F260E464200EF7526;
+			remoteInfo = "Hetzner Cloud";
+		};
+		3A41A982260E464400EF7526 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A41A958260E464200EF7526 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A41A95F260E464200EF7526;
+			remoteInfo = "Hetzner Cloud";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3A05A8752646E376003C6D0D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3A05A8742646E375003C6D0D /* ConfettiSwiftUI in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3A00B3B4260FAA5D000864C2 /* ServerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListViewController.swift; sourceTree = "<group>"; };
+		3A00B3BF260FAF3E000864C2 /* ProjectVolumeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectVolumeDetailViewController.swift; sourceTree = "<group>"; };
+		3A00B3C7260FAF49000864C2 /* ProjectLoadBalancerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailViewController.swift; sourceTree = "<group>"; };
+		3A00B3CC260FAF5A000864C2 /* ProjectFloatingIPDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFloatingIPDetailViewController.swift; sourceTree = "<group>"; };
+		3A00B3D1260FAF61000864C2 /* ProjectNetworkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNetworkDetailViewController.swift; sourceTree = "<group>"; };
+		3A00B3D6260FAF69000864C2 /* ProjectFirewallDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFirewallDetailViewController.swift; sourceTree = "<group>"; };
+		3A00B3DB260FAF77000864C2 /* ProjectSecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSecurityViewController.swift; sourceTree = "<group>"; };
+		3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailViewController.swift; sourceTree = "<group>"; };
+		3A05A8772646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailSnapshotsView.swift; sourceTree = "<group>"; };
+		3A0A58D7261B189A00000C37 /* ExampleJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleJSON.swift; sourceTree = "<group>"; };
+		3A1379E32612339C002EAFA7 /* HetznerCloudAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI.swift; sourceTree = "<group>"; };
+		3A1379E926123535002EAFA7 /* HCAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAPIError.swift; sourceTree = "<group>"; };
+		3A190D7D2618C504003405A6 /* ProjectServerDetailPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailPowerView.swift; sourceTree = "<group>"; };
+		3A190D832618C98F003405A6 /* GlobalSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSplitViewController.swift; sourceTree = "<group>"; };
+		3A19D868261B1F490041FBED /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3A41A960260E464200EF7526 /* Aurora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aurora.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A41A963260E464200EF7526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3A41A965260E464200EF7526 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3A41A967260E464200EF7526 /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
+		3A41A96C260E464400EF7526 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A41A96F260E464400EF7526 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3A41A971260E464400EF7526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A41A976260E464400EF7526 /* AuroraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuroraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A41A97A260E464400EF7526 /* Hetzner_CloudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hetzner_CloudTests.swift; sourceTree = "<group>"; };
+		3A41A97C260E464400EF7526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A41A981260E464400EF7526 /* AuroraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuroraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A41A985260E464400EF7526 /* Hetzner_CloudUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hetzner_CloudUITests.swift; sourceTree = "<group>"; };
+		3A41A987260E464400EF7526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A41A9A6260E47A200EF7526 /* CloudProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudProject.swift; sourceTree = "<group>"; };
+		3A41A9B6260E707300EF7526 /* CloudServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudServer.swift; sourceTree = "<group>"; };
+		3A41A9BC260E70F200EF7526 /* HetznerDatacenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerDatacenter.swift; sourceTree = "<group>"; };
+		3A54A3432612229A00F99693 /* HCAppCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAppCache.swift; sourceTree = "<group>"; };
+		3A54A3572612238300F99693 /* RealmCloudProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCloudProject.swift; sourceTree = "<group>"; };
+		3A68A26A2619EB8800107533 /* ProjectServerDetailBackupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailBackupsView.swift; sourceTree = "<group>"; };
+		3A6940E62618BEAF00490E82 /* HetznerCloudAPI_Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Volume.swift; sourceTree = "<group>"; };
+		3A6A17982610DD7600BAE1ED /* CloudVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudVolume.swift; sourceTree = "<group>"; };
+		3A6A17A02610E3C800BAE1ED /* CloudFloatingIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFloatingIP.swift; sourceTree = "<group>"; };
+		3A6A17A82610F3FA00BAE1ED /* CloudFirewall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFirewall.swift; sourceTree = "<group>"; };
+		3A7E2AD3261888C800F41F04 /* ProjectServerDetailDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailDeleteView.swift; sourceTree = "<group>"; };
+		3A98AF762615F4D800EF895B /* ProjectServerDetailGraphsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailGraphsView.swift; sourceTree = "<group>"; };
+		3A9B455C2612303E007E2EA4 /* EZAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EZAlertController.swift; sourceTree = "<group>"; };
+		3A9B456126123118007E2EA4 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		3AA896F02610F86F00188F74 /* CloudNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudNetwork.swift; sourceTree = "<group>"; };
+		3AAF49C426124D3D009FEBBC /* HetznerCloudAPI_Firewall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Firewall.swift; sourceTree = "<group>"; };
+		3AB8A6212610FBA5000567C3 /* CloudLoadBalancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudLoadBalancer.swift; sourceTree = "<group>"; };
+		3AC0D6852612372200EB819E /* HetznerCloudAPI_Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Server.swift; sourceTree = "<group>"; };
+		3AC230FC261DFB77000700AA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3AC577CF2645A7E4000E3F91 /* LegalNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
+		3AC577D12645AE98000E3F91 /* UsedLibrariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedLibrariesView.swift; sourceTree = "<group>"; };
+		3AC9742526132B5F000AAAA2 /* Aurora.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Aurora.entitlements; sourceTree = "<group>"; };
+		3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Network.swift; sourceTree = "<group>"; };
+		3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_FloatingIP.swift; sourceTree = "<group>"; };
+		3ADCEE7A2646A97600567E0F /* UsedLibrariesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedLibrariesData.swift; sourceTree = "<group>"; };
+		3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailTargetView.swift; sourceTree = "<group>"; };
+		3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailServicesView.swift; sourceTree = "<group>"; };
+		3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_LoadBalancer.swift; sourceTree = "<group>"; };
+		3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailGraphsView.swift; sourceTree = "<group>"; };
+		3AE2AFFE264824F000B56C2D /* ProjectServerDetailFirewallsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailFirewallsView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A41A95D260E464200EF7526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A54A34A2612236600F99693 /* RealmSwift in Frameworks */,
+				3A41A9C6260E783100EF7526 /* SwiftyJSON in Frameworks */,
+				3A54A35E261225BD00F99693 /* SwiftKeychainWrapper in Frameworks */,
+				3A9B456B26123317007E2EA4 /* Alamofire in Frameworks */,
+				3A54A34C2612236600F99693 /* Realm in Frameworks */,
+				3A41A9A1260E471D00EF7526 /* SnapKit in Frameworks */,
+				3A05A8732646E375003C6D0D /* ConfettiSwiftUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A41A973260E464400EF7526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A41A97E260E464400EF7526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A00B3BC260FAF0B000864C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A190D822618C97E003405A6 /* Head */,
+				3A00B3BE260FAF19000864C2 /* Subviews */,
+				3A00B3BD260FAF10000864C2 /* Sidebar */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A00B3BD260FAF10000864C2 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				3A41A967260E464200EF7526 /* ProjectListViewController.swift */,
+				3A00B3B4260FAA5D000864C2 /* ServerListViewController.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		3A00B3BE260FAF19000864C2 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				3AC230FB261DFB43000700AA /* Settings */,
+				3AC230FA261DFB3A000700AA /* Project */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		3A05A8762646F80D003C6D0D /* Snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				3A05A8772646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift */,
+			);
+			path = Snapshots;
+			sourceTree = "<group>";
+		};
+		3A0A58D6261B188C00000C37 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				3A0A58D7261B189A00000C37 /* ExampleJSON.swift */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		3A0DB1972618FC6600AD2E0A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B456F2612331D007E2EA4 /* Hetzner Cloud API */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		3A1379E826123524002EAFA7 /* Error Handling */ = {
+			isa = PBXGroup;
+			children = (
+				3A1379E926123535002EAFA7 /* HCAPIError.swift */,
+			);
+			path = "Error Handling";
+			sourceTree = "<group>";
+		};
+		3A190D822618C97E003405A6 /* Head */ = {
+			isa = PBXGroup;
+			children = (
+				3A190D832618C98F003405A6 /* GlobalSplitViewController.swift */,
+			);
+			path = Head;
+			sourceTree = "<group>";
+		};
+		3A19D86D261B2D0F0041FBED /* Load Balancers */ = {
+			isa = PBXGroup;
+			children = (
+				3A00B3C7260FAF49000864C2 /* ProjectLoadBalancerDetailViewController.swift */,
+				3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */,
+				3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */,
+				3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */,
+			);
+			path = "Load Balancers";
+			sourceTree = "<group>";
+		};
+		3A41A957260E464200EF7526 = {
+			isa = PBXGroup;
+			children = (
+				3A19D868261B1F490041FBED /* README.md */,
+				3A41A962260E464200EF7526 /* Aurora */,
+				3A41A979260E464400EF7526 /* AuroraTests */,
+				3A41A984260E464400EF7526 /* AuroraUITests */,
+				3A41A961260E464200EF7526 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3A41A961260E464200EF7526 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A41A960260E464200EF7526 /* Aurora.app */,
+				3A41A976260E464400EF7526 /* AuroraTests.xctest */,
+				3A41A981260E464400EF7526 /* AuroraUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A41A962260E464200EF7526 /* Aurora */ = {
+			isa = PBXGroup;
+			children = (
+				3A0A58D6261B188C00000C37 /* Testing */,
+				3AC9742526132B5F000AAAA2 /* Aurora.entitlements */,
+				3A0DB1972618FC6600AD2E0A /* Networking */,
+				3A54A3632612301900F99693 /* Extensions */,
+				3AF3B6E726122262006BE70C /* Caching */,
+				3A00B3BC260FAF0B000864C2 /* Views */,
+				3A41A9A5260E479700EF7526 /* Data Structures */,
+				3A41A963260E464200EF7526 /* AppDelegate.swift */,
+				3A41A965260E464200EF7526 /* SceneDelegate.swift */,
+				3A41A96C260E464400EF7526 /* Assets.xcassets */,
+				3A41A96E260E464400EF7526 /* LaunchScreen.storyboard */,
+				3A41A971260E464400EF7526 /* Info.plist */,
+			);
+			path = Aurora;
+			sourceTree = "<group>";
+		};
+		3A41A979260E464400EF7526 /* AuroraTests */ = {
+			isa = PBXGroup;
+			children = (
+				3A41A97A260E464400EF7526 /* Hetzner_CloudTests.swift */,
+				3A41A97C260E464400EF7526 /* Info.plist */,
+			);
+			path = AuroraTests;
+			sourceTree = "<group>";
+		};
+		3A41A984260E464400EF7526 /* AuroraUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3A41A985260E464400EF7526 /* Hetzner_CloudUITests.swift */,
+				3A41A987260E464400EF7526 /* Info.plist */,
+			);
+			path = AuroraUITests;
+			sourceTree = "<group>";
+		};
+		3A41A9A5260E479700EF7526 /* Data Structures */ = {
+			isa = PBXGroup;
+			children = (
+				3A41A9A6260E47A200EF7526 /* CloudProject.swift */,
+				3A41A9B6260E707300EF7526 /* CloudServer.swift */,
+				3A41A9BC260E70F200EF7526 /* HetznerDatacenter.swift */,
+				3A6A17982610DD7600BAE1ED /* CloudVolume.swift */,
+				3A6A17A02610E3C800BAE1ED /* CloudFloatingIP.swift */,
+				3A6A17A82610F3FA00BAE1ED /* CloudFirewall.swift */,
+				3AA896F02610F86F00188F74 /* CloudNetwork.swift */,
+				3AB8A6212610FBA5000567C3 /* CloudLoadBalancer.swift */,
+			);
+			path = "Data Structures";
+			sourceTree = "<group>";
+		};
+		3A54A3502612237600F99693 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				3A54A3572612238300F99693 /* RealmCloudProject.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		3A54A3632612301900F99693 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B455C2612303E007E2EA4 /* EZAlertController.swift */,
+				3A9B456126123118007E2EA4 /* UITableView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3A9B456F2612331D007E2EA4 /* Hetzner Cloud API */ = {
+			isa = PBXGroup;
+			children = (
+				3A1379E826123524002EAFA7 /* Error Handling */,
+				3A1379E32612339C002EAFA7 /* HetznerCloudAPI.swift */,
+				3AC0D6852612372200EB819E /* HetznerCloudAPI_Server.swift */,
+				3A6940E62618BEAF00490E82 /* HetznerCloudAPI_Volume.swift */,
+				3AAF49C426124D3D009FEBBC /* HetznerCloudAPI_Firewall.swift */,
+				3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */,
+				3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */,
+				3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */,
+			);
+			path = "Hetzner Cloud API";
+			sourceTree = "<group>";
+		};
+		3AC230FA261DFB3A000700AA /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				3A19D86D261B2D0F0041FBED /* Load Balancers */,
+				3ACD371A2615EE1700C5B36C /* Servers */,
+				3A00B3BF260FAF3E000864C2 /* ProjectVolumeDetailViewController.swift */,
+				3A00B3CC260FAF5A000864C2 /* ProjectFloatingIPDetailViewController.swift */,
+				3A00B3D1260FAF61000864C2 /* ProjectNetworkDetailViewController.swift */,
+				3A00B3DB260FAF77000864C2 /* ProjectSecurityViewController.swift */,
+				3A00B3D6260FAF69000864C2 /* ProjectFirewallDetailViewController.swift */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		3AC230FB261DFB43000700AA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3AC230FC261DFB77000700AA /* SettingsView.swift */,
+				3AC577CF2645A7E4000E3F91 /* LegalNoticeView.swift */,
+				3AC577D12645AE98000E3F91 /* UsedLibrariesView.swift */,
+				3ADCEE7A2646A97600567E0F /* UsedLibrariesData.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3AC577CB2645A187000E3F91 /* Delete */ = {
+			isa = PBXGroup;
+			children = (
+				3A7E2AD3261888C800F41F04 /* ProjectServerDetailDeleteView.swift */,
+			);
+			path = Delete;
+			sourceTree = "<group>";
+		};
+		3AC577CC2645A18F000E3F91 /* Backups */ = {
+			isa = PBXGroup;
+			children = (
+				3A68A26A2619EB8800107533 /* ProjectServerDetailBackupsView.swift */,
+			);
+			path = Backups;
+			sourceTree = "<group>";
+		};
+		3AC577CD2645A1A5000E3F91 /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				3A98AF762615F4D800EF895B /* ProjectServerDetailGraphsView.swift */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
+		3AC577CE2645A1B2000E3F91 /* Power */ = {
+			isa = PBXGroup;
+			children = (
+				3A190D7D2618C504003405A6 /* ProjectServerDetailPowerView.swift */,
+			);
+			path = Power;
+			sourceTree = "<group>";
+		};
+		3ACD371A2615EE1700C5B36C /* Servers */ = {
+			isa = PBXGroup;
+			children = (
+				3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */,
+				3AE2AFFD264824E000B56C2D /* Firewalls */,
+				3A05A8762646F80D003C6D0D /* Snapshots */,
+				3AC577CE2645A1B2000E3F91 /* Power */,
+				3AC577CD2645A1A5000E3F91 /* Graphs */,
+				3AC577CC2645A18F000E3F91 /* Backups */,
+				3AC577CB2645A187000E3F91 /* Delete */,
+			);
+			path = Servers;
+			sourceTree = "<group>";
+		};
+		3AE2AFFD264824E000B56C2D /* Firewalls */ = {
+			isa = PBXGroup;
+			children = (
+				3AE2AFFE264824F000B56C2D /* ProjectServerDetailFirewallsView.swift */,
+			);
+			path = Firewalls;
+			sourceTree = "<group>";
+		};
+		3AF3B6E726122262006BE70C /* Caching */ = {
+			isa = PBXGroup;
+			children = (
+				3A54A3502612237600F99693 /* Objects */,
+				3A54A3432612229A00F99693 /* HCAppCache.swift */,
+			);
+			path = Caching;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A41A95F260E464200EF7526 /* Aurora */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A41A98A260E464400EF7526 /* Build configuration list for PBXNativeTarget "Aurora" */;
+			buildPhases = (
+				3A41A95C260E464200EF7526 /* Sources */,
+				3A41A95D260E464200EF7526 /* Frameworks */,
+				3A41A95E260E464200EF7526 /* Resources */,
+				3A05A8752646E376003C6D0D /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Aurora;
+			packageProductDependencies = (
+				3A41A9A0260E471D00EF7526 /* SnapKit */,
+				3A41A9C5260E783100EF7526 /* SwiftyJSON */,
+				3A54A3492612236600F99693 /* RealmSwift */,
+				3A54A34B2612236600F99693 /* Realm */,
+				3A54A35D261225BD00F99693 /* SwiftKeychainWrapper */,
+				3A9B456A26123317007E2EA4 /* Alamofire */,
+				3A05A8722646E375003C6D0D /* ConfettiSwiftUI */,
+			);
+			productName = "Hetzner Cloud";
+			productReference = 3A41A960260E464200EF7526 /* Aurora.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3A41A975260E464400EF7526 /* AuroraTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A41A98D260E464400EF7526 /* Build configuration list for PBXNativeTarget "AuroraTests" */;
+			buildPhases = (
+				3A41A972260E464400EF7526 /* Sources */,
+				3A41A973260E464400EF7526 /* Frameworks */,
+				3A41A974260E464400EF7526 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3A41A978260E464400EF7526 /* PBXTargetDependency */,
+			);
+			name = AuroraTests;
+			productName = "Hetzner CloudTests";
+			productReference = 3A41A976260E464400EF7526 /* AuroraTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3A41A980260E464400EF7526 /* AuroraUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A41A990260E464400EF7526 /* Build configuration list for PBXNativeTarget "AuroraUITests" */;
+			buildPhases = (
+				3A41A97D260E464400EF7526 /* Sources */,
+				3A41A97E260E464400EF7526 /* Frameworks */,
+				3A41A97F260E464400EF7526 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3A41A983260E464400EF7526 /* PBXTargetDependency */,
+			);
+			name = AuroraUITests;
+			productName = "Hetzner CloudUITests";
+			productReference = 3A41A981260E464400EF7526 /* AuroraUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A41A958260E464200EF7526 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					3A41A95F260E464200EF7526 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					3A41A975260E464400EF7526 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 3A41A95F260E464200EF7526;
+					};
+					3A41A980260E464400EF7526 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 3A41A95F260E464200EF7526;
+					};
+				};
+			};
+			buildConfigurationList = 3A41A95B260E464200EF7526 /* Build configuration list for PBXProject "Aurora" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A41A957260E464200EF7526;
+			packageReferences = (
+				3A41A99F260E471D00EF7526 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3A41A9C4260E783100EF7526 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				3A54A35C261225BD00F99693 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				3A9B456926123317007E2EA4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				3A05A8712646E375003C6D0D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
+			productRefGroup = 3A41A961260E464200EF7526 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A41A95F260E464200EF7526 /* Aurora */,
+				3A41A975260E464400EF7526 /* AuroraTests */,
+				3A41A980260E464400EF7526 /* AuroraUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A41A95E260E464200EF7526 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A19D869261B1F490041FBED /* README.md in Resources */,
+				3A41A970260E464400EF7526 /* LaunchScreen.storyboard in Resources */,
+				3A41A96D260E464400EF7526 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A41A974260E464400EF7526 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A41A97F260E464400EF7526 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A41A95C260E464200EF7526 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AAF49C526124D3D009FEBBC /* HetznerCloudAPI_Firewall.swift in Sources */,
+				3AC0D6862612372200EB819E /* HetznerCloudAPI_Server.swift in Sources */,
+				3A41A9BD260E70F200EF7526 /* HetznerDatacenter.swift in Sources */,
+				3A00B3CD260FAF5A000864C2 /* ProjectFloatingIPDetailViewController.swift in Sources */,
+				3AB8A6222610FBA5000567C3 /* CloudLoadBalancer.swift in Sources */,
+				3AC230FD261DFB77000700AA /* SettingsView.swift in Sources */,
+				3A00B3B5260FAA5D000864C2 /* ServerListViewController.swift in Sources */,
+				3A0A58D8261B189A00000C37 /* ExampleJSON.swift in Sources */,
+				3A1379EA26123535002EAFA7 /* HCAPIError.swift in Sources */,
+				3A41A968260E464200EF7526 /* ProjectListViewController.swift in Sources */,
+				3AC577D02645A7E4000E3F91 /* LegalNoticeView.swift in Sources */,
+				3A7E2AD4261888C800F41F04 /* ProjectServerDetailDeleteView.swift in Sources */,
+				3AC577D22645AE98000E3F91 /* UsedLibrariesView.swift in Sources */,
+				3A6A17A12610E3C800BAE1ED /* CloudFloatingIP.swift in Sources */,
+				3A00B3E1260FAF80000864C2 /* ProjectServerDetailViewController.swift in Sources */,
+				3A41A964260E464200EF7526 /* AppDelegate.swift in Sources */,
+				3AC9E31D261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift in Sources */,
+				3A00B3DC260FAF77000864C2 /* ProjectSecurityViewController.swift in Sources */,
+				3A6A17992610DD7600BAE1ED /* CloudVolume.swift in Sources */,
+				3A00B3C8260FAF49000864C2 /* ProjectLoadBalancerDetailViewController.swift in Sources */,
+				3AE2AFFF264824F000B56C2D /* ProjectServerDetailFirewallsView.swift in Sources */,
+				3A6940E72618BEAF00490E82 /* HetznerCloudAPI_Volume.swift in Sources */,
+				3AE03A2F261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift in Sources */,
+				3A05A8782646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift in Sources */,
+				3AE18DB5261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift in Sources */,
+				3A68A26B2619EB8800107533 /* ProjectServerDetailBackupsView.swift in Sources */,
+				3A54A3442612229A00F99693 /* HCAppCache.swift in Sources */,
+				3A00B3D7260FAF69000864C2 /* ProjectFirewallDetailViewController.swift in Sources */,
+				3AE03A37261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift in Sources */,
+				3A41A9B7260E707300EF7526 /* CloudServer.swift in Sources */,
+				3A00B3D2260FAF61000864C2 /* ProjectNetworkDetailViewController.swift in Sources */,
+				3A190D7E2618C504003405A6 /* ProjectServerDetailPowerView.swift in Sources */,
+				3A41A966260E464200EF7526 /* SceneDelegate.swift in Sources */,
+				3AE18DBA261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift in Sources */,
+				3A190D842618C98F003405A6 /* GlobalSplitViewController.swift in Sources */,
+				3A00B3C0260FAF3E000864C2 /* ProjectVolumeDetailViewController.swift in Sources */,
+				3ADCEE7B2646A97600567E0F /* UsedLibrariesData.swift in Sources */,
+				3A1379E42612339C002EAFA7 /* HetznerCloudAPI.swift in Sources */,
+				3AC9E318261A1621003EAC36 /* HetznerCloudAPI_Network.swift in Sources */,
+				3A9B456226123118007E2EA4 /* UITableView.swift in Sources */,
+				3A9B455D2612303E007E2EA4 /* EZAlertController.swift in Sources */,
+				3A98AF772615F4D800EF895B /* ProjectServerDetailGraphsView.swift in Sources */,
+				3A41A9A7260E47A200EF7526 /* CloudProject.swift in Sources */,
+				3AA896F12610F86F00188F74 /* CloudNetwork.swift in Sources */,
+				3A54A3582612238300F99693 /* RealmCloudProject.swift in Sources */,
+				3A6A17A92610F3FA00BAE1ED /* CloudFirewall.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A41A972260E464400EF7526 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A41A97B260E464400EF7526 /* Hetzner_CloudTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A41A97D260E464400EF7526 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A41A986260E464400EF7526 /* Hetzner_CloudUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3A41A978260E464400EF7526 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A41A95F260E464200EF7526 /* Aurora */;
+			targetProxy = 3A41A977260E464400EF7526 /* PBXContainerItemProxy */;
+		};
+		3A41A983260E464400EF7526 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A41A95F260E464200EF7526 /* Aurora */;
+			targetProxy = 3A41A982260E464400EF7526 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3A41A96E260E464400EF7526 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A41A96F260E464400EF7526 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3A41A988260E464400EF7526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3A41A989260E464400EF7526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3A41A98B260E464400EF7526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Aurora/Aurora.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G8434KY9GR;
+				INFOPLIST_FILE = "$(SRCROOT)/Aurora/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.9.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.abmgrt.Aurora;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3A41A98C260E464400EF7526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Aurora/Aurora.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G8434KY9GR;
+				INFOPLIST_FILE = "$(SRCROOT)/Aurora/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.9.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.abmgrt.Aurora;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3A41A98E260E464400EF7526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G8434KY9GR;
+				INFOPLIST_FILE = "Hetzner CloudTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.abmgrt.Hetzner-CloudTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aurora.app/Aurora";
+			};
+			name = Debug;
+		};
+		3A41A98F260E464400EF7526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G8434KY9GR;
+				INFOPLIST_FILE = "Hetzner CloudTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.abmgrt.Hetzner-CloudTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aurora.app/Aurora";
+			};
+			name = Release;
+		};
+		3A41A991260E464400EF7526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G8434KY9GR;
+				INFOPLIST_FILE = "Hetzner CloudUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.abmgrt.Hetzner-CloudUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Hetzner Cloud";
+			};
+			name = Debug;
+		};
+		3A41A992260E464400EF7526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G8434KY9GR;
+				INFOPLIST_FILE = "Hetzner CloudUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.abmgrt.Hetzner-CloudUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Hetzner Cloud";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A41A95B260E464200EF7526 /* Build configuration list for PBXProject "Aurora" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A41A988260E464400EF7526 /* Debug */,
+				3A41A989260E464400EF7526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A41A98A260E464400EF7526 /* Build configuration list for PBXNativeTarget "Aurora" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A41A98B260E464400EF7526 /* Debug */,
+				3A41A98C260E464400EF7526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A41A98D260E464400EF7526 /* Build configuration list for PBXNativeTarget "AuroraTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A41A98E260E464400EF7526 /* Debug */,
+				3A41A98F260E464400EF7526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A41A990260E464400EF7526 /* Build configuration list for PBXNativeTarget "AuroraUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A41A991260E464400EF7526 /* Debug */,
+				3A41A992260E464400EF7526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3A05A8712646E375003C6D0D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
+			};
+		};
+		3A41A99F260E471D00EF7526 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		3A41A9C4260E783100EF7526 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "http://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.7.2;
+			};
+		};
+		3A54A35C261225BD00F99693 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+		3A9B456926123317007E2EA4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3A05A8722646E375003C6D0D /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A05A8712646E375003C6D0D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
+		3A41A9A0260E471D00EF7526 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A41A99F260E471D00EF7526 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		3A41A9C5260E783100EF7526 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A41A9C4260E783100EF7526 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		3A54A3492612236600F99693 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+		3A54A34B2612236600F99693 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		3A54A35D261225BD00F99693 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A54A35C261225BD00F99693 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+		3A9B456A26123317007E2EA4 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A9B456926123317007E2EA4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3A41A958260E464200EF7526 /* Project object */;
+}
