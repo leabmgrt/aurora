@@ -15,7 +15,7 @@ struct LegalNoticeView: View {
         ScrollView(.vertical) {
             VStack(alignment: .leading) {
                 Text("Information in accordance with Section 5 TMG").bold().font(.headline).padding(.bottom)
-                Text("Lea Baumgart\nKarl-Gehrig-Straße 2\n69226 Nußloch\nGermany").padding(.bottom)
+                Text("Adrian Baumgart\nKarl-Gehrig-Straße 2\n69226 Nußloch\nGermany").padding(.bottom)
                 Text("Contact Information").bold().font(.headline)
                 HStack {
                     Text("Telephone:")
