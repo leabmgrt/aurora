@@ -1,9 +1,9 @@
 //
 // Aurora
-// File created by Adrian Baumgart on 07.04.21.
+// File created by Lea Baumgart on 07.04.21.
 //
 // Licensed under the MIT License
-// Copyright © 2020 Adrian Baumgart. All rights reserved.
+// Copyright © 2020 Lea Baumgart. All rights reserved.
 //
 // https://git.abmgrt.dev/exc_bad_access/aurora
 //
@@ -26,13 +26,13 @@ struct SettingsView: View {
                 List {
                     Section(header: Text("Security")) {
                         Toggle(isOn: $controller.biometicAuthEnabled) {
-                            SettingsSideIcon(image: "faceid", text: "Biometrics")
+                            SettingsSideIcon(image: Image(systemName: "faceid"), text: "Biometrics")
                         }.padding(4).disabled(!controller.biometricAuthAllowed)
                     }
 
                     Section(header: Text("Developer"), footer: Text("Enabling this option will prevent any network activity and load sample data stored within the app (Good for testing)")) {
                         Toggle(isOn: $controller.developerModeEnabled) {
-                            SettingsSideIcon(image: "staroflife.circle", text: "Developer mode")
+                            SettingsSideIcon(image: Image(systemName: "staroflife.circle"), text: "Developer mode")
                         }.padding(4).alert(isPresented: $controller.developerModeSuccessNotice) {
                             Alert(title: Text("Done!"), message: Text("You'll have to restart the app for the change to take effect."), dismissButton: .cancel())
                         }
@@ -45,29 +45,36 @@ struct SettingsView: View {
                                 UIApplication.shared.open(url)
                             }
                         } label: {
-                            SettingsSideIcon(image: "lock", text: "Privacy policy")
+                            SettingsSideIcon(image: Image(systemName: "lock"), text: "Privacy policy")
                         }
                         NavigationLink(destination: LegalNoticeView()) {
-                            SettingsSideIcon(image: "briefcase", text: "Legal notice")
+                            SettingsSideIcon(image: Image(systemName: "briefcase"), text: "Legal notice")
                         }
                     }
 
                     Section(header: Text("Other")) {
                         NavigationLink(destination: UsedLibrariesView()) {
-                            SettingsSideIcon(image: "tray", text: "Used libraries")
+                            SettingsSideIcon(image: Image(systemName: "tray"), text: "Used libraries")
                         }
                         Button {
                             let url = URL(string: "https://git.abmgrt.dev/exc_bad_access/aurora")!
                             if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }
                         } label: {
-                            SettingsSideIcon(image: "chevron.left.slash.chevron.right", text: "Code")
+                            SettingsSideIcon(image: Image(systemName: "chevron.left.slash.chevron.right"), text: "Code")
                         }
 
                         Button {
-                            let url = URL(string: "mailto:adrian@abmgrt.dev")!
+                            let url = URL(string: "mailto:lea@abmgrt.dev")!
                             if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }
                         } label: {
-                            SettingsSideIcon(image: "envelope", text: "Contact")
+                            SettingsSideIcon(image: Image(systemName: "envelope"), text: "Contact")
+                        }
+                        
+                        Button {
+                            let url = URL(string: "https://twitter.com/leabmgrt")!
+                            if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }
+                        } label: {
+                            SettingsSideIcon(image: Image("twitter"), text: "Twitter")
                         }
                     }
 
@@ -80,7 +87,7 @@ struct SettingsView: View {
                                 ConfettiCannon(counter: $versionEasterEggCountdown, radius: 120, repetitions: 5, repetitionInterval: 0.3)
                             }
                         }
-                        // Text("© 2021, Adrian Baumgart").foregroundColor(.secondary).font(.footnote)
+                        // Text("© 2021, Lea Baumgart").foregroundColor(.secondary).font(.footnote)
                     }
                 }.listStyle(InsetGroupedListStyle())
             }
@@ -166,14 +173,14 @@ class SettingsController: ObservableObject {
 }
 
 struct SettingsSideIcon: View {
-    var image: String
+    var image: Image
     var text: String
     var colorOverride: Color? = nil
     var isButton: Bool = false
 
     var body: some View {
         HStack {
-            Image(systemName: image).resizable().aspectRatio(contentMode: .fit).frame(width: 22, height: 22, alignment: .leading)
+            image.resizable().aspectRatio(contentMode: .fit).frame(width: 22, height: 22, alignment: .leading)
             Text(text).font(.callout)
         }.foregroundColor(isButton ? colorOverride ?? .accentColor : .accentColor)
     }

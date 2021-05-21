@@ -1,9 +1,9 @@
 //
 // Aurora
-// File created by Adrian Baumgart on 28.03.21.
+// File created by Lea Baumgart on 28.03.21.
 //
 // Licensed under the MIT License
-// Copyright © 2021 Adrian Baumgart. All rights reserved.
+// Copyright © 2021 Lea Baumgart. All rights reserved.
 //
 // https://git.abmgrt.dev/exc_bad_access/aurora
 //
