@@ -1,7 +1,6 @@
-# Hetzner Cloud App
-(name pending)
+# Aurora
 
-This is an iOS app for the Hetzner Cloud. It's currently mostly read-only but I plan to add write actions in the future.
+This is an unofficial iOS app for the Hetzner Cloud. It's currently mostly read-only but I plan to add write actions in the future.
 
 If you want to know what I'm working on, check out the issues and projects on this repo. :D
 
