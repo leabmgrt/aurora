@@ -18,7 +18,7 @@ struct ProjectServerDetailDeleteView: View {
     var body: some View {
         ScrollView {
             AppReadOnlyDisclaimerView()
-            Group {
+            FloatingCardBackgroundView {
                 Group {
                     VStack(alignment: .leading) {
                         Text("Wait wait wait...").bold().font(.title)
@@ -39,12 +39,12 @@ struct ProjectServerDetailDeleteView: View {
                 }.frame(minWidth: 0,
                         maxWidth: .infinity,
                         alignment: .topLeading)
-            }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2).padding().navigationBarTitle(Text("Delete"))
+            }.padding()
         }.alert(isPresented: $showingFinalAlert, content: {
             Alert(title: Text("Are you absolutely sure?"), message: Text("Are you really sure you want to delete \"\(controller.server.name)\"? We are not responsible for any data loss."), primaryButton: .destructive(Text("Delete"), action: {
                 print("delete")
             }), secondaryButton: .cancel(Text("Cancel").foregroundColor(.blue)))
-        })
+        }).navigationBarTitle(Text("Delete"))
     }
 }
 

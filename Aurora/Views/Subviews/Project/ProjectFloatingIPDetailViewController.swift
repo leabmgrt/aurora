@@ -57,7 +57,7 @@ struct ProjectFloatingIPDetailView: View {
                     }
                 }
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 350), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: []) {
-                    Group {
+                    FloatingCardBackgroundView {
                         VStack {
                             HStack {
                                 Text("Configuration").bold().font(.title3)
@@ -81,9 +81,9 @@ struct ProjectFloatingIPDetailView: View {
                                 }
                             }
                         }
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+                    }
 
-                    Group {
+                    FloatingCardBackgroundView {
                         VStack(alignment: .leading) {
                             HStack {
                                 Text("Location").bold().font(.title3)
@@ -94,7 +94,7 @@ struct ProjectFloatingIPDetailView: View {
                             Text("Datacenter: ") + Text("\(controller.floatingip.home_location.description)").bold()
                             Text("Country: ") + Text("\(controller.floatingip.home_location.country)").bold()
                         }
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+                    }
                 }.padding([.top, .bottom])
             }.padding()
         }.navigationBarTitle(Text("\(controller.floatingip.name)"))

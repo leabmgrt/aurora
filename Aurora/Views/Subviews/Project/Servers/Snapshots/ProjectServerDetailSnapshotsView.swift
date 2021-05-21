@@ -19,7 +19,8 @@ struct ProjectServerDetailSnapshotsView: View {
             if controller.snapshots != nil {
                 ScrollView {
                     AppReadOnlyDisclaimerView()
-                    Group {
+                    
+                    FloatingCardBackgroundView {
                         Group {
                             VStack(alignment: .leading) {
                                 Text("Snapshots").bold().font(.title)
@@ -35,7 +36,7 @@ struct ProjectServerDetailSnapshotsView: View {
                         }.frame(minWidth: 0,
                                 maxWidth: .infinity,
                                 alignment: .topLeading)
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2).padding()
+                    }.padding()
 
                     if controller.snapshots!.count > 0 {
                         ForEach(controller.snapshots!.sorted(by: { $0.created > $1.created }), id: \.id) { snapshot in

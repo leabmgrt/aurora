@@ -16,7 +16,8 @@ struct ProjectServerDetailPowerView: View {
     var body: some View {
         ScrollView {
             AppReadOnlyDisclaimerView()
-            Group {
+            
+            FloatingCardBackgroundView {
                 Group {
                     VStack(alignment: .leading) {
                         Text("Power").bold().font(.title)
@@ -35,9 +36,9 @@ struct ProjectServerDetailPowerView: View {
                 }.frame(minWidth: 0,
                         maxWidth: .infinity,
                         alignment: .topLeading)
-            }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2).padding().navigationBarTitle(Text("Power"))
+            }.padding()
 
-            Group {
+            FloatingCardBackgroundView {
                 Group {
                     VStack(alignment: .leading) {
                         Text("Power Reset").bold().font(.title)
@@ -50,8 +51,8 @@ struct ProjectServerDetailPowerView: View {
                 }.frame(minWidth: 0,
                         maxWidth: .infinity,
                         alignment: .topLeading)
-            }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2).padding().navigationBarTitle(Text("Power"))
-        }
+            }.padding()
+        }.navigationBarTitle(Text("Power"))
     }
 }
 

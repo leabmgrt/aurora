@@ -163,7 +163,7 @@ struct ServerGraph: View {
     @State var startAnimation = false
 
     var body: some View {
-        Group {
+        FloatingCardBackgroundView {
             VStack(alignment: .leading) {
                 Text("\(title)").bold().font(.title3)
                 HStack {
@@ -192,7 +192,7 @@ struct ServerGraph: View {
                     }
                 }
             }
-        }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2).frame(minWidth: 300, maxWidth: 300, minHeight: 240, maxHeight: 240).onAppear(perform: {
+        }.frame(minWidth: 300, maxWidth: 300, minHeight: 240, maxHeight: 240).onAppear(perform: {
             withAnimation(.easeInOut(duration: 2)) {
                 startAnimation = true
             }

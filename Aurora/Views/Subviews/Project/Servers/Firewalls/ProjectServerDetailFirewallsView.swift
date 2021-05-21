@@ -18,7 +18,7 @@ struct ProjectServerDetailFirewallsView: View {
         Group {
             ScrollView {
                 AppReadOnlyDisclaimerView()
-                Group {
+                FloatingCardBackgroundView {
                     Group {
                         VStack(alignment: .leading) {
                             Text("Firewalls").bold().font(.title)
@@ -33,7 +33,7 @@ struct ProjectServerDetailFirewallsView: View {
                     }.frame(minWidth: 0,
                             maxWidth: .infinity,
                             alignment: .topLeading)
-                }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2).padding()
+                }.padding()
 
                 if controller.server.public_net.firewalls.count > 0 {
                     ForEach(controller.server.public_net.firewalls, id: \.id) { firewall in

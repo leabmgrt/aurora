@@ -32,7 +32,7 @@ struct ProjectLoadBalancerDetailView: View {
                     }
                 }
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: []) {
-                    Group {
+                    FloatingCardBackgroundView {
                         VStack {
                             HStack {
                                 Text("Configuration (\(controller.loadBalancer.type.description))").bold().font(.title3)
@@ -69,9 +69,9 @@ struct ProjectLoadBalancerDetailView: View {
                                 Spacer()
                             }
                         }
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+                    }
 
-                    Group {
+                    FloatingCardBackgroundView {
                         VStack {
                             HStack {
                                 Text("Health status").bold().font(.title3)
@@ -98,9 +98,9 @@ struct ProjectLoadBalancerDetailView: View {
                                 }
                             }.frame(width: 90, height: 90, alignment: .center).padding(16).padding(.bottom)
                         }
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+                    }
 
-                    Group {
+                    FloatingCardBackgroundView {
                         VStack {
                             HStack {
                                 Text("Network (Public)").bold().font(.title3)
@@ -119,9 +119,9 @@ struct ProjectLoadBalancerDetailView: View {
                                 Spacer()
                             }
                         }
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+                    }
 
-                    Group {
+                    FloatingCardBackgroundView {
                         VStack(alignment: .leading) {
                             HStack {
                                 Text("Location").bold().font(.title3)
@@ -132,7 +132,7 @@ struct ProjectLoadBalancerDetailView: View {
                             Text("Datacenter: ") + Text("\(controller.loadBalancer.location.description)").bold()
                             Text("Country: ") + Text("\(controller.loadBalancer.location.country)").bold()
                         }
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+                    }
 
                 }.padding([.top, .bottom])
                 Group {
