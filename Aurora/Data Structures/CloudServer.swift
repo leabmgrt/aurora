@@ -117,12 +117,12 @@ struct CloudServerIPv4 {
 struct CloudServerIPv6 {
     var ip: String
     var blocked: Bool
-    var dns_ptr: [CloudServerIPv6DNS_PTR]?
+    var dns_ptr: [CloudServerIPv6DNS_PTR]
 
     init(_ json: JSON) {
         ip = json["ip"].string!
         blocked = json["blocked"].bool!
-        dns_ptr = json["dns_ptr"].exists() && !json["dns_ptr"].isEmpty ? json["dns_ptr"].arrayValue.map { CloudServerIPv6DNS_PTR($0) } : nil
+        dns_ptr = json["dns_ptr"].exists() && !json["dns_ptr"].isEmpty ? json["dns_ptr"].arrayValue.map { CloudServerIPv6DNS_PTR($0) } : []
     }
 }
 

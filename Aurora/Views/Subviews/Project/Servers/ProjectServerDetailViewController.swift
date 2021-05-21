@@ -51,7 +51,7 @@ struct ProjectServerDetailView: View {
                     }.padding(.bottom)
                 }
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: [], content: {
-                    Group {
+                    FloatingCardBackgroundView {
                         VStack {
                             HStack {
                                 Text("Configuration (\(controller.server.server_type.name))").bold().font(.title3)
@@ -78,9 +78,9 @@ struct ProjectServerDetailView: View {
                                 Spacer()
                             }
                         }
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+                    }
 
-                    Group {
+                    FloatingCardBackgroundView {
                         VStack(alignment: .leading) {
                             HStack {
                                 Text("Network (Public)").bold().font(.title3)
@@ -90,9 +90,9 @@ struct ProjectServerDetailView: View {
                             Text("IPv4: ") + Text("\(controller.server.public_net.ipv4.ip)").bold()
                             Text("IPv6: ") + Text("\(controller.server.public_net.ipv6.ip)").bold()
                         }
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+                    }
 
-                    Group {
+                    FloatingCardBackgroundView {
                         VStack(alignment: .leading) {
                             HStack {
                                 Text("Location").bold().font(.title3)
@@ -103,7 +103,7 @@ struct ProjectServerDetailView: View {
                             Text("Datacenter: ") + Text("\(controller.server.datacenter.description)").bold()
                             Text("Country: ") + Text("\(controller.server.datacenter.location.country)").bold()
                         }
-                    }.padding().background(Rectangle().fill(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color.white)).cornerRadius(10).shadow(color: colorScheme == .dark ? Color(UIColor.tertiarySystemBackground) : Color.gray, radius: 3, x: 2, y: 2)
+                    }
 
                 }).padding([.top, .bottom])
                 Group {
@@ -121,7 +121,7 @@ struct ProjectServerDetailView: View {
                              Text("Destination")
                          } */
                         ProjectServerDetailOtherOptionsView(title: "Networking") {
-                            Text("Destination")
+                            ProjectServerDetailNetworkingView(controller: .init(project: controller.project, server: controller.server))
                         }
                         ProjectServerDetailOtherOptionsView(title: "Firewalls") {
                             ProjectServerDetailFirewallsView(controller: .init(project: controller.project, server: controller.server))

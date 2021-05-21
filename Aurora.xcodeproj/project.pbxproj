@@ -24,6 +24,8 @@
 		3A190D7E2618C504003405A6 /* ProjectServerDetailPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A190D7D2618C504003405A6 /* ProjectServerDetailPowerView.swift */; };
 		3A190D842618C98F003405A6 /* GlobalSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A190D832618C98F003405A6 /* GlobalSplitViewController.swift */; };
 		3A19D869261B1F490041FBED /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A19D868261B1F490041FBED /* README.md */; };
+		3A2DD8542657E81E0031E3B0 /* ProjectServerDetailNetworkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DD8532657E81E0031E3B0 /* ProjectServerDetailNetworkingView.swift */; };
+		3A2DD8572657E93C0031E3B0 /* FloatingCardBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DD8562657E93C0031E3B0 /* FloatingCardBackgroundView.swift */; };
 		3A41A964260E464200EF7526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A963260E464200EF7526 /* AppDelegate.swift */; };
 		3A41A966260E464200EF7526 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A965260E464200EF7526 /* SceneDelegate.swift */; };
 		3A41A968260E464200EF7526 /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A967260E464200EF7526 /* ProjectListViewController.swift */; };
@@ -115,6 +117,8 @@
 		3A190D7D2618C504003405A6 /* ProjectServerDetailPowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailPowerView.swift; sourceTree = "<group>"; };
 		3A190D832618C98F003405A6 /* GlobalSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSplitViewController.swift; sourceTree = "<group>"; };
 		3A19D868261B1F490041FBED /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3A2DD8532657E81E0031E3B0 /* ProjectServerDetailNetworkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailNetworkingView.swift; sourceTree = "<group>"; };
+		3A2DD8562657E93C0031E3B0 /* FloatingCardBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingCardBackgroundView.swift; sourceTree = "<group>"; };
 		3A41A960260E464200EF7526 /* Aurora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aurora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A41A963260E464200EF7526 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A41A965260E464200EF7526 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 		3A00B3BC260FAF0B000864C2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A2DD8552657E9220031E3B0 /* Extra */,
 				3A190D822618C97E003405A6 /* Head */,
 				3A00B3BE260FAF19000864C2 /* Subviews */,
 				3A00B3BD260FAF10000864C2 /* Sidebar */,
@@ -269,6 +274,22 @@
 				3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */,
 			);
 			path = "Load Balancers";
+			sourceTree = "<group>";
+		};
+		3A2DD8522657E7EC0031E3B0 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3A2DD8532657E81E0031E3B0 /* ProjectServerDetailNetworkingView.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		3A2DD8552657E9220031E3B0 /* Extra */ = {
+			isa = PBXGroup;
+			children = (
+				3A2DD8562657E93C0031E3B0 /* FloatingCardBackgroundView.swift */,
+			);
+			path = Extra;
 			sourceTree = "<group>";
 		};
 		3A41A957260E464200EF7526 = {
@@ -437,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				3A00B3E0260FAF80000864C2 /* ProjectServerDetailViewController.swift */,
+				3A2DD8522657E7EC0031E3B0 /* Networking */,
 				3AE2AFFD264824E000B56C2D /* Firewalls */,
 				3A05A8762646F80D003C6D0D /* Snapshots */,
 				3AC577CE2645A1B2000E3F91 /* Power */,
@@ -631,10 +653,12 @@
 				3AC9E31D261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift in Sources */,
 				3A00B3DC260FAF77000864C2 /* ProjectSecurityViewController.swift in Sources */,
 				3A6A17992610DD7600BAE1ED /* CloudVolume.swift in Sources */,
+				3A2DD8542657E81E0031E3B0 /* ProjectServerDetailNetworkingView.swift in Sources */,
 				3A00B3C8260FAF49000864C2 /* ProjectLoadBalancerDetailViewController.swift in Sources */,
 				3AE2AFFF264824F000B56C2D /* ProjectServerDetailFirewallsView.swift in Sources */,
 				3A6940E72618BEAF00490E82 /* HetznerCloudAPI_Volume.swift in Sources */,
 				3AE03A2F261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift in Sources */,
+				3A2DD8572657E93C0031E3B0 /* FloatingCardBackgroundView.swift in Sources */,
 				3A05A8782646F833003C6D0D /* ProjectServerDetailSnapshotsView.swift in Sources */,
 				3AE18DB5261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift in Sources */,
 				3A68A26B2619EB8800107533 /* ProjectServerDetailBackupsView.swift in Sources */,
