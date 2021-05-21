@@ -50,7 +50,8 @@ class ServerListViewController: UIViewController {
     func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { section, layoutEnvironment in
             var config = UICollectionLayoutListConfiguration(appearance: .sidebar)
-            config.headerMode = section == 0 ? .none : .firstItemInSection
+            //config.headerMode = section == 0 ? .none : .firstItemInSection
+            config.headerMode = .firstItemInSection
             return NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
         }
     }
@@ -106,14 +107,14 @@ class ServerListViewController: UIViewController {
         // Creating the datasource
         dataSource = UICollectionViewDiffableDataSource<ServerListSection, ServerListItem>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, item: ServerListItem) -> UICollectionViewCell? in
-            if indexPath.item == 0, indexPath.section != 0 {
-                return collectionView.dequeueConfiguredReusableCell(using: headerRegistration, for: indexPath, item: item)
+            if indexPath.item == 0/*, indexPath.section != 0 */{
+            return collectionView.dequeueConfiguredReusableCell(using: headerRegistration, for: indexPath, item: item)
             } else {
                 return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
             }
         }
 
-        let sections: [ServerListSection] = [.tabs, .servers, .volumes, .floatingIPs, .firewalls, .networks, .loadBalancers]
+        let sections: [ServerListSection] = [.servers, .volumes, .floatingIPs, .firewalls, .networks, .loadBalancers]
 
         var snapshot = NSDiffableDataSourceSnapshot<ServerListSection, ServerListItem>()
         snapshot.appendSections(sections)
@@ -121,10 +122,10 @@ class ServerListViewController: UIViewController {
 
         for section in sections {
             switch section {
-            case .tabs:
+            /*case .tabs:
                 var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
                 sectionSnapshot.append(tabsItems)
-                dataSource.apply(sectionSnapshot, to: section)
+                dataSource.apply(sectionSnapshot, to: section)*/
             case .servers:
                 if project != nil {
                     let headerItem = ServerListItem(title: section.rawValue, image: nil)
@@ -188,22 +189,23 @@ extension ServerListViewController: UICollectionViewDelegate {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var detailView: UIViewController?
 
-        if indexPath.section == 0 { // Server list
+        /*if indexPath.section == 0 { // Security
             detailView = UIViewController()
-        } else if indexPath.section == 1 { // Servers
+        } else */
+        if indexPath.section == 0 { // Servers
             let detailController = ProjectServerDetailController(project: project!, server: project!.servers[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectServerDetailView(controller: detailController))
 
-        } else if indexPath.section == 2 { // Volumes
+        } else if indexPath.section == 1 { // Volumes
             let detailController = ProjectVolumeDetailController(project: project!, volume: project!.volumes[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectVolumeDetailView(controller: detailController))
-        } else if indexPath.section == 3 { // Floating IPs
+        } else if indexPath.section == 2 { // Floating IPs
             let detailController = ProjectFloatingIPDetailController(project: project!, floatingip: project!.floatingIPs[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectFloatingIPDetailView(controller: detailController))
-        } else if indexPath.section == 4 { // Firewalls
+        } else if indexPath.section == 3 { // Firewalls
             let detailController = ProjectFirewallDetailController(project: project!, firewall: project!.firewalls[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectFirewallDetailView(controller: detailController))
-        } else if indexPath.section == 5 { // Network
+        } else if indexPath.section == 4 { // Network
             let detailController = ProjectNetworkDetailController(project: project!, network: project!.networks[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectNetworkDetailView(controller: detailController))
         } else { // Load Balancers
@@ -248,5 +250,5 @@ enum ServerListSection: String {
     case firewalls = "Firewalls"
     case networks = "Networks"
     case loadBalancers = "Load Balancers"
-    case tabs
+    //case tabs
 }
