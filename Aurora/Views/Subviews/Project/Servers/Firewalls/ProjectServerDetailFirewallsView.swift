@@ -3,7 +3,7 @@
 // File created by Lea Baumgart on 09.05.21.
 //
 // Licensed under the MIT License
-// Copyright © 2020 Lea Baumgart. All rights reserved.
+// Copyright © 2021 Lea Baumgart. All rights reserved.
 //
 // https://git.abmgrt.dev/exc_bad_access/aurora
 //
