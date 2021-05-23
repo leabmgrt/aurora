@@ -25,8 +25,24 @@ struct SettingsView: View {
             } else {
                 List {
                     Section(header: Text("Security")) {
+                        
+                        let biometricIcon: String = {
+                            if let biometricType = controller.biometricType {
+                                switch biometricType {
+                                case .faceID: return "faceid"
+                                case .touchID: return "touchid"
+                                default: return "faceid"
+                                }
+                            }
+                            else {
+                                return "faceid"
+                            }
+                        }()
+                        
                         Toggle(isOn: $controller.biometicAuthEnabled) {
-                            SettingsSideIcon(image: Image(systemName: "faceid"), text: "Biometrics")
+                            
+                            
+                            SettingsSideIcon(image: Image(systemName: biometricIcon), text: "Biometrics")
                         }.padding(4).disabled(!controller.biometricAuthAllowed)
                     }
 
@@ -137,6 +153,7 @@ class SettingsController: ObservableObject {
     }
 
     @Published var biometricAuthAllowed: Bool = false
+    @Published var biometricType: LABiometryType?
 
     @Published var developerModeEnabled: Bool = false {
         didSet {
@@ -163,6 +180,7 @@ class SettingsController: ObservableObject {
         versionText = "Version \(version) Build \(build)"
 
         let authContext = LAContext()
+        biometricType = authContext.biometryType
         var authError: NSError?
 
         biometicAuthEnabled = KeychainWrapper.standard.bool(forKey: "biometricAuthEnabled") ?? false
