@@ -74,7 +74,8 @@ struct ProjectServerDetailView: View {
                             }
                             HStack {
                                 Image(systemName: "eurosign.circle")
-                                Text("\(String(format: "%.2f", Double(controller.server.server_type.prices.first!.price_monthly.gross)!))/mo")
+                                let pricing = controller.server.server_type.prices.first(where: { $0.location == controller.server.datacenter.location.name })!
+                                Text("\(String(format: "%.2f", Double(pricing.price_monthly.gross)!))/mo")
                                 Spacer()
                             }
                         }
