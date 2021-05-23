@@ -11,11 +11,9 @@
 import SwiftUI
 
 struct ProjectServerDetailNetworkingView: View {
-    
     @ObservedObject var controller: ProjectServerDetailNetworkingController
-    
+
     var body: some View {
-        
         List {
             Section(header: Text("Primary IPs")) {
                 Group {
@@ -32,17 +30,16 @@ struct ProjectServerDetailNetworkingView: View {
                 }
             }
             Section(header: Text("Floating IPs")) {
-                let floatingIPs = controller.project.floatingIPs.filter({ $0.server == controller.server.id })
+                let floatingIPs = controller.project.floatingIPs.filter { $0.server == controller.server.id }
                 if floatingIPs.count > 0 {
                     ForEach(floatingIPs, id: \.id) { ip in
                         Text("\(ip.ip)").bold()
                     }
-                }
-                else {
+                } else {
                     Text("No Floating IPs assigned to this server").italic().foregroundColor(.secondary)
                 }
             }
-            
+
             Section(header: Text("Private IPs")) {
                 let privateNetwork = controller.server.private_net
                 if privateNetwork.count > 0 {
@@ -56,12 +53,11 @@ struct ProjectServerDetailNetworkingView: View {
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     Text("Server not attached to any network").italic().foregroundColor(.secondary)
                 }
             }
-            
+
             Section(header: Text("Usage")) {
                 let ingoingTraffic = controller.server.ingoing_traffic ?? 0
                 let outgoingTraffic = controller.server.outgoing_traffic ?? 0
@@ -88,11 +84,11 @@ struct ProjectServerDetailNetworkingView: View {
 
 struct ServerNetworkingProgressbarView: View {
     var percentage: Float
-    
+
     init(used: Double, included: Double) {
-        self.percentage = Float(used) / Float(included)
+        percentage = Float(used) / Float(included)
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
@@ -105,15 +101,13 @@ struct ServerNetworkingProgressbarView: View {
             }.cornerRadius(45)
         }
     }
-    
+
     func getColor() -> Color {
         if percentage < 0.5 {
             return .green
-        }
-        else if percentage < 0.75 {
+        } else if percentage < 0.75 {
             return .orange
-        }
-        else {
+        } else {
             return .red
         }
     }

@@ -19,7 +19,7 @@ struct ProjectServerDetailSnapshotsView: View {
             if controller.snapshots != nil {
                 ScrollView {
                     AppReadOnlyDisclaimerView()
-                    
+
                     FloatingCardBackgroundView {
                         Group {
                             VStack(alignment: .leading) {

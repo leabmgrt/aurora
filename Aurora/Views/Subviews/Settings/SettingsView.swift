@@ -25,7 +25,6 @@ struct SettingsView: View {
             } else {
                 List {
                     Section(header: Text("Security")) {
-                        
                         let biometricIcon: String = {
                             if let biometricType = controller.biometricType {
                                 switch biometricType {
@@ -33,15 +32,12 @@ struct SettingsView: View {
                                 case .touchID: return "touchid"
                                 default: return "faceid"
                                 }
-                            }
-                            else {
+                            } else {
                                 return "faceid"
                             }
                         }()
-                        
+
                         Toggle(isOn: $controller.biometicAuthEnabled) {
-                            
-                            
                             SettingsSideIcon(image: Image(systemName: biometricIcon), text: "Biometrics")
                         }.padding(4).disabled(!controller.biometricAuthAllowed)
                     }
@@ -55,11 +51,10 @@ struct SettingsView: View {
                     }
 
                     Section(header: Text("Legal")) {
-                        
                         SettingsExternalLinkButton(url: URL(string: "https://go.abmgrt.dev/IsaHi8")!) {
                             SettingsSideIcon(image: Image(systemName: "lock"), text: "Privacy Policy")
                         }
-                        
+
                         NavigationLink(destination: LegalNoticeView()) {
                             SettingsSideIcon(image: Image(systemName: "briefcase"), text: "Legal Notice")
                         }
@@ -69,11 +64,11 @@ struct SettingsView: View {
                         NavigationLink(destination: UsedLibrariesView()) {
                             SettingsSideIcon(image: Image(systemName: "tray"), text: "Used Libraries")
                         }
-                        
+
                         SettingsExternalLinkButton(url: URL(string: "https://git.abmgrt.dev/exc_bad_access/aurora")!) {
                             SettingsSideIcon(image: Image(systemName: "chevron.left.slash.chevron.right"), text: "Code")
                         }
-                        
+
                         SettingsExternalLinkButton(url: URL(string: "mailto:lea@abmgrt.dev")!) {
                             SettingsSideIcon(image: Image(systemName: "envelope"), text: "Contact")
                         }
@@ -109,14 +104,14 @@ struct SettingsView_Previews: PreviewProvider {
 
 struct SettingsExternalLinkButton<Content: View>: View {
     var url: URL!
-    
+
     let content: Content
-    
+
     init(url: URL, @ViewBuilder content: @escaping () -> Content) {
         self.url = url
         self.content = content()
     }
-    
+
     var body: some View {
         Button(action: {
             if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }

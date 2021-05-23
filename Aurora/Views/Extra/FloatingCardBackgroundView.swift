@@ -12,13 +12,13 @@ import SwiftUI
 
 struct FloatingCardBackgroundView<Content: View>: View {
     @Environment(\.colorScheme) var colorScheme
-    
+
     let content: Content
 
-        init(@ViewBuilder content: @escaping () -> Content) {
-            self.content = content()
-        }
-    
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content()
+    }
+
     var body: some View {
         Group {
             content

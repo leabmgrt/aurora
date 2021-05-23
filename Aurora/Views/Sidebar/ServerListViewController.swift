@@ -48,9 +48,9 @@ class ServerListViewController: UIViewController {
     }
 
     func createLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { section, layoutEnvironment in
+        return UICollectionViewCompositionalLayout { _, layoutEnvironment in
             var config = UICollectionLayoutListConfiguration(appearance: .sidebar)
-            //config.headerMode = section == 0 ? .none : .firstItemInSection
+            // config.headerMode = section == 0 ? .none : .firstItemInSection
             config.headerMode = .firstItemInSection
             return NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
         }
@@ -107,8 +107,8 @@ class ServerListViewController: UIViewController {
         // Creating the datasource
         dataSource = UICollectionViewDiffableDataSource<ServerListSection, ServerListItem>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, item: ServerListItem) -> UICollectionViewCell? in
-            if indexPath.item == 0/*, indexPath.section != 0 */{
-            return collectionView.dequeueConfiguredReusableCell(using: headerRegistration, for: indexPath, item: item)
+            if indexPath.item == 0 /* , indexPath.section != 0 */ {
+                return collectionView.dequeueConfiguredReusableCell(using: headerRegistration, for: indexPath, item: item)
             } else {
                 return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
             }
@@ -122,10 +122,10 @@ class ServerListViewController: UIViewController {
 
         for section in sections {
             switch section {
-            /*case .tabs:
-                var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
-                sectionSnapshot.append(tabsItems)
-                dataSource.apply(sectionSnapshot, to: section)*/
+            /* case .tabs:
+             var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
+             sectionSnapshot.append(tabsItems)
+             dataSource.apply(sectionSnapshot, to: section) */
             case .servers:
                 if project != nil {
                     let headerItem = ServerListItem(title: section.rawValue, image: nil)
@@ -189,9 +189,9 @@ extension ServerListViewController: UICollectionViewDelegate {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var detailView: UIViewController?
 
-        /*if indexPath.section == 0 { // Security
-            detailView = UIViewController()
-        } else */
+        /* if indexPath.section == 0 { // Security
+             detailView = UIViewController()
+         } else */
         if indexPath.section == 0 { // Servers
             let detailController = ProjectServerDetailController(project: project!, server: project!.servers[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectServerDetailView(controller: detailController))
@@ -250,5 +250,5 @@ enum ServerListSection: String {
     case firewalls = "Firewalls"
     case networks = "Networks"
     case loadBalancers = "Load Balancers"
-    //case tabs
+    // case tabs
 }

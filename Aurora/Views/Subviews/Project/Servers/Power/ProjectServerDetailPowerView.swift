@@ -16,7 +16,7 @@ struct ProjectServerDetailPowerView: View {
     var body: some View {
         ScrollView {
             AppReadOnlyDisclaimerView()
-            
+
             FloatingCardBackgroundView {
                 Group {
                     VStack(alignment: .leading) {
