@@ -20,7 +20,6 @@ class ProjectLoadBalancerDetailViewController: UIViewController {
 
 struct ProjectLoadBalancerDetailView: View {
     @ObservedObject var controller: ProjectLoadBalancerDetailController
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ScrollView {

@@ -12,7 +12,6 @@ import SwiftUI
 
 struct ProjectServerDetailSnapshotsView: View {
     @ObservedObject var controller: ProjectServerDetailSnapshotsController
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         Group {

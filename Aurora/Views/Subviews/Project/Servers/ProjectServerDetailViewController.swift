@@ -9,28 +9,9 @@
 //
 
 import SwiftUI
-import UIKit
-
-class ProjectServerDetailViewController: UIViewController {
-    var controller: ProjectServerDetailController?
-    var hostingController: UIHostingController<ProjectServerDetailView>?
-    var server: CloudServer? {
-        didSet {
-            if controller != nil {
-                controller?.server = server!
-            }
-        }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-    }
-}
 
 struct ProjectServerDetailView: View {
     @ObservedObject var controller: ProjectServerDetailController
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ScrollView {
@@ -49,7 +30,7 @@ struct ProjectServerDetailView: View {
                         }
                     }.padding(.bottom)
                 }
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: [], content: {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 250), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: [], content: {
                     FloatingCardBackgroundView {
                         VStack {
                             let serverType = controller.server.server_type

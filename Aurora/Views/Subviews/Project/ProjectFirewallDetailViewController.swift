@@ -9,20 +9,10 @@
 //
 
 import SwiftUI
-import UIKit
-
-class ProjectFirewallDetailViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        // Do any additional setup after loading the view.
-    }
-}
 
 struct ProjectFirewallDetailView: View {
     @ObservedObject var controller: ProjectFirewallDetailController
     @State private var selectedView = 0
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack {

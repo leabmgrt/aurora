@@ -12,7 +12,6 @@ import SwiftUI
 
 struct ProjectServerDetailFirewallsView: View {
     @ObservedObject var controller: ProjectServerDetailFirewallsController
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         Group {

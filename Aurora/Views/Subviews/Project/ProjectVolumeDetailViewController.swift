@@ -9,19 +9,9 @@
 //
 
 import SwiftUI
-import UIKit
-
-class ProjectVolumeDetailViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        // Do any additional setup after loading the view.
-    }
-}
 
 struct ProjectVolumeDetailView: View {
     @ObservedObject var controller: ProjectVolumeDetailController
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ScrollView {

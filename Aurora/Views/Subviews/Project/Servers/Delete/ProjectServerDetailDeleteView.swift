@@ -12,7 +12,6 @@ import SwiftUI
 
 struct ProjectServerDetailDeleteView: View {
     @ObservedObject var controller: ProjectServerDetailDeleteController
-    @Environment(\.colorScheme) var colorScheme
     @State var showingFinalAlert = false
 
     var body: some View {

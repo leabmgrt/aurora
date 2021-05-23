@@ -12,7 +12,6 @@ import SwiftUI
 
 struct ProjectServerDetailBackupsView: View {
     @ObservedObject var controller: ProjectServerDetailBackupsController
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         Group {

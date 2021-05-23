@@ -11,7 +11,6 @@ import SwiftUI
 
 struct ProjectServerDetailPowerView: View {
     @ObservedObject var controller: ProjectServerDetailPowerController
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ScrollView {

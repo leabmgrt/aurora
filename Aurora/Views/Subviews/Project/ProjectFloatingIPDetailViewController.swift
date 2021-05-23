@@ -9,18 +9,9 @@
 //
 
 import SwiftUI
-import UIKit
-
-class ProjectFloatingIPDetailViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-    }
-}
 
 struct ProjectFloatingIPDetailView: View {
     @ObservedObject var controller: ProjectFloatingIPDetailController
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ScrollView {
