@@ -196,13 +196,7 @@ struct ServerGraph: View {
             withAnimation(.easeInOut(duration: 2)) {
                 startAnimation = true
             }
-        }) /* .gesture(DragGesture()
-         .onChanged({ value in
-             print(value.location)
-         })
-             .onEnded({ value in
-                 print(value.location)
-             })) */
+        })
     }
 
     func getDateFormatter() -> DateFormatter {
@@ -242,7 +236,6 @@ struct ServerGraphShape: Shape {
         }
 
         return Path { p in
-            // guard dataPoints.count > 1 else { return }
             p.move(to: CGPoint(x: CGFloat(sortedDataPoints[0].date.timeIntervalSince1970) - lowestXValue, y: rect.height - ((sortedDataPoints[0].value / highestYValue) * rect.height)))
             for idx in sortedDataPoints.indices {
                 p.addLine(to: calcPoint(at: idx))

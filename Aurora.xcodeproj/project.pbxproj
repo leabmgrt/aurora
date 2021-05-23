@@ -38,6 +38,7 @@
 		3A41A9B7260E707300EF7526 /* CloudServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A9B6260E707300EF7526 /* CloudServer.swift */; };
 		3A41A9BD260E70F200EF7526 /* HetznerDatacenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A41A9BC260E70F200EF7526 /* HetznerDatacenter.swift */; };
 		3A41A9C6260E783100EF7526 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3A41A9C5260E783100EF7526 /* SwiftyJSON */; };
+		3A446D8B265AB1BD00314C87 /* AppReadOnlyDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A446D8A265AB1BD00314C87 /* AppReadOnlyDisclaimerView.swift */; };
 		3A54A3442612229A00F99693 /* HCAppCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A54A3432612229A00F99693 /* HCAppCache.swift */; };
 		3A54A34A2612236600F99693 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A54A3492612236600F99693 /* RealmSwift */; };
 		3A54A34C2612236600F99693 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3A54A34B2612236600F99693 /* Realm */; };
@@ -135,6 +136,7 @@
 		3A41A9A6260E47A200EF7526 /* CloudProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudProject.swift; sourceTree = "<group>"; };
 		3A41A9B6260E707300EF7526 /* CloudServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudServer.swift; sourceTree = "<group>"; };
 		3A41A9BC260E70F200EF7526 /* HetznerDatacenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerDatacenter.swift; sourceTree = "<group>"; };
+		3A446D8A265AB1BD00314C87 /* AppReadOnlyDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReadOnlyDisclaimerView.swift; sourceTree = "<group>"; };
 		3A54A3432612229A00F99693 /* HCAppCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAppCache.swift; sourceTree = "<group>"; };
 		3A54A3572612238300F99693 /* RealmCloudProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCloudProject.swift; sourceTree = "<group>"; };
 		3A68A26A2619EB8800107533 /* ProjectServerDetailBackupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailBackupsView.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				3A2DD8562657E93C0031E3B0 /* FloatingCardBackgroundView.swift */,
+				3A446D8A265AB1BD00314C87 /* AppReadOnlyDisclaimerView.swift */,
 			);
 			path = Extra;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				3A7E2AD4261888C800F41F04 /* ProjectServerDetailDeleteView.swift in Sources */,
 				3AC577D22645AE98000E3F91 /* UsedLibrariesView.swift in Sources */,
 				3A6A17A12610E3C800BAE1ED /* CloudFloatingIP.swift in Sources */,
+				3A446D8B265AB1BD00314C87 /* AppReadOnlyDisclaimerView.swift in Sources */,
 				3A00B3E1260FAF80000864C2 /* ProjectServerDetailViewController.swift in Sources */,
 				3A41A964260E464200EF7526 /* AppDelegate.swift in Sources */,
 				3AC9E31D261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift in Sources */,
