@@ -39,41 +39,30 @@ struct SettingsView: View {
                     }
 
                     Section(header: Text("Legal")) {
-                        Button {
-                            let url = URL(string: "https://go.abmgrt.dev/IsaHi8")!
-                            if UIApplication.shared.canOpenURL(url) {
-                                UIApplication.shared.open(url)
-                            }
-                        } label: {
-                            SettingsSideIcon(image: Image(systemName: "lock"), text: "Privacy policy")
+                        
+                        SettingsExternalLinkButton(url: URL(string: "https://go.abmgrt.dev/IsaHi8")!) {
+                            SettingsSideIcon(image: Image(systemName: "lock"), text: "Privacy Policy")
                         }
+                        
                         NavigationLink(destination: LegalNoticeView()) {
-                            SettingsSideIcon(image: Image(systemName: "briefcase"), text: "Legal notice")
+                            SettingsSideIcon(image: Image(systemName: "briefcase"), text: "Legal Notice")
                         }
                     }
 
                     Section(header: Text("Other")) {
                         NavigationLink(destination: UsedLibrariesView()) {
-                            SettingsSideIcon(image: Image(systemName: "tray"), text: "Used libraries")
-                        }
-                        Button {
-                            let url = URL(string: "https://git.abmgrt.dev/exc_bad_access/aurora")!
-                            if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }
-                        } label: {
-                            SettingsSideIcon(image: Image(systemName: "chevron.left.slash.chevron.right"), text: "Code")
-                        }
-
-                        Button {
-                            let url = URL(string: "mailto:lea@abmgrt.dev")!
-                            if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }
-                        } label: {
-                            SettingsSideIcon(image: Image(systemName: "envelope"), text: "Contact")
+                            SettingsSideIcon(image: Image(systemName: "tray"), text: "Used Libraries")
                         }
                         
-                        Button {
-                            let url = URL(string: "https://twitter.com/leabmgrt")!
-                            if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }
-                        } label: {
+                        SettingsExternalLinkButton(url: URL(string: "https://git.abmgrt.dev/exc_bad_access/aurora")!) {
+                            SettingsSideIcon(image: Image(systemName: "chevron.left.slash.chevron.right"), text: "Code")
+                        }
+                        
+                        SettingsExternalLinkButton(url: URL(string: "mailto:lea@abmgrt.dev")!) {
+                            SettingsSideIcon(image: Image(systemName: "envelope"), text: "Contact")
+                        }
+
+                        SettingsExternalLinkButton(url: URL(string: "https://twitter.com/leabmgrt")!) {
                             SettingsSideIcon(image: Image("twitter"), text: "Twitter")
                         }
                     }
@@ -87,7 +76,6 @@ struct SettingsView: View {
                                 ConfettiCannon(counter: $versionEasterEggCountdown, radius: 120, repetitions: 5, repetitionInterval: 0.3)
                             }
                         }
-                        // Text("© 2021, Lea Baumgart").foregroundColor(.secondary).font(.footnote)
                     }
                 }.listStyle(InsetGroupedListStyle())
             }
@@ -100,6 +88,25 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(controller: .init())
+    }
+}
+
+struct SettingsExternalLinkButton<Content: View>: View {
+    var url: URL!
+    
+    let content: Content
+    
+    init(url: URL, @ViewBuilder content: @escaping () -> Content) {
+        self.url = url
+        self.content = content()
+    }
+    
+    var body: some View {
+        Button(action: {
+            if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }
+        }, label: {
+            content
+        })
     }
 }
 
