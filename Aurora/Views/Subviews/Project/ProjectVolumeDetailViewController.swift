@@ -62,17 +62,17 @@ struct ProjectVolumeDetailView: View {
                                 Spacer()
                             }.padding(.bottom)
                             HStack(alignment: .top) {
-                                Image(systemName: "folder")
+                                Image(systemName: "folder").frame(width: 20)
                                 Text("Path: ") + Text("\(controller.volume.linux_device)").bold()
                                 Spacer()
                             }
                             HStack(alignment: .top) {
-                                Image(systemName: "internaldrive")
+                                Image(systemName: "internaldrive").frame(width: 20)
                                 Text("\(Int(controller.volume.size))").bold() + Text(" GB")
                                 Spacer()
                             }
                             HStack(alignment: .top) {
-                                Image(systemName: "wrench.and.screwdriver")
+                                Image(systemName: "wrench.and.screwdriver").frame(width: 20)
                                 // Text("\(String(format: "%.2f", Double(controller.server!.server_type.prices.first!.price_monthly.gross)!))/mo")
                                 Text("Format: ") + Text("\(controller.volume.format ?? "not formatted")").bold()
                                 Spacer()

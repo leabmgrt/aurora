@@ -39,32 +39,32 @@ struct ProjectLoadBalancerDetailView: View {
                                 Spacer()
                             }.padding(.bottom)
                             HStack {
-                                Image(systemName: "target")
+                                Image(systemName: "target").frame(width: 20)
                                 Text("\(controller.loadBalancer.targets.count)/\(Int(controller.loadBalancer.type.max_targets))").bold() + Text(" Targets")
                                 Spacer()
                             }
                             HStack {
-                                Image(systemName: "gearshape")
+                                Image(systemName: "gearshape").frame(width: 20)
                                 Text("\(controller.loadBalancer.services.count)/\(Int(controller.loadBalancer.type.max_services))").bold() + Text(" Services")
                                 Spacer()
                             }
                             HStack {
-                                Image(systemName: "shield")
+                                Image(systemName: "shield").frame(width: 20)
                                 Text("\(controller.getCertificateCount())/\(Int(controller.loadBalancer.type.max_assigned_certificates))").bold() + Text(" Certificates")
                                 Spacer()
                             }
                             HStack {
-                                Image(systemName: "network")
+                                Image(systemName: "network").frame(width: 20)
                                 Text("\(Int(controller.loadBalancer.type.max_connections))").bold() + Text(" Connections")
                                 Spacer()
                             }
                             HStack {
-                                Image(systemName: "plus.slash.minus")
+                                Image(systemName: "plus.slash.minus").frame(width: 20)
                                 Text("Algorithm: ") + Text("\(controller.loadBalancer.algorithm.type.humanString())").bold()
                                 Spacer()
                             }
                             HStack {
-                                Image(systemName: "eurosign.circle")
+                                Image(systemName: "eurosign.circle").frame(width: 20)
                                 Text("\(String(format: "%.2f", controller.getMonthlyPrice()))/mo")
                                 Spacer()
                             }

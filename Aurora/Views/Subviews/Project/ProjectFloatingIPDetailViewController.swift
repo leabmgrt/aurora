@@ -64,18 +64,18 @@ struct ProjectFloatingIPDetailView: View {
                                 Spacer()
                             }.padding(.bottom)
                             HStack(alignment: .top) {
-                                Image(systemName: "network")
+                                Image(systemName: "network").frame(width: 20)
                                 Text("IP: ") + Text("\(controller.floatingip.ip)").bold()
                                 Spacer()
                             }
                             HStack(alignment: .top) {
-                                Image(systemName: "gearshape.2")
+                                Image(systemName: "gearshape.2").frame(width: 20)
                                 Text("Type: ") + Text("\(controller.floatingip.type.getHumanName())").bold()
                                 Spacer()
                             }
                             ForEach(controller.floatingip.dns_ptr, id: \.ip) { dnsptr in
                                 HStack(alignment: .top) {
-                                    Image(systemName: "number")
+                                    Image(systemName: "number").frame(width: 20)
                                     Text("Reverse DNS (\(dnsptr.ip)): ") + Text("\(dnsptr.dns_ptr)").bold()
                                     Spacer()
                                 }

@@ -58,22 +58,22 @@ struct ProjectServerDetailView: View {
                                 Spacer()
                             }.padding(.bottom)
                             HStack {
-                                Image(systemName: "cpu")
+                                Image(systemName: "cpu").frame(width: 20)
                                 Text("\(Int(serverType.cores)) VCPU\(serverType.cores != 1 ? "s" : "") (\(serverType.cpu_type.rawValue.lowercased()))")
                                 Spacer()
                             }
                             HStack {
-                                Image(systemName: "memorychip")
+                                Image(systemName: "memorychip").frame(width: 20)
                                 Text("\(Int(serverType.memory)) GB RAM")
                                 Spacer()
                             }
                             HStack {
-                                Image(systemName: "internaldrive")
+                                Image(systemName: "internaldrive").frame(width: 20)
                                 Text("\(Int(serverType.disk)) GB DISK (\(serverType.storage_type.rawValue.lowercased()))")
                                 Spacer()
                             }
                             HStack {
-                                Image(systemName: "eurosign.circle")
+                                Image(systemName: "eurosign.circle").frame(width: 20)
                                 let pricing = serverType.prices.first(where: { $0.location == controller.server.datacenter.location.name })!
                                 Text("\(String(format: "%.2f", Double(pricing.price_monthly.gross)!))/mo")
                                 Spacer()
