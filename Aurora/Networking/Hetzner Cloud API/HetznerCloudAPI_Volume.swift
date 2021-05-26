@@ -15,6 +15,7 @@ import SwiftyJSON
 extension HetznerCloudAPI {
     func loadVolumes(callback: @escaping (Result<[CloudVolume], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([.example])) }
+        if isASEC { return callback(.success(ASEC.data.volumes)) }
 
         loadVolumeNetworkCall(page: nil) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {

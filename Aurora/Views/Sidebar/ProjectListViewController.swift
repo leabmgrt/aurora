@@ -30,19 +30,18 @@ class ProjectListViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self, selector: #selector(projectNotificationReceived), name: .init("ProjectArrayUpdatedNotification"), object: nil)
     }
-    
+
     @objc func projectNotificationReceived(notification: Notification) {
         if let userInfo = notification.userInfo, userInfo["sender"] as? String == "projectlist" {
             // do nothing
-        }
-        else {
+        } else {
             projects = cloudAppSplitViewController.loadedProjects.map { CloudProjectInList($0) }
             for (index, _) in projects.enumerated() {
-                self.projects[index].connectionError = false
-                self.projects[index].didLoad = true
-                self.projects[index].error = nil
+                projects[index].connectionError = false
+                projects[index].didLoad = true
+                projects[index].error = nil
             }
-            self.projects.sort(by: { $0.project.name > $1.project.name })
+            projects.sort(by: { $0.project.name > $1.project.name })
             reloadTableView()
         }
     }
@@ -168,7 +167,7 @@ class ProjectListViewController: UIViewController {
     }
 
     func confirmProjectDeletion(_ project: CloudProject) {
-        EZAlertController.alert("Delete Project?", message: "Are you sure you want to delete\"\(project.name)\"? This only deletes the project locally, not at Hetzner", actions: [UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+        EZAlertController.alert("Delete Project?", message: "Are you sure you want to delete\"\(project.name)\"? This only deletes the project locally, not at Hetzner.", actions: [UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
             project.delete()
             self.loadProjects()
         }), UIAlertAction(title: "Cancel", style: .cancel, handler: nil)])
@@ -246,9 +245,18 @@ class ProjectListCell: UITableViewCell {
 
 struct ProjectListCellView: View {
     @ObservedObject var controller: ProjectListCellController
+
+    var image: Image {
+        if controller.project.project.api!.isASEC {
+            return Image("aperturescience")
+        } else {
+            return Image(systemName: "folder")
+        }
+    }
+
     var body: some View {
         HStack {
-            Image(systemName: "folder").resizable().aspectRatio(contentMode: .fit)
+            image.resizable().aspectRatio(contentMode: .fit)
                 .frame(width: 25).foregroundColor(.accentColor).padding(.trailing, 2)
             VStack(alignment: .leading) {
                 Text("\(controller.project.project.name)").bold().font(.title3)

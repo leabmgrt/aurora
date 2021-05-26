@@ -29,12 +29,11 @@ class ServerListViewController: UIViewController {
             }
         }
     }
-    
+
     @objc func projectNotificationReceived(notification: Notification) {
         if let userInfo = notification.userInfo, userInfo["sender"] as? String == "projectdetail" {
             // do nothing
-        }
-        else {
+        } else {
             if let projectFromArray = cloudAppSplitViewController.loadedProjects.first(where: { $0.id == project!.id }) {
                 project = projectFromArray
             }
@@ -95,8 +94,7 @@ class ServerListViewController: UIViewController {
                 project = networkproject
                 if let index = cloudAppSplitViewController.loadedProjects.firstIndex(where: { $0.id == project!.id }) {
                     cloudAppSplitViewController.loadedProjects[index] = project!
-                }
-                else {
+                } else {
                     cloudAppSplitViewController.loadedProjects.append(project!)
                 }
                 NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectdetail"])
@@ -125,8 +123,7 @@ class ServerListViewController: UIViewController {
             cell.contentConfiguration = content
             if allowDropdownArrow {
                 cell.accessories = [.outlineDisclosure()]
-            }
-            else {
+            } else {
                 cell.accessories = []
             }
         }
@@ -156,7 +153,6 @@ class ServerListViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
 
         for section in sections {
-            
             if project != nil {
                 switch section {
                 /* case .tabs:
@@ -168,42 +164,42 @@ class ServerListViewController: UIViewController {
                     var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
                     sectionSnapshot.append([headerItem])
                     sectionSnapshot.append(project!.servers.map { ServerListItem(title: $0.name, image: UIImage(systemName: "server.rack"), childcount: nil) }, to: headerItem)
-                    //sectionSnapshot.expand([headerItem])
+                    // sectionSnapshot.expand([headerItem])
                     dataSource.apply(sectionSnapshot, to: section)
                 case .volumes:
                     let headerItem = ServerListItem(title: section.rawValue, image: nil, childcount: project!.volumes.count)
                     var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
                     sectionSnapshot.append([headerItem])
                     sectionSnapshot.append(project!.volumes.map { ServerListItem(title: $0.name, image: UIImage(systemName: "externaldrive"), childcount: nil) }, to: headerItem)
-                    //sectionSnapshot.expand([headerItem])
+                    // sectionSnapshot.expand([headerItem])
                     dataSource.apply(sectionSnapshot, to: section)
                 case .floatingIPs:
                     let headerItem = ServerListItem(title: section.rawValue, image: nil, childcount: project!.floatingIPs.count)
                     var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
                     sectionSnapshot.append([headerItem])
                     sectionSnapshot.append(project!.floatingIPs.map { ServerListItem(title: $0.name, image: UIImage(systemName: "cloud"), childcount: nil) }, to: headerItem)
-                    //sectionSnapshot.expand([headerItem])
+                    // sectionSnapshot.expand([headerItem])
                     dataSource.apply(sectionSnapshot, to: section)
                 case .firewalls:
                     let headerItem = ServerListItem(title: section.rawValue, image: nil, childcount: project!.firewalls.count)
                     var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
                     sectionSnapshot.append([headerItem])
                     sectionSnapshot.append(project!.firewalls.map { ServerListItem(title: $0.name, image: UIImage(systemName: "flame"), childcount: nil) }, to: headerItem)
-                    //sectionSnapshot.expand([headerItem])
+                    // sectionSnapshot.expand([headerItem])
                     dataSource.apply(sectionSnapshot, to: section)
                 case .networks:
                     let headerItem = ServerListItem(title: section.rawValue, image: nil, childcount: project!.networks.count)
                     var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
                     sectionSnapshot.append([headerItem])
                     sectionSnapshot.append(project!.networks.map { ServerListItem(title: $0.name, image: UIImage(systemName: "network"), childcount: nil) }, to: headerItem)
-                    //sectionSnapshot.expand([headerItem])
+                    // sectionSnapshot.expand([headerItem])
                     dataSource.apply(sectionSnapshot, to: section)
                 case .loadBalancers:
                     let headerItem = ServerListItem(title: section.rawValue, image: nil, childcount: project!.loadBalancers.count)
                     var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
                     sectionSnapshot.append([headerItem])
                     sectionSnapshot.append(project!.loadBalancers.map { ServerListItem(title: $0.name, image: UIImage(systemName: "scale.3d"), childcount: nil) }, to: headerItem)
-                    //sectionSnapshot.expand([headerItem])
+                    // sectionSnapshot.expand([headerItem])
                     dataSource.apply(sectionSnapshot, to: section)
                 }
             }
@@ -214,7 +210,7 @@ class ServerListViewController: UIViewController {
 extension ServerListViewController: UICollectionViewDelegate {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var detailView: UIViewController?
-        
+
         let sectionIdentifier = dataSource.snapshot().sectionIdentifiers[indexPath.section]
         if indexPath.row == 0 { return }
         switch sectionIdentifier {
@@ -237,31 +233,30 @@ extension ServerListViewController: UICollectionViewDelegate {
             let detailController = ProjectLoadBalancerDetailController(project: project!, loadBalancer: project!.loadBalancers[indexPath.row - 1])
             detailView = UIHostingController(rootView: ProjectLoadBalancerDetailView(controller: detailController))
         }
-        
-        
+
         /* if indexPath.section == 0 { // Security
              detailView = UIViewController()
          } else */
-        /*if sectionIdentifier == .servers { // Servers
-            let detailController = ProjectServerDetailController(project: project!, server: project!.servers[indexPath.row - 1])
-            detailView = UIHostingController(rootView: ProjectServerDetailView(controller: detailController))
+        /* if sectionIdentifier == .servers { // Servers
+             let detailController = ProjectServerDetailController(project: project!, server: project!.servers[indexPath.row - 1])
+             detailView = UIHostingController(rootView: ProjectServerDetailView(controller: detailController))
 
-        } else if indexPath.section == 1 { // Volumes
-            let detailController = ProjectVolumeDetailController(project: project!, volume: project!.volumes[indexPath.row - 1])
-            detailView = UIHostingController(rootView: ProjectVolumeDetailView(controller: detailController))
-        } else if indexPath.section == 2 { // Floating IPs
-            let detailController = ProjectFloatingIPDetailController(project: project!, floatingip: project!.floatingIPs[indexPath.row - 1])
-            detailView = UIHostingController(rootView: ProjectFloatingIPDetailView(controller: detailController))
-        } else if indexPath.section == 3 { // Firewalls
-            let detailController = ProjectFirewallDetailController(project: project!, firewall: project!.firewalls[indexPath.row - 1])
-            detailView = UIHostingController(rootView: ProjectFirewallDetailView(controller: detailController))
-        } else if indexPath.section == 4 { // Network
-            let detailController = ProjectNetworkDetailController(project: project!, network: project!.networks[indexPath.row - 1])
-            detailView = UIHostingController(rootView: ProjectNetworkDetailView(controller: detailController))
-        } else { // Load Balancers
-            let detailController = ProjectLoadBalancerDetailController(project: project!, loadBalancer: project!.loadBalancers[indexPath.row - 1])
-            detailView = UIHostingController(rootView: ProjectLoadBalancerDetailView(controller: detailController))
-        }*/
+         } else if indexPath.section == 1 { // Volumes
+             let detailController = ProjectVolumeDetailController(project: project!, volume: project!.volumes[indexPath.row - 1])
+             detailView = UIHostingController(rootView: ProjectVolumeDetailView(controller: detailController))
+         } else if indexPath.section == 2 { // Floating IPs
+             let detailController = ProjectFloatingIPDetailController(project: project!, floatingip: project!.floatingIPs[indexPath.row - 1])
+             detailView = UIHostingController(rootView: ProjectFloatingIPDetailView(controller: detailController))
+         } else if indexPath.section == 3 { // Firewalls
+             let detailController = ProjectFirewallDetailController(project: project!, firewall: project!.firewalls[indexPath.row - 1])
+             detailView = UIHostingController(rootView: ProjectFirewallDetailView(controller: detailController))
+         } else if indexPath.section == 4 { // Network
+             let detailController = ProjectNetworkDetailController(project: project!, network: project!.networks[indexPath.row - 1])
+             detailView = UIHostingController(rootView: ProjectNetworkDetailView(controller: detailController))
+         } else { // Load Balancers
+             let detailController = ProjectLoadBalancerDetailController(project: project!, loadBalancer: project!.loadBalancers[indexPath.row - 1])
+             detailView = UIHostingController(rootView: ProjectLoadBalancerDetailView(controller: detailController))
+         } */
 
         splitViewController?.showsSecondaryOnlyButton = true
 

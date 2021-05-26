@@ -15,6 +15,7 @@ import SwiftyJSON
 extension HetznerCloudAPI {
     func loadFloatingIPs(callback: @escaping (Result<[CloudFloatingIP], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([.example])) }
+        if isASEC { return callback(.success(ASEC.data.floatingIPs)) }
 
         loadFloatingIPsNetworkCall(page: nil) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {

@@ -26,8 +26,21 @@ class HetznerCloudAPI {
         return KeychainWrapper.standard.string(forKey: project.apikeyReferrer) ?? ""
     }
 
+    var isASEC: Bool {
+        return project.name == ASEC.credential_name && apikey == ASEC.credential_key
+    }
+
     func loadProject(callback: @escaping (Result<CloudProject, HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success(CloudProject(id: UUID(), name: "Project 1", apikeyReferrer: "ref", apikey: "", servers: [.example], volumes: [.example], floatingIPs: [.example], firewalls: [.example], networks: [.example], loadBalancers: [.example], persistentInstance: false))) }
+        if isASEC {
+            project.servers = ASEC.data.servers
+            project.volumes = ASEC.data.volumes
+            project.networks = ASEC.data.networks
+            project.floatingIPs = ASEC.data.floatingIPs
+            project.api = self
+            project.api!.project = project
+            return callback(.success(project))
+        }
         let dispatchGroup = DispatchGroup()
 
         var latestError: HCAPIError?

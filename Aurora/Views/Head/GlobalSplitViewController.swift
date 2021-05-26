@@ -11,9 +11,8 @@
 import UIKit
 
 class GlobalSplitViewController: UISplitViewController {
-    
     public var loadedProjects = [CloudProject]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }

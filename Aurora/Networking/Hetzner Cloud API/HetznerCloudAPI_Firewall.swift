@@ -15,6 +15,7 @@ import SwiftyJSON
 extension HetznerCloudAPI {
     func loadFirewalls(callback: @escaping (Result<[CloudFirewall], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([.example])) }
+        if isASEC { return callback(.success([])) }
 
         loadFirewallNetworkCall(page: nil) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {

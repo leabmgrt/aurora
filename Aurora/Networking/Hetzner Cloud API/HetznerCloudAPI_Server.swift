@@ -15,6 +15,7 @@ import SwiftyJSON
 extension HetznerCloudAPI {
     func loadServers(callback: @escaping (Result<[CloudServer], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([.example])) }
+        if isASEC { return callback(.success(ASEC.data.servers)) }
 
         loadServerNetworkCall(page: nil) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {
@@ -59,6 +60,7 @@ extension HetznerCloudAPI {
 
     func loadServerBackups(_ serverId: Int, callback: @escaping (Result<[CloudServerImage], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([])) }
+        if isASEC { return callback(.success([])) }
 
         loadServerBackupsNetworkCall(page: nil, server: serverId) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {
@@ -103,6 +105,7 @@ extension HetznerCloudAPI {
 
     func loadServerSnapshots(_ serverId: Int?, callback: @escaping (Result<[CloudServerImage], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([])) }
+        if isASEC { return callback(.success([])) }
 
         loadServerSnapshotsNetworkCall(page: nil) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {
@@ -149,6 +152,7 @@ extension HetznerCloudAPI {
 
     func loadServerMetrics(_ id: Int, minutes: Int, step: Int = 1000, callback: @escaping (Result<CloudServerMetrics, HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success(.example)) }
+        if isASEC { return callback(.success(.example)) }
 
         let isoDateSubtracted = ISO8601DateFormatter().string(from: Calendar.current.date(byAdding: .minute, value: -minutes, to: Date())!)
         let isoDateCurrent = ISO8601DateFormatter().string(from: Date())

@@ -15,6 +15,7 @@ import SwiftyJSON
 extension HetznerCloudAPI {
     func loadNetworks(callback: @escaping (Result<[CloudNetwork], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([.example])) }
+        if isASEC { return callback(.success(ASEC.data.networks)) }
 
         loadNetworksNetworkCall(page: nil) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {

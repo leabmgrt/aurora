@@ -15,6 +15,7 @@ import SwiftyJSON
 extension HetznerCloudAPI {
     func loadLoadBalancers(callback: @escaping (Result<[CloudLoadBalancer], HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success([.example])) }
+        if isASEC { return callback(.success([])) }
 
         loadLoadBalancerNetworkCall(page: nil) { [self] firstResponse in
             if let error = responseCheck(firstResponse) {
@@ -60,6 +61,7 @@ extension HetznerCloudAPI {
 
     func loadLoadBalancerMetrics(_ id: Int, minutes: Int, step: Int = 1000, callback: @escaping (Result<CloudLoadBalancerMetrics, HCAPIError>) -> Void) {
         if cloudAppPreventNetworkActivityUseSampleData { return callback(.success(.example)) }
+        if isASEC { return callback(.success(.example)) }
 
         let isoDateSubtracted = ISO8601DateFormatter().string(from: Calendar.current.date(byAdding: .minute, value: -minutes, to: Date())!)
         let isoDateCurrent = ISO8601DateFormatter().string(from: Date())

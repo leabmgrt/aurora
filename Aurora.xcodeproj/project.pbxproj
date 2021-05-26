@@ -69,6 +69,7 @@
 		3AE18DB5261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */; };
 		3AE18DBA261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */; };
 		3AE2AFFF264824F000B56C2D /* ProjectServerDetailFirewallsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE2AFFE264824F000B56C2D /* ProjectServerDetailFirewallsView.swift */; };
+		3AFB0DE5265EA01C00A65880 /* ASEC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB0DE4265EA01C00A65880 /* ASEC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 		3AE18DB4261B3CD40072935B /* HetznerCloudAPI_LoadBalancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_LoadBalancer.swift; sourceTree = "<group>"; };
 		3AE18DB9261B4D650072935B /* ProjectLoadBalancerDetailGraphsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailGraphsView.swift; sourceTree = "<group>"; };
 		3AE2AFFE264824F000B56C2D /* ProjectServerDetailFirewallsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailFirewallsView.swift; sourceTree = "<group>"; };
+		3AFB0DE4265EA01C00A65880 /* ASEC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASEC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +321,7 @@
 		3A41A962260E464200EF7526 /* Aurora */ = {
 			isa = PBXGroup;
 			children = (
+				3AFB0DE3265E9FED00A65880 /* Other */,
 				3A0A58D6261B188C00000C37 /* Testing */,
 				3AC9742526132B5F000AAAA2 /* Aurora.entitlements */,
 				3A0DB1972618FC6600AD2E0A /* Networking */,
@@ -487,6 +490,14 @@
 				3A54A3432612229A00F99693 /* HCAppCache.swift */,
 			);
 			path = Caching;
+			sourceTree = "<group>";
+		};
+		3AFB0DE3265E9FED00A65880 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				3AFB0DE4265EA01C00A65880 /* ASEC.swift */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -686,6 +697,7 @@
 				3AA896F12610F86F00188F74 /* CloudNetwork.swift in Sources */,
 				3A54A3582612238300F99693 /* RealmCloudProject.swift in Sources */,
 				3A6A17A92610F3FA00BAE1ED /* CloudFirewall.swift in Sources */,
+				3AFB0DE5265EA01C00A65880 /* ASEC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
