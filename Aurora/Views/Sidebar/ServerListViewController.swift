@@ -29,6 +29,17 @@ class ServerListViewController: UIViewController {
             }
         }
     }
+    
+    @objc func projectNotificationReceived(notification: Notification) {
+        if let userInfo = notification.userInfo, userInfo["sender"] as? String == "projectdetail" {
+            // do nothing
+        }
+        else {
+            if let projectFromArray = cloudAppSplitViewController.loadedProjects.first(where: { $0.id == project!.id }) {
+                project = projectFromArray
+            }
+        }
+    }
 
     var refreshControl: UIRefreshControl!
 
@@ -37,6 +48,8 @@ class ServerListViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.sizeToFit()
         navigationController?.isToolbarHidden = true
+        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.addObserver(self, selector: #selector(projectNotificationReceived), name: .init("ProjectArrayUpdatedNotification"), object: nil)
     }
 
     override func viewDidLoad() {
@@ -80,6 +93,13 @@ class ServerListViewController: UIViewController {
             switch projectresponse {
             case let .success(networkproject):
                 project = networkproject
+                if let index = cloudAppSplitViewController.loadedProjects.firstIndex(where: { $0.id == project!.id }) {
+                    cloudAppSplitViewController.loadedProjects[index] = project!
+                }
+                else {
+                    cloudAppSplitViewController.loadedProjects.append(project!)
+                }
+                NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectdetail"])
                 refreshControl.endRefreshing()
             case let .failure(err):
                 cloudAppSplitViewController.showError(err)

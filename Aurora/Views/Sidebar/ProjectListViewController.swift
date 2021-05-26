@@ -27,6 +27,24 @@ class ProjectListViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewProjectButton))
         navigationController?.isToolbarHidden = false
         toolbarItems = [UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openSettings))]
+        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.addObserver(self, selector: #selector(projectNotificationReceived), name: .init("ProjectArrayUpdatedNotification"), object: nil)
+    }
+    
+    @objc func projectNotificationReceived(notification: Notification) {
+        if let userInfo = notification.userInfo, userInfo["sender"] as? String == "projectlist" {
+            // do nothing
+        }
+        else {
+            projects = cloudAppSplitViewController.loadedProjects.map { CloudProjectInList($0) }
+            for (index, _) in projects.enumerated() {
+                self.projects[index].connectionError = false
+                self.projects[index].didLoad = true
+                self.projects[index].error = nil
+            }
+            self.projects.sort(by: { $0.project.name > $1.project.name })
+            reloadTableView()
+        }
     }
 
     @objc func openSettings() {
@@ -105,11 +123,13 @@ class ProjectListViewController: UIViewController {
         projects = HCAppCache.default.loadProjects().map { CloudProjectInList($0) }
         reloadTableView()
         let dispatchGroup = DispatchGroup()
+        cloudAppSplitViewController.loadedProjects.removeAll()
         for (index, project) in projects.enumerated() {
             dispatchGroup.enter()
             project.project.api!.loadProject { projectresponse in
                 switch projectresponse {
                 case let .success(networkproject):
+                    cloudAppSplitViewController.loadedProjects.append(networkproject)
                     self.projects[index].project.api!.project = networkproject
                     self.projects[index].project = networkproject
                     self.projects[index].connectionError = false
@@ -128,6 +148,7 @@ class ProjectListViewController: UIViewController {
 
         dispatchGroup.notify(queue: .main) { [self] in
             self.projects.sort(by: { $0.project.name > $1.project.name })
+            NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectlist"])
             reloadTableView()
             refreshControl.endRefreshing()
         }
