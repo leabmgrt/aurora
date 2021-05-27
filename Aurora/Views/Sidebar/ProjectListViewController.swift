@@ -29,6 +29,9 @@ class ProjectListViewController: UIViewController {
         toolbarItems = [UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openSettings))]
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self, selector: #selector(projectNotificationReceived), name: .init("ProjectArrayUpdatedNotification"), object: nil)
+        if let selectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedRow, animated: false)
+        }
     }
 
     @objc func projectNotificationReceived(notification: Notification) {
@@ -103,6 +106,9 @@ class ProjectListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ProjectListCell.self, forCellReuseIdentifier: "projectCell")
+        /*tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.tableFooterView = UIView()*/
         view.addSubview(tableView)
 
         refreshControl = .init()
@@ -227,19 +233,12 @@ class ProjectListViewController: UIViewController {
 
     func reloadTableView(sortProjects: Bool) {
         self.projects.sort(by: { $0.project.name > $1.project.name })
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             //self.tableView.reloadData()
-            self.tableView.reloadSections([0], with: .automatic)
+            tableView.reloadSections([0], with: .automatic)
         }
 
-        // TODO: Fix this
-
-        /* if projects.isEmpty {
-             tableView.setEmptyMessage(message: "No projects", subtitle: "Try adding a project by clicking the \"+\" button above")
-         }
-         else {
-             tableView.restore()
-         } */
+        
     }
 
     func confirmProjectDeletion(_ project: CloudProject) {
@@ -272,10 +271,13 @@ extension ProjectListViewController: UITableViewDelegate {
         } else if !selectedproject.didLoad && !selectedproject.connectionError && selectedproject.error == nil {
             // didn't load yet, chill
             EZAlertController.alert("Not loaded", message: "Please wait until all information was fetched from the API.")
+            tableView.deselectRow(at: indexPath, animated: true)
         } else if !selectedproject.didLoad, selectedproject.connectionError, selectedproject.error != nil {
             cloudAppSplitViewController.showError(selectedproject.error!)
+            tableView.deselectRow(at: indexPath, animated: true)
         } else {
             EZAlertController.alert("Error", message: "Something went wrong. Please contact the developers.")
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
 
@@ -292,6 +294,14 @@ extension ProjectListViewController: UITableViewDataSource {
     }
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        
+        if projects.isEmpty {
+             tableView.setEmptyMessage(message: "No projects", subtitle: "Try adding a project by clicking the \"+\" button above", navigationController: navigationController!)
+         }
+         else {
+             tableView.restore()
+         }
+        
         return projects.count
     }
 
@@ -299,6 +309,36 @@ extension ProjectListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "projectCell", for: indexPath) as! ProjectListCell
         cell.controller.project = projects[indexPath.row]
         return cell
+    }
+}
+
+extension ProjectListViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Welcome"
+        let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Tap the button below to add your first grokkleglob."
+        let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        return UIImage(named: "taylor-swift")
+    }
+
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView, for state: UIControl.State) -> NSAttributedString? {
+        let str = "Add Grokkleglob"
+        let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+
+    func emptyDataSet(_ scrollView: UIScrollView, didTap button: UIButton) {
+        let ac = UIAlertController(title: "Button tapped!", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Hurray", style: .default))
+        present(ac, animated: true)
     }
 }
 
