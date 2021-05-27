@@ -41,8 +41,7 @@ class ProjectListViewController: UIViewController {
                 projects[index].didLoad = true
                 projects[index].error = nil
             }
-            projects.sort(by: { $0.project.name > $1.project.name })
-            reloadTableView()
+            reloadTableView(sortProjects: true)
         }
     }
 
@@ -84,8 +83,10 @@ class ProjectListViewController: UIViewController {
             if newProjectName == "" || newProjectAPIKey == "" {
                 EZAlertController.alert("Error", message: "Please enter a name and an API key")
             } else {
-                _ = CloudProject(name: newProjectName, apikey: newProjectAPIKey, persistentInstance: true) // is automatically saved and cached
-                self.loadProjects()
+                DispatchQueue.global(qos: .background).async {
+                    let newProject = CloudProject(name: newProjectName, apikey: newProjectAPIKey, persistentInstance: true) // is automatically saved and cached
+                    self.loadProjects([newProject.id])
+                }
             }
         }
 
@@ -105,7 +106,7 @@ class ProjectListViewController: UIViewController {
         view.addSubview(tableView)
 
         refreshControl = .init()
-        refreshControl.addTarget(self, action: #selector(loadProjects), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(loadProjectsViaRefresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
 
         tableView.snp.makeConstraints { make in
@@ -117,30 +118,101 @@ class ProjectListViewController: UIViewController {
 
         loadProjects()
     }
+    
+    @objc func loadProjectsViaRefresh() {
+        loadProjects()
+    }
 
-    @objc func loadProjects() {
-        projects = HCAppCache.default.loadProjects().map { CloudProjectInList($0) }
+    func loadProjects(_ ids: [UUID]? = nil) {
+        
+        DispatchQueue.global(qos: .background).async { [self] in
+            let cachedProjects = HCAppCache.default.loadProjects()
+            
+            var projectsToLoad = [CloudProject]()
+            
+            if let idsToLoad = ids {
+                // Only load projects inside idsToLoad array from API
+                for id in idsToLoad {
+                    // update them in main list
+                    if let cached = cachedProjects.first(where: { $0.id == id }) {
+                        projectsToLoad.append(cached)
+                        if let indexInMainArray = projects.firstIndex(where: { $0.project.id == id }) {
+                            // first remove it, then add it
+                            projects.remove(at: indexInMainArray)
+                        }
+                        projects.append(CloudProjectInList(cached))
+                    }
+                }
+                reloadTableView(sortProjects: true)
+            }
+            else {
+                projects = cachedProjects.map { CloudProjectInList($0) }
+                projectsToLoad = cachedProjects
+                reloadTableView(sortProjects: true)
+            }
+            
+            let dispatchGroup = DispatchGroup()
+            for project in projectsToLoad {
+                dispatchGroup.enter()
+                
+                if let index = projects.firstIndex(where: { $0.project.id == project.id }) {
+                    DispatchQueue.global(qos: .background).async {
+                        project.api!.loadProject { projectresponse in
+                            switch projectresponse {
+                            case let .success(networkproject):
+                                self.projects[index].project.api!.project = networkproject
+                                self.projects[index].project = networkproject
+                                self.projects[index].connectionError = false
+                                self.projects[index].didLoad = true
+                                self.projects[index].error = nil
+                                dispatchGroup.leave()
+                            case let .failure(err):
+                                self.projects[index].connectionError = true
+                                self.projects[index].didLoad = false
+                                self.projects[index].error = err
+                                dispatchGroup.leave()
+                            }
+                        }
+                    }
+                }
+            }
+            
+            dispatchGroup.notify(queue: .main) { [self] in
+                // add them to shared array and send out notification
+                cloudAppSplitViewController.loadedProjects = projects.map { $0.project }
+                NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectlist"])
+                reloadTableView(sortProjects: true)
+                refreshControl.endRefreshing()
+            }
+        }
+        
+        
+        
+        /*let cachedProjects = HCAppCache.default.loadProjects().map { CloudProjectInList($0) }
         reloadTableView()
         let dispatchGroup = DispatchGroup()
         cloudAppSplitViewController.loadedProjects.removeAll()
-        for (index, project) in projects.enumerated() {
+        let projectsToLoad = idsToLoad != nil ? projects.filter({ idsToLoad!.contains($0.project.id )}) : cachedProjects
+        for (index, project) in projectsToLoad.enumerated() {
             dispatchGroup.enter()
-            project.project.api!.loadProject { projectresponse in
-                switch projectresponse {
-                case let .success(networkproject):
-                    cloudAppSplitViewController.loadedProjects.append(networkproject)
-                    self.projects[index].project.api!.project = networkproject
-                    self.projects[index].project = networkproject
-                    self.projects[index].connectionError = false
-                    self.projects[index].didLoad = true
-                    self.projects[index].error = nil
-                    dispatchGroup.leave()
-                case let .failure(err):
-                    // cloudAppSplitViewController.showError(err)
-                    self.projects[index].connectionError = true
-                    self.projects[index].didLoad = false
-                    self.projects[index].error = err
-                    dispatchGroup.leave()
+            DispatchQueue.global(qos: .background).async {
+                project.project.api!.loadProject { projectresponse in
+                    switch projectresponse {
+                    case let .success(networkproject):
+                        cloudAppSplitViewController.loadedProjects.append(networkproject)
+                        self.projects[index].project.api!.project = networkproject
+                        self.projects[index].project = networkproject
+                        self.projects[index].connectionError = false
+                        self.projects[index].didLoad = true
+                        self.projects[index].error = nil
+                        dispatchGroup.leave()
+                    case let .failure(err):
+                        // cloudAppSplitViewController.showError(err)
+                        self.projects[index].connectionError = true
+                        self.projects[index].didLoad = false
+                        self.projects[index].error = err
+                        dispatchGroup.leave()
+                    }
                 }
             }
         }
@@ -150,13 +222,17 @@ class ProjectListViewController: UIViewController {
             NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectlist"])
             reloadTableView()
             refreshControl.endRefreshing()
-        }
+        }*/
     }
 
-    func reloadTableView() {
-        tableView.reloadData()
+    func reloadTableView(sortProjects: Bool) {
+        self.projects.sort(by: { $0.project.name > $1.project.name })
+        DispatchQueue.main.async {
+            //self.tableView.reloadData()
+            self.tableView.reloadSections([0], with: .automatic)
+        }
 
-        // TOOD: Fix this
+        // TODO: Fix this
 
         /* if projects.isEmpty {
              tableView.setEmptyMessage(message: "No projects", subtitle: "Try adding a project by clicking the \"+\" button above")
@@ -167,9 +243,15 @@ class ProjectListViewController: UIViewController {
     }
 
     func confirmProjectDeletion(_ project: CloudProject) {
-        EZAlertController.alert("Delete Project?", message: "Are you sure you want to delete\"\(project.name)\"? This only deletes the project locally, not at Hetzner.", actions: [UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+        EZAlertController.alert("Delete Project?", message: "Are you sure you want to delete\"\(project.name)\"? This only deletes the project locally, not at Hetzner.", actions: [UIAlertAction(title: "Delete", style: .destructive, handler: { [self] _ in
             project.delete()
-            self.loadProjects()
+            if let index = projects.firstIndex(where: {$0.project.id == project.id }) {
+                projects.remove(at: index)
+                reloadTableView(sortProjects: false)
+            }
+            else {
+                self.loadProjects()
+            }
         }), UIAlertAction(title: "Cancel", style: .cancel, handler: nil)])
     }
 }
@@ -259,8 +341,17 @@ struct ProjectListCellView: View {
             image.resizable().aspectRatio(contentMode: .fit)
                 .frame(width: 25).foregroundColor(.accentColor).padding(.trailing, 2)
             VStack(alignment: .leading) {
-                Text("\(controller.project.project.name)").bold().font(.title3)
-                Text("\(controller.project.project.servers.count) Server\(controller.project.project.servers.count == 1 ? "" : "s")").foregroundColor(.gray).font(.caption)
+                let project = controller.project.project
+                Text("\(project.name)").bold().font(.title3)
+                HStack {
+                    let otherResourcesSum = project.volumes.count + project.floatingIPs.count + project.firewalls.count + project.networks.count + project.loadBalancers.count
+                    Text("\(project.servers.count) Server\(project.servers.count == 1 ? "" : "s")\(otherResourcesSum > 0 ? ";" : "")").foregroundColor(.gray).font(.caption)
+                    
+                    if otherResourcesSum > 0 {
+                        Text("\(otherResourcesSum) other").foregroundColor(.gray).font(.caption)
+                    }
+                }
+                
             }
             Spacer()
             if !controller.project.didLoad && !controller.project.connectionError {
