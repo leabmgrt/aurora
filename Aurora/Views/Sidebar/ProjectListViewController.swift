@@ -133,7 +133,6 @@ class ProjectListViewController: UIViewController {
         
         DispatchQueue.global(qos: .background).async { [self] in
             let cachedProjects = HCAppCache.default.loadProjects()
-            
             var projectsToLoad = [CloudProject]()
             
             if let idsToLoad = ids {
