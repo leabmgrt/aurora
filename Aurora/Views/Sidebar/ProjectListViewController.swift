@@ -191,44 +191,6 @@ class ProjectListViewController: UIViewController {
                 refreshControl.endRefreshing()
             }
         }
-        
-        
-        
-        /*let cachedProjects = HCAppCache.default.loadProjects().map { CloudProjectInList($0) }
-        reloadTableView()
-        let dispatchGroup = DispatchGroup()
-        cloudAppSplitViewController.loadedProjects.removeAll()
-        let projectsToLoad = idsToLoad != nil ? projects.filter({ idsToLoad!.contains($0.project.id )}) : cachedProjects
-        for (index, project) in projectsToLoad.enumerated() {
-            dispatchGroup.enter()
-            DispatchQueue.global(qos: .background).async {
-                project.project.api!.loadProject { projectresponse in
-                    switch projectresponse {
-                    case let .success(networkproject):
-                        cloudAppSplitViewController.loadedProjects.append(networkproject)
-                        self.projects[index].project.api!.project = networkproject
-                        self.projects[index].project = networkproject
-                        self.projects[index].connectionError = false
-                        self.projects[index].didLoad = true
-                        self.projects[index].error = nil
-                        dispatchGroup.leave()
-                    case let .failure(err):
-                        // cloudAppSplitViewController.showError(err)
-                        self.projects[index].connectionError = true
-                        self.projects[index].didLoad = false
-                        self.projects[index].error = err
-                        dispatchGroup.leave()
-                    }
-                }
-            }
-        }
-
-        dispatchGroup.notify(queue: .main) { [self] in
-            self.projects.sort(by: { $0.project.name > $1.project.name })
-            NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectlist"])
-            reloadTableView()
-            refreshControl.endRefreshing()
-        }*/
     }
 
     func reloadTableView(sortProjects: Bool) {
