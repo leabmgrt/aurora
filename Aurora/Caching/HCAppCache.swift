@@ -45,13 +45,13 @@ class HCAppCache {
             let realm = try Realm()
             let existingObjects = realm.objects(RealmCloudProject.self)
             let projects: [CloudProject] = Array(existingObjects).map { $0.toProject() }
-			var uniqueProjects: [CloudProject] = []
-			for project in projects {
-				if uniqueProjects.first(where: { $0.id == project.id }) == nil {
-					uniqueProjects.append(project)
-				}
-			}
-			
+            var uniqueProjects: [CloudProject] = []
+            for project in projects {
+                if uniqueProjects.first(where: { $0.id == project.id }) == nil {
+                    uniqueProjects.append(project)
+                }
+            }
+
             return uniqueProjects
         } catch {
             // TODO: Error Handling

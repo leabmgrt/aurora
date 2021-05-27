@@ -13,15 +13,15 @@ import UIKit
 
 extension UITableView {
     func setEmptyMessage(message: String, subtitle: String, navigationController: UINavigationController) {
-        //print(subviews[0].frame.minX)
-        let backView = UIView(frame: CGRect(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height)) //UIView(frame: cloudAppSplitViewController.viewControllers.first!.view.frame)
+        // print(subviews[0].frame.minX)
+        let backView = UIView(frame: CGRect(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height)) // UIView(frame: cloudAppSplitViewController.viewControllers.first!.view.frame)
         let messageLabel: UILabel = {
             let label = UILabel(frame: .zero)
             label.text = message
             label.textColor = .label
             label.numberOfLines = 0
             label.textAlignment = .center
-            label.font = .rounded(ofSize: 30, weight: .bold)//UIFont( .boldSystemFont(ofSize: 25)
+            label.font = .rounded(ofSize: 30, weight: .bold) // UIFont( .boldSystemFont(ofSize: 25)
             return label
         }()
 
@@ -31,7 +31,7 @@ extension UITableView {
             label.textColor = .tertiaryLabel
             label.numberOfLines = 0
             label.textAlignment = .center
-            label.font = .rounded(ofSize: 13, weight: .regular)//.boldSystemFont(ofSize: 10) // 20
+            label.font = .rounded(ofSize: 13, weight: .regular) // .boldSystemFont(ofSize: 10) // 20
             return label
         }()
 
@@ -43,14 +43,14 @@ extension UITableView {
         messageLabel.snp.makeConstraints { make in
             make.centerX.equalTo(backView.snp.centerX)
             make.centerY.equalTo(backView.snp.centerY)
-            make.leading.equalTo(backView.snp.leading).offset(16 + -(navigationController.view.frame.minX))
+            make.leading.equalTo(backView.snp.leading).offset(16 + -navigationController.view.frame.minX)
             make.trailing.equalTo(backView.snp.trailing).offset(-16)
         }
 
         subtitleLabel.snp.makeConstraints { make in
             make.centerX.equalTo(backView.snp.centerX)
             make.top.equalTo(messageLabel.snp.bottom)
-            make.leading.equalTo(backView.snp.leading).offset(16 + -(navigationController.view.frame.minX))
+            make.leading.equalTo(backView.snp.leading).offset(16 + -navigationController.view.frame.minX)
             make.trailing.equalTo(backView.snp.trailing).offset(-16)
         }
 

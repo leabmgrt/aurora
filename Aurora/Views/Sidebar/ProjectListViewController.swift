@@ -106,9 +106,9 @@ class ProjectListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ProjectListCell.self, forCellReuseIdentifier: "projectCell")
-        /*tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
-        tableView.tableFooterView = UIView()*/
+        /* tableView.emptyDataSetSource = self
+         tableView.emptyDataSetDelegate = self
+         tableView.tableFooterView = UIView() */
         view.addSubview(tableView)
 
         refreshControl = .init()
@@ -124,17 +124,16 @@ class ProjectListViewController: UIViewController {
 
         loadProjects()
     }
-    
+
     @objc func loadProjectsViaRefresh() {
         loadProjects()
     }
 
     func loadProjects(_ ids: [UUID]? = nil) {
-        
         DispatchQueue.global(qos: .background).async { [self] in
             let cachedProjects = HCAppCache.default.loadProjects()
             var projectsToLoad = [CloudProject]()
-            
+
             if let idsToLoad = ids {
                 // Only load projects inside idsToLoad array from API
                 for id in idsToLoad {
@@ -149,17 +148,16 @@ class ProjectListViewController: UIViewController {
                     }
                 }
                 reloadTableView(sortProjects: true)
-            }
-            else {
+            } else {
                 projects = cachedProjects.map { CloudProjectInList($0) }
                 projectsToLoad = cachedProjects
                 reloadTableView(sortProjects: true)
             }
-            
+
             let dispatchGroup = DispatchGroup()
             for project in projectsToLoad {
                 dispatchGroup.enter()
-                
+
                 if let index = projects.firstIndex(where: { $0.project.id == project.id }) {
                     DispatchQueue.global(qos: .background).async {
                         project.api!.loadProject { projectresponse in
@@ -181,7 +179,7 @@ class ProjectListViewController: UIViewController {
                     }
                 }
             }
-            
+
             dispatchGroup.notify(queue: .main) { [self] in
                 // add them to shared array and send out notification
                 cloudAppSplitViewController.loadedProjects = projects.map { $0.project }
@@ -192,24 +190,21 @@ class ProjectListViewController: UIViewController {
         }
     }
 
-    func reloadTableView(sortProjects: Bool) {
-        self.projects.sort(by: { $0.project.name > $1.project.name })
+    func reloadTableView(sortProjects _: Bool) {
+        projects.sort(by: { $0.project.name > $1.project.name })
         DispatchQueue.main.async { [self] in
-            //self.tableView.reloadData()
+            // self.tableView.reloadData()
             tableView.reloadSections([0], with: .automatic)
         }
-
-        
     }
 
     func confirmProjectDeletion(_ project: CloudProject) {
         EZAlertController.alert("Delete Project?", message: "Are you sure you want to delete\"\(project.name)\"? This only deletes the project locally, not at Hetzner.", actions: [UIAlertAction(title: "Delete", style: .destructive, handler: { [self] _ in
             project.delete()
-            if let index = projects.firstIndex(where: {$0.project.id == project.id }) {
+            if let index = projects.firstIndex(where: { $0.project.id == project.id }) {
                 projects.remove(at: index)
                 reloadTableView(sortProjects: false)
-            }
-            else {
+            } else {
                 self.loadProjects()
             }
         }), UIAlertAction(title: "Cancel", style: .cancel, handler: nil)])
@@ -255,14 +250,12 @@ extension ProjectListViewController: UITableViewDataSource {
     }
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        
         if projects.isEmpty {
-             tableView.setEmptyMessage(message: "No projects", subtitle: "Try adding a project by clicking the \"+\" button above", navigationController: navigationController!)
-         }
-         else {
-             tableView.restore()
-         }
-        
+            tableView.setEmptyMessage(message: "No projects", subtitle: "Try adding a project by clicking the \"+\" button above", navigationController: navigationController!)
+        } else {
+            tableView.restore()
+        }
+
         return projects.count
     }
 
@@ -274,29 +267,29 @@ extension ProjectListViewController: UITableViewDataSource {
 }
 
 extension ProjectListViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+    func title(forEmptyDataSet _: UIScrollView) -> NSAttributedString? {
         let str = "Welcome"
         let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
 
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+    func description(forEmptyDataSet _: UIScrollView) -> NSAttributedString? {
         let str = "Tap the button below to add your first grokkleglob."
         let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]
         return NSAttributedString(string: str, attributes: attrs)
     }
 
-    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+    func image(forEmptyDataSet _: UIScrollView) -> UIImage? {
         return UIImage(named: "taylor-swift")
     }
 
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView, for state: UIControl.State) -> NSAttributedString? {
+    func buttonTitle(forEmptyDataSet _: UIScrollView, for _: UIControl.State) -> NSAttributedString? {
         let str = "Add Grokkleglob"
         let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]
         return NSAttributedString(string: str, attributes: attrs)
     }
 
-    func emptyDataSet(_ scrollView: UIScrollView, didTap button: UIButton) {
+    func emptyDataSet(_: UIScrollView, didTap _: UIButton) {
         let ac = UIAlertController(title: "Button tapped!", message: nil, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Hurray", style: .default))
         present(ac, animated: true)
@@ -347,12 +340,11 @@ struct ProjectListCellView: View {
                 HStack {
                     let otherResourcesSum = project.volumes.count + project.floatingIPs.count + project.firewalls.count + project.networks.count + project.loadBalancers.count
                     Text("\(project.servers.count) Server\(project.servers.count == 1 ? "" : "s")\(otherResourcesSum > 0 ? ";" : "")").foregroundColor(.gray).font(.caption)
-                    
+
                     if otherResourcesSum > 0 {
                         Text("\(otherResourcesSum) other").foregroundColor(.gray).font(.caption)
                     }
                 }
-                
             }
             Spacer()
             if !controller.project.didLoad && !controller.project.connectionError {
