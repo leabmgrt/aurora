@@ -10,7 +10,7 @@
 
 import XCTest
 import SwiftyJSON
-@testable import Hetzner_Cloud
+@testable import Aurora
 
 class Hetzner_CloudTests: XCTestCase {
 

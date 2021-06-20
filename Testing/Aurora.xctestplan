@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "38F03188-36DC-4C08-84A5-943885F6EB10",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Aurora.xcodeproj",
+      "identifier" : "3A41A95F260E464200EF7526",
+      "name" : "Aurora"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Aurora.xcodeproj",
+        "identifier" : "3A41A975260E464400EF7526",
+        "name" : "AuroraTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Aurora.xcodeproj",
+        "identifier" : "3A41A980260E464400EF7526",
+        "name" : "AuroraUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

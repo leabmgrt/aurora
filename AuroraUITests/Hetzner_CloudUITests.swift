@@ -9,6 +9,7 @@
 //
 
 import XCTest
+@testable import Aurora
 
 class Hetzner_CloudUITests: XCTestCase {
 
@@ -28,8 +29,15 @@ class Hetzner_CloudUITests: XCTestCase {
     func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
+		app.launchArguments = ["enable-dev-mode", "projectdetail-collectionview-autoexpand"]
         app.launch()
+		
+		let projectCell = app.tables.element(boundBy: 0).cells.element(boundBy: 0)
+		//XCTAssertEqual(projectCell.staticTexts.element(boundBy: 0).label, CloudProject.example.name)
+		projectCell.tap()
 
+		let cell = app.collectionViews.element.cells.firstMatch
+		cell.tap()
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
