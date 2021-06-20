@@ -60,7 +60,7 @@ struct ProjectNetworkDetailView: View {
                                 Text("Failed to parse server").italic()
                             }
                         }
-                    }
+                    }.listStyle(PlainListStyle())
                 } else {
                     VStack {
                         Spacer()
@@ -100,7 +100,7 @@ struct ProjectNetworkDetailView: View {
                             }
                         }
                     }
-                }
+                }.listStyle(PlainListStyle())
             } else {
                 if controller.network.routes.count > 0 {
                     List {
@@ -110,7 +110,7 @@ struct ProjectNetworkDetailView: View {
                                 Text("Gateway: ").bold() + Text("\(route.gateway)")
                             }.padding([.top, .bottom], 4)
                         }
-                    }
+                    }.listStyle(PlainListStyle())
                 } else {
                     VStack {
                         Spacer()
