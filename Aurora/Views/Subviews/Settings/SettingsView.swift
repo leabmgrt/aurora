@@ -132,15 +132,30 @@ class SettingsController: ObservableObject {
                     var authError: NSError?
 
                     if authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-                        KeychainWrapper.standard.set(biometicAuthEnabled, forKey: "biometricAuthEnabled")
+						authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Please authenticate using Face ID to enable biometric authentication") { callback, error in
+							if callback {
+								KeychainWrapper.standard.set(self.biometicAuthEnabled, forKey: "biometricAuthEnabled")
+							}
+							else {
+								let errorString = error?.localizedDescription ?? "Unknown error"
+								DispatchQueue.main.async {
+									self.isLoadingInformation = true
+									self.biometicAuthEnabled = false
+									self.isLoadingInformation = false
+									EZAlertController.alert("Error", message: "The following error occurred while trying to authenticate you: \n\n\(errorString)")
+								}
+								KeychainWrapper.standard.set(false, forKey: "biometricAuthEnabled")
+							}
+						}
                     } else {
                         DispatchQueue.main.async {
                             self.isLoadingInformation = true
                             self.biometicAuthEnabled = false
                             self.isLoadingInformation = false
+							EZAlertController.alert("Device error", message: "Biometric authentication is not enabled on your device. Please verify that it's enabled in the device settings")
                         }
                         KeychainWrapper.standard.set(false, forKey: "biometricAuthEnabled")
-                        EZAlertController.alert("Device error", message: "Biometric authentication is not enabled on your device. Please verify that it's enabled in the device settings")
+                        
                     }
                 }
             }

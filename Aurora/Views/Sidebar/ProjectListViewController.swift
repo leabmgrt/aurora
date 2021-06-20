@@ -266,36 +266,6 @@ extension ProjectListViewController: UITableViewDataSource {
     }
 }
 
-extension ProjectListViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func title(forEmptyDataSet _: UIScrollView) -> NSAttributedString? {
-        let str = "Welcome"
-        let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)]
-        return NSAttributedString(string: str, attributes: attrs)
-    }
-
-    func description(forEmptyDataSet _: UIScrollView) -> NSAttributedString? {
-        let str = "Tap the button below to add your first grokkleglob."
-        let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]
-        return NSAttributedString(string: str, attributes: attrs)
-    }
-
-    func image(forEmptyDataSet _: UIScrollView) -> UIImage? {
-        return UIImage(named: "taylor-swift")
-    }
-
-    func buttonTitle(forEmptyDataSet _: UIScrollView, for _: UIControl.State) -> NSAttributedString? {
-        let str = "Add Grokkleglob"
-        let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]
-        return NSAttributedString(string: str, attributes: attrs)
-    }
-
-    func emptyDataSet(_: UIScrollView, didTap _: UIButton) {
-        let ac = UIAlertController(title: "Button tapped!", message: nil, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Hurray", style: .default))
-        present(ac, animated: true)
-    }
-}
-
 class ProjectListCell: UITableViewCell {
     var swiftuiView: UIView!
     var controller = ProjectListCellController()
