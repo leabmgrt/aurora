@@ -35,9 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "CloudProjectCD")
         container.loadPersistentStores { _, error in
-            if let error = error as? NSError? {
-                //
-            }
+            print("An error occurred while loading the CoreData container")
         }
         return container
     }()
@@ -48,8 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             do {
                 try context.save()
             } catch {
-                let nserror = error as NSError
-                //
+                print("An error occurred while saving")
             }
         }
     }

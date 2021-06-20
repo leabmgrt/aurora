@@ -47,7 +47,6 @@
 		3A6A17A12610E3C800BAE1ED /* CloudFloatingIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A17A02610E3C800BAE1ED /* CloudFloatingIP.swift */; };
 		3A6A17A92610F3FA00BAE1ED /* CloudFirewall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A17A82610F3FA00BAE1ED /* CloudFirewall.swift */; };
 		3A7E2AD4261888C800F41F04 /* ProjectServerDetailDeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E2AD3261888C800F41F04 /* ProjectServerDetailDeleteView.swift */; };
-		3A85F986265FEC3900865E60 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A85F984265FEC3900865E60 /* UIScrollView+EmptyDataSet.m */; };
 		3A85F988265FF32B00865E60 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85F987265FF32B00865E60 /* UIFont.swift */; };
 		3A98AF772615F4D800EF895B /* ProjectServerDetailGraphsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A98AF762615F4D800EF895B /* ProjectServerDetailGraphsView.swift */; };
 		3A9B455D2612303E007E2EA4 /* EZAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B455C2612303E007E2EA4 /* EZAlertController.swift */; };
@@ -148,8 +147,6 @@
 		3A6A17A82610F3FA00BAE1ED /* CloudFirewall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFirewall.swift; sourceTree = "<group>"; };
 		3A7E2AD3261888C800F41F04 /* ProjectServerDetailDeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailDeleteView.swift; sourceTree = "<group>"; };
 		3A85F983265FEC3800865E60 /* Aurora-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aurora-Bridging-Header.h"; sourceTree = "<group>"; };
-		3A85F984265FEC3900865E60 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
-		3A85F985265FEC3900865E60 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		3A85F987265FF32B00865E60 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		3A98AF762615F4D800EF895B /* ProjectServerDetailGraphsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailGraphsView.swift; sourceTree = "<group>"; };
 		3A9B455C2612303E007E2EA4 /* EZAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EZAlertController.swift; sourceTree = "<group>"; };
@@ -397,15 +394,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		3A85F982265FEC2600865E60 /* DZNEmptyDataSet */ = {
-			isa = PBXGroup;
-			children = (
-				3A85F985265FEC3900865E60 /* UIScrollView+EmptyDataSet.h */,
-				3A85F984265FEC3900865E60 /* UIScrollView+EmptyDataSet.m */,
-			);
-			path = DZNEmptyDataSet;
-			sourceTree = "<group>";
-		};
 		3A9B456F2612331D007E2EA4 /* Hetzner Cloud API */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,7 +520,6 @@
 		3AFB0DE3265E9FED00A65880 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				3A85F982265FEC2600865E60 /* DZNEmptyDataSet */,
 				3AFB0DE4265EA01C00A65880 /* ASEC.swift */,
 			);
 			path = Other;
@@ -699,7 +686,6 @@
 				3AC577D02645A7E4000E3F91 /* LegalNoticeView.swift in Sources */,
 				3A7E2AD4261888C800F41F04 /* ProjectServerDetailDeleteView.swift in Sources */,
 				3AC577D22645AE98000E3F91 /* UsedLibrariesView.swift in Sources */,
-				3A85F986265FEC3900865E60 /* UIScrollView+EmptyDataSet.m in Sources */,
 				3A6A17A12610E3C800BAE1ED /* CloudFloatingIP.swift in Sources */,
 				3A446D8B265AB1BD00314C87 /* AppReadOnlyDisclaimerView.swift in Sources */,
 				3A00B3E1260FAF80000864C2 /* ProjectServerDetailViewController.swift in Sources */,
