@@ -9,9 +9,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(CloudProjectCD)
-public class CloudProjectCD: NSManagedObject {
-}
+public class CloudProjectCD: NSManagedObject {}

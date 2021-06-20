@@ -67,7 +67,7 @@ struct ProjectFirewallDetailView: View {
                             Text("All outbound traffic is allowed.").italic()
                         }
                     }
-				}.listStyle(PlainListStyle())
+                }.listStyle(PlainListStyle())
             } else {
                 if controller.appliedServers().count != 0 {
                     List {

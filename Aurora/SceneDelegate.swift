@@ -30,12 +30,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         firstLaunchRoutine()
 
         cloudAppPreventNetworkActivityUseSampleData = UserDefaults.standard.bool(forKey: "devmodeEnabled")
-		
-		#if DEBUG
-		if CommandLine.arguments.contains("enable-dev-mode") {
-			cloudAppPreventNetworkActivityUseSampleData = true
-		}
-		#endif
+
+        #if DEBUG
+            if CommandLine.arguments.contains("enable-dev-mode") {
+                cloudAppPreventNetworkActivityUseSampleData = true
+            }
+        #endif
         window?.rootViewController = loadInitialViewController() // UINavigationController(rootViewController: ProjectListViewController())
         window?.makeKeyAndVisible()
         verifyBiometricAuthentication()

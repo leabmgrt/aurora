@@ -18,11 +18,11 @@ class ProjectListViewController: UIViewController {
 
     var tableView: UITableView!
     var refreshControl: UIRefreshControl!
-	private var dataIsLoading: Bool = false {
-		didSet {
-			reloadTableView(sortProjects: true)
-		}
-	}
+    private var dataIsLoading: Bool = false {
+        didSet {
+            reloadTableView(sortProjects: true)
+        }
+    }
 
     override func viewWillAppear(_: Bool) {
         navigationItem.title = "Projects"
@@ -132,66 +132,66 @@ class ProjectListViewController: UIViewController {
     }
 
     func loadProjects(_ ids: [UUID]? = nil) {
-		dataIsLoading = true
-		DispatchQueue.main.async { [self] in
+        dataIsLoading = true
+        DispatchQueue.main.async { [self] in
             let cachedProjects = HCAppCache.default.loadProjects()
-			DispatchQueue.global(qos: .background).async {
-				var projectsToLoad = [CloudProject]()
+            DispatchQueue.global(qos: .background).async {
+                var projectsToLoad = [CloudProject]()
 
-				if let idsToLoad = ids {
-					// Only load projects inside idsToLoad array from API
-					for id in idsToLoad {
-						// update them in main list
-						if let cached = cachedProjects.first(where: { $0.id == id }) {
-							projectsToLoad.append(cached)
-							if let indexInMainArray = projects.firstIndex(where: { $0.project.id == id }) {
-								// first remove it, then add it
-								projects.remove(at: indexInMainArray)
-							}
-							projects.append(CloudProjectInList(cached))
-						}
-					}
-					reloadTableView(sortProjects: true)
-				} else {
-					projects = cachedProjects.map { CloudProjectInList($0) }
-					projectsToLoad = cachedProjects
-					reloadTableView(sortProjects: true)
-				}
+                if let idsToLoad = ids {
+                    // Only load projects inside idsToLoad array from API
+                    for id in idsToLoad {
+                        // update them in main list
+                        if let cached = cachedProjects.first(where: { $0.id == id }) {
+                            projectsToLoad.append(cached)
+                            if let indexInMainArray = projects.firstIndex(where: { $0.project.id == id }) {
+                                // first remove it, then add it
+                                projects.remove(at: indexInMainArray)
+                            }
+                            projects.append(CloudProjectInList(cached))
+                        }
+                    }
+                    reloadTableView(sortProjects: true)
+                } else {
+                    projects = cachedProjects.map { CloudProjectInList($0) }
+                    projectsToLoad = cachedProjects
+                    reloadTableView(sortProjects: true)
+                }
 
-				let dispatchGroup = DispatchGroup()
-				for project in projectsToLoad {
-					dispatchGroup.enter()
+                let dispatchGroup = DispatchGroup()
+                for project in projectsToLoad {
+                    dispatchGroup.enter()
 
-					if let index = projects.firstIndex(where: { $0.project.id == project.id }) {
-						DispatchQueue.global(qos: .background).async {
-							project.api!.loadProject { projectresponse in
-								switch projectresponse {
-								case let .success(networkproject):
-									self.projects[index].project.api!.project = networkproject
-									self.projects[index].project = networkproject
-									self.projects[index].connectionError = false
-									self.projects[index].didLoad = true
-									self.projects[index].error = nil
-									dispatchGroup.leave()
-								case let .failure(err):
-									self.projects[index].connectionError = true
-									self.projects[index].didLoad = false
-									self.projects[index].error = err
-									dispatchGroup.leave()
-								}
-							}
-						}
-					}
-				}
+                    if let index = projects.firstIndex(where: { $0.project.id == project.id }) {
+                        DispatchQueue.global(qos: .background).async {
+                            project.api!.loadProject { projectresponse in
+                                switch projectresponse {
+                                case let .success(networkproject):
+                                    self.projects[index].project.api!.project = networkproject
+                                    self.projects[index].project = networkproject
+                                    self.projects[index].connectionError = false
+                                    self.projects[index].didLoad = true
+                                    self.projects[index].error = nil
+                                    dispatchGroup.leave()
+                                case let .failure(err):
+                                    self.projects[index].connectionError = true
+                                    self.projects[index].didLoad = false
+                                    self.projects[index].error = err
+                                    dispatchGroup.leave()
+                                }
+                            }
+                        }
+                    }
+                }
 
-				dispatchGroup.notify(queue: .main) { [self] in
-					// add them to shared array and send out notification
-					cloudAppSplitViewController.loadedProjects = projects.map { $0.project }
-					NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectlist"])
-					dataIsLoading = false
-					refreshControl.endRefreshing()
-				}
-			}
+                dispatchGroup.notify(queue: .main) { [self] in
+                    // add them to shared array and send out notification
+                    cloudAppSplitViewController.loadedProjects = projects.map { $0.project }
+                    NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectlist"])
+                    dataIsLoading = false
+                    refreshControl.endRefreshing()
+                }
+            }
         }
     }
 
@@ -228,7 +228,7 @@ extension ProjectListViewController: UITableViewDelegate {
                 navigationController?.pushViewController(serverListVC, animated: true)
             } else {
                 splitViewController?.setViewController(UINavigationController(rootViewController: serverListVC), for: .supplementary)
-				splitViewController?.hide(.primary)
+                splitViewController?.hide(.primary)
             }
         } else if !selectedproject.didLoad && !selectedproject.connectionError && selectedproject.error == nil {
             // didn't load yet, chill
@@ -257,13 +257,12 @@ extension ProjectListViewController: UITableViewDataSource {
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         if projects.isEmpty {
-			if dataIsLoading {
-				tableView.setEmptyMessage(message: "Loading data...", subtitle: "The projects are currently being loaded", navigationController: navigationController!)
-			}
-			else {
-				tableView.setEmptyMessage(message: "No projects", subtitle: "Try adding a project by clicking the \"+\" button above", navigationController: navigationController!)
-			}
-            
+            if dataIsLoading {
+                tableView.setEmptyMessage(message: "Loading data...", subtitle: "The projects are currently being loaded", navigationController: navigationController!)
+            } else {
+                tableView.setEmptyMessage(message: "No projects", subtitle: "Try adding a project by clicking the \"+\" button above", navigationController: navigationController!)
+            }
+
         } else {
             tableView.restore()
         }

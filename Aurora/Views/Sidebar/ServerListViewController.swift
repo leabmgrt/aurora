@@ -154,42 +154,42 @@ class ServerListViewController: UIViewController {
 
         for section in sections {
             if project != nil {
-				var listItems = [ServerListItem]()
+                var listItems = [ServerListItem]()
                 switch section {
                 /* case .tabs:
                  var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
                  sectionSnapshot.append(tabsItems)
                  dataSource.apply(sectionSnapshot, to: section) */
                 case .servers:
-						listItems = project!.servers.map { ServerListItem(title: $0.name, image: UIImage(systemName: "server.rack"), childcount: nil) }
+                    listItems = project!.servers.map { ServerListItem(title: $0.name, image: UIImage(systemName: "server.rack"), childcount: nil) }
                 case .volumes:
-						listItems = project!.volumes.map { ServerListItem(title: $0.name, image: UIImage(systemName: "externaldrive"), childcount: nil) }
+                    listItems = project!.volumes.map { ServerListItem(title: $0.name, image: UIImage(systemName: "externaldrive"), childcount: nil) }
                 case .floatingIPs:
-						listItems = project!.floatingIPs.map { ServerListItem(title: $0.name, image: UIImage(systemName: "cloud"), childcount: nil) }
+                    listItems = project!.floatingIPs.map { ServerListItem(title: $0.name, image: UIImage(systemName: "cloud"), childcount: nil) }
                 case .firewalls:
-						listItems = project!.firewalls.map { ServerListItem(title: $0.name, image: UIImage(systemName: "flame"), childcount: nil) }
+                    listItems = project!.firewalls.map { ServerListItem(title: $0.name, image: UIImage(systemName: "flame"), childcount: nil) }
                 case .networks:
-						listItems = project!.networks.map { ServerListItem(title: $0.name, image: UIImage(systemName: "network"), childcount: nil) }
+                    listItems = project!.networks.map { ServerListItem(title: $0.name, image: UIImage(systemName: "network"), childcount: nil) }
                 case .loadBalancers:
-						listItems = project!.loadBalancers.map { ServerListItem(title: $0.name, image: UIImage(systemName: "scale.3d"), childcount: nil) }
+                    listItems = project!.loadBalancers.map { ServerListItem(title: $0.name, image: UIImage(systemName: "scale.3d"), childcount: nil) }
                 }
-				setupListItem(title: section.rawValue, items: listItems, section: section)
+                setupListItem(title: section.rawValue, items: listItems, section: section)
             }
         }
     }
-	
-	private func setupListItem(title: String, items: [ServerListItem], section: ServerListSection) {
-		let headerItem = ServerListItem(title: title, image: nil, childcount: items.count)
-		var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
-		sectionSnapshot.append([headerItem])
-		sectionSnapshot.append(items, to: headerItem)
-		#if DEBUG
-		if CommandLine.arguments.contains("projectdetail-collectionview-autoexpand") {
-			sectionSnapshot.expand([headerItem])
-		}
-		#endif
-		dataSource.apply(sectionSnapshot, to: section)
-	}
+
+    private func setupListItem(title: String, items: [ServerListItem], section: ServerListSection) {
+        let headerItem = ServerListItem(title: title, image: nil, childcount: items.count)
+        var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<ServerListItem>()
+        sectionSnapshot.append([headerItem])
+        sectionSnapshot.append(items, to: headerItem)
+        #if DEBUG
+            if CommandLine.arguments.contains("projectdetail-collectionview-autoexpand") {
+                sectionSnapshot.expand([headerItem])
+            }
+        #endif
+        dataSource.apply(sectionSnapshot, to: section)
+    }
 }
 
 extension ServerListViewController: UICollectionViewDelegate {

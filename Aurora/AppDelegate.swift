@@ -8,8 +8,8 @@
 // https://git.abmgrt.dev/exc_bad_access/aurora
 //
 
-import UIKit
 import CoreData
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,27 +31,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-	
-	lazy var persistentContainer: NSPersistentContainer = {
-		let container = NSPersistentContainer(name: "CloudProjectCD")
-		container.loadPersistentStores { storeDescription, error in
-			if let error = error as? NSError? {
-				//
-			}
-		}
-		return container
-	}()
-	
-	func saveContext() {
-		let context = persistentContainer.viewContext
-		if context.hasChanges {
-			do {
-				try context.save()
-			}
-			catch {
-				let nserror = error as NSError
-				//
-			}
-		}
-	}
+
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "CloudProjectCD")
+        container.loadPersistentStores { _, error in
+            if let error = error as? NSError? {
+                //
+            }
+        }
+        return container
+    }()
+
+    func saveContext() {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                //
+            }
+        }
+    }
 }

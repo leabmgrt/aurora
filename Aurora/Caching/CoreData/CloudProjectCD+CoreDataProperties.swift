@@ -9,22 +9,17 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-
-extension CloudProjectCD {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CloudProjectCD> {
+public extension CloudProjectCD {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<CloudProjectCD> {
         return NSFetchRequest<CloudProjectCD>(entityName: "CloudProjectCD")
     }
 
-    @NSManaged public var id: String?
-    @NSManaged public var name: String?
-    @NSManaged public var apikeyReferrer: String?
-
+    @NSManaged var id: String?
+    @NSManaged var name: String?
+    @NSManaged var apikeyReferrer: String?
 }
 
-extension CloudProjectCD : Identifiable {
-
-}
+extension CloudProjectCD: Identifiable {}
