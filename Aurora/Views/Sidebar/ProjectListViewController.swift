@@ -228,6 +228,7 @@ extension ProjectListViewController: UITableViewDelegate {
                 navigationController?.pushViewController(serverListVC, animated: true)
             } else {
                 splitViewController?.setViewController(UINavigationController(rootViewController: serverListVC), for: .supplementary)
+				splitViewController?.hide(.primary)
             }
         } else if !selectedproject.didLoad && !selectedproject.connectionError && selectedproject.error == nil {
             // didn't load yet, chill
