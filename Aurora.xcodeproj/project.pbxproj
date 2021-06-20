@@ -40,9 +40,6 @@
 		3A41A9C6260E783100EF7526 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3A41A9C5260E783100EF7526 /* SwiftyJSON */; };
 		3A446D8B265AB1BD00314C87 /* AppReadOnlyDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A446D8A265AB1BD00314C87 /* AppReadOnlyDisclaimerView.swift */; };
 		3A54A3442612229A00F99693 /* HCAppCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A54A3432612229A00F99693 /* HCAppCache.swift */; };
-		3A54A34A2612236600F99693 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A54A3492612236600F99693 /* RealmSwift */; };
-		3A54A34C2612236600F99693 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3A54A34B2612236600F99693 /* Realm */; };
-		3A54A3582612238300F99693 /* RealmCloudProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A54A3572612238300F99693 /* RealmCloudProject.swift */; };
 		3A54A35E261225BD00F99693 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 3A54A35D261225BD00F99693 /* SwiftKeychainWrapper */; };
 		3A68A26B2619EB8800107533 /* ProjectServerDetailBackupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A68A26A2619EB8800107533 /* ProjectServerDetailBackupsView.swift */; };
 		3A6940E72618BEAF00490E82 /* HetznerCloudAPI_Volume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6940E62618BEAF00490E82 /* HetznerCloudAPI_Volume.swift */; };
@@ -65,6 +62,9 @@
 		3AC577D22645AE98000E3F91 /* UsedLibrariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC577D12645AE98000E3F91 /* UsedLibrariesView.swift */; };
 		3AC9E318261A1621003EAC36 /* HetznerCloudAPI_Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */; };
 		3AC9E31D261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */; };
+		3AD9D9C2267F4D44009E6596 /* CloudProjectCD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9D9C0267F4D44009E6596 /* CloudProjectCD.xcdatamodeld */; };
+		3AD9D9C5267F4E2A009E6596 /* CloudProjectCD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9D9C3267F4E2A009E6596 /* CloudProjectCD+CoreDataClass.swift */; };
+		3AD9D9C6267F4E2A009E6596 /* CloudProjectCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9D9C4267F4E2A009E6596 /* CloudProjectCD+CoreDataProperties.swift */; };
 		3ADCEE7B2646A97600567E0F /* UsedLibrariesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADCEE7A2646A97600567E0F /* UsedLibrariesData.swift */; };
 		3AE03A2F261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */; };
 		3AE03A37261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */; };
@@ -141,7 +141,6 @@
 		3A41A9BC260E70F200EF7526 /* HetznerDatacenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerDatacenter.swift; sourceTree = "<group>"; };
 		3A446D8A265AB1BD00314C87 /* AppReadOnlyDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReadOnlyDisclaimerView.swift; sourceTree = "<group>"; };
 		3A54A3432612229A00F99693 /* HCAppCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAppCache.swift; sourceTree = "<group>"; };
-		3A54A3572612238300F99693 /* RealmCloudProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCloudProject.swift; sourceTree = "<group>"; };
 		3A68A26A2619EB8800107533 /* ProjectServerDetailBackupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServerDetailBackupsView.swift; sourceTree = "<group>"; };
 		3A6940E62618BEAF00490E82 /* HetznerCloudAPI_Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Volume.swift; sourceTree = "<group>"; };
 		3A6A17982610DD7600BAE1ED /* CloudVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudVolume.swift; sourceTree = "<group>"; };
@@ -166,6 +165,9 @@
 		3AC9E317261A1621003EAC36 /* HetznerCloudAPI_Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_Network.swift; sourceTree = "<group>"; };
 		3AC9E31C261A29A9003EAC36 /* HetznerCloudAPI_FloatingIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HetznerCloudAPI_FloatingIP.swift; sourceTree = "<group>"; };
 		3AD9D9BF267F3637009E6596 /* Aurora.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Aurora.xctestplan; sourceTree = "<group>"; };
+		3AD9D9C1267F4D44009E6596 /* CloudProjectCD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CloudProjectCD.xcdatamodel; sourceTree = "<group>"; };
+		3AD9D9C3267F4E2A009E6596 /* CloudProjectCD+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudProjectCD+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3AD9D9C4267F4E2A009E6596 /* CloudProjectCD+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudProjectCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3ADCEE7A2646A97600567E0F /* UsedLibrariesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedLibrariesData.swift; sourceTree = "<group>"; };
 		3AE03A2E261B5119006EC3F1 /* ProjectLoadBalancerDetailTargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailTargetView.swift; sourceTree = "<group>"; };
 		3AE03A36261B57D7006EC3F1 /* ProjectLoadBalancerDetailServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectLoadBalancerDetailServicesView.swift; sourceTree = "<group>"; };
@@ -180,11 +182,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A54A34A2612236600F99693 /* RealmSwift in Frameworks */,
 				3A41A9C6260E783100EF7526 /* SwiftyJSON in Frameworks */,
 				3A54A35E261225BD00F99693 /* SwiftKeychainWrapper in Frameworks */,
 				3A9B456B26123317007E2EA4 /* Alamofire in Frameworks */,
-				3A54A34C2612236600F99693 /* Realm in Frameworks */,
 				3A41A9A1260E471D00EF7526 /* SnapKit in Frameworks */,
 				3A05A8732646E375003C6D0D /* ConfettiSwiftUI in Frameworks */,
 			);
@@ -383,7 +383,6 @@
 		3A54A3502612237600F99693 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				3A54A3572612238300F99693 /* RealmCloudProject.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -502,6 +501,16 @@
 			path = Testing;
 			sourceTree = "<group>";
 		};
+		3AD9D9C7267F4E32009E6596 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				3AD9D9C3267F4E2A009E6596 /* CloudProjectCD+CoreDataClass.swift */,
+				3AD9D9C4267F4E2A009E6596 /* CloudProjectCD+CoreDataProperties.swift */,
+				3AD9D9C0267F4D44009E6596 /* CloudProjectCD.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		3AE2AFFD264824E000B56C2D /* Firewalls */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,6 +522,7 @@
 		3AF3B6E726122262006BE70C /* Caching */ = {
 			isa = PBXGroup;
 			children = (
+				3AD9D9C7267F4E32009E6596 /* CoreData */,
 				3A54A3502612237600F99693 /* Objects */,
 				3A54A3432612229A00F99693 /* HCAppCache.swift */,
 			);
@@ -548,8 +558,6 @@
 			packageProductDependencies = (
 				3A41A9A0260E471D00EF7526 /* SnapKit */,
 				3A41A9C5260E783100EF7526 /* SwiftyJSON */,
-				3A54A3492612236600F99693 /* RealmSwift */,
-				3A54A34B2612236600F99693 /* Realm */,
 				3A54A35D261225BD00F99693 /* SwiftKeychainWrapper */,
 				3A9B456A26123317007E2EA4 /* Alamofire */,
 				3A05A8722646E375003C6D0D /* ConfettiSwiftUI */,
@@ -629,7 +637,6 @@
 			packageReferences = (
 				3A41A99F260E471D00EF7526 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				3A41A9C4260E783100EF7526 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				3A54A35C261225BD00F99693 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				3A9B456926123317007E2EA4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				3A05A8712646E375003C6D0D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
@@ -679,11 +686,13 @@
 			files = (
 				3AAF49C526124D3D009FEBBC /* HetznerCloudAPI_Firewall.swift in Sources */,
 				3AC0D6862612372200EB819E /* HetznerCloudAPI_Server.swift in Sources */,
+				3AD9D9C5267F4E2A009E6596 /* CloudProjectCD+CoreDataClass.swift in Sources */,
 				3A41A9BD260E70F200EF7526 /* HetznerDatacenter.swift in Sources */,
 				3A00B3CD260FAF5A000864C2 /* ProjectFloatingIPDetailViewController.swift in Sources */,
 				3AB8A6222610FBA5000567C3 /* CloudLoadBalancer.swift in Sources */,
 				3AC230FD261DFB77000700AA /* SettingsView.swift in Sources */,
 				3A00B3B5260FAA5D000864C2 /* ServerListViewController.swift in Sources */,
+				3AD9D9C6267F4E2A009E6596 /* CloudProjectCD+CoreDataProperties.swift in Sources */,
 				3A0A58D8261B189A00000C37 /* ExampleJSON.swift in Sources */,
 				3A1379EA26123535002EAFA7 /* HCAPIError.swift in Sources */,
 				3A41A968260E464200EF7526 /* ProjectListViewController.swift in Sources */,
@@ -721,12 +730,12 @@
 				3A1379E42612339C002EAFA7 /* HetznerCloudAPI.swift in Sources */,
 				3AC9E318261A1621003EAC36 /* HetznerCloudAPI_Network.swift in Sources */,
 				3A9B456226123118007E2EA4 /* UITableView.swift in Sources */,
+				3AD9D9C2267F4D44009E6596 /* CloudProjectCD.xcdatamodeld in Sources */,
 				3A9B455D2612303E007E2EA4 /* EZAlertController.swift in Sources */,
 				3A98AF772615F4D800EF895B /* ProjectServerDetailGraphsView.swift in Sources */,
 				3A41A9A7260E47A200EF7526 /* CloudProject.swift in Sources */,
 				3AA896F12610F86F00188F74 /* CloudNetwork.swift in Sources */,
 				3A85F988265FF32B00865E60 /* UIFont.swift in Sources */,
-				3A54A3582612238300F99693 /* RealmCloudProject.swift in Sources */,
 				3A6A17A92610F3FA00BAE1ED /* CloudFirewall.swift in Sources */,
 				3AFB0DE5265EA01C00A65880 /* ASEC.swift in Sources */,
 			);
@@ -1096,14 +1105,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "http://github.com/realm/realm-cocoa";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.7.2;
-			};
-		};
 		3A54A35C261225BD00F99693 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
@@ -1138,16 +1139,6 @@
 			package = 3A41A9C4260E783100EF7526 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
 		};
-		3A54A3492612236600F99693 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = RealmSwift;
-		};
-		3A54A34B2612236600F99693 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3A54A3482612236600F99693 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = Realm;
-		};
 		3A54A35D261225BD00F99693 /* SwiftKeychainWrapper */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A54A35C261225BD00F99693 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
@@ -1159,6 +1150,19 @@
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		3AD9D9C0267F4D44009E6596 /* CloudProjectCD.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3AD9D9C1267F4D44009E6596 /* CloudProjectCD.xcdatamodel */,
+			);
+			currentVersion = 3AD9D9C1267F4D44009E6596 /* CloudProjectCD.xcdatamodel */;
+			path = CloudProjectCD.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3A41A958260E464200EF7526 /* Project object */;
 }

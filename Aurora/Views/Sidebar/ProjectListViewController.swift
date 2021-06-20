@@ -133,63 +133,65 @@ class ProjectListViewController: UIViewController {
 
     func loadProjects(_ ids: [UUID]? = nil) {
 		dataIsLoading = true
-        DispatchQueue.global(qos: .background).async { [self] in
+		DispatchQueue.main.async { [self] in
             let cachedProjects = HCAppCache.default.loadProjects()
-            var projectsToLoad = [CloudProject]()
+			DispatchQueue.global(qos: .background).async {
+				var projectsToLoad = [CloudProject]()
 
-            if let idsToLoad = ids {
-                // Only load projects inside idsToLoad array from API
-                for id in idsToLoad {
-                    // update them in main list
-                    if let cached = cachedProjects.first(where: { $0.id == id }) {
-                        projectsToLoad.append(cached)
-                        if let indexInMainArray = projects.firstIndex(where: { $0.project.id == id }) {
-                            // first remove it, then add it
-                            projects.remove(at: indexInMainArray)
-                        }
-                        projects.append(CloudProjectInList(cached))
-                    }
-                }
-                reloadTableView(sortProjects: true)
-            } else {
-                projects = cachedProjects.map { CloudProjectInList($0) }
-                projectsToLoad = cachedProjects
-                reloadTableView(sortProjects: true)
-            }
+				if let idsToLoad = ids {
+					// Only load projects inside idsToLoad array from API
+					for id in idsToLoad {
+						// update them in main list
+						if let cached = cachedProjects.first(where: { $0.id == id }) {
+							projectsToLoad.append(cached)
+							if let indexInMainArray = projects.firstIndex(where: { $0.project.id == id }) {
+								// first remove it, then add it
+								projects.remove(at: indexInMainArray)
+							}
+							projects.append(CloudProjectInList(cached))
+						}
+					}
+					reloadTableView(sortProjects: true)
+				} else {
+					projects = cachedProjects.map { CloudProjectInList($0) }
+					projectsToLoad = cachedProjects
+					reloadTableView(sortProjects: true)
+				}
 
-            let dispatchGroup = DispatchGroup()
-            for project in projectsToLoad {
-                dispatchGroup.enter()
+				let dispatchGroup = DispatchGroup()
+				for project in projectsToLoad {
+					dispatchGroup.enter()
 
-                if let index = projects.firstIndex(where: { $0.project.id == project.id }) {
-                    DispatchQueue.global(qos: .background).async {
-                        project.api!.loadProject { projectresponse in
-                            switch projectresponse {
-                            case let .success(networkproject):
-                                self.projects[index].project.api!.project = networkproject
-                                self.projects[index].project = networkproject
-                                self.projects[index].connectionError = false
-                                self.projects[index].didLoad = true
-                                self.projects[index].error = nil
-                                dispatchGroup.leave()
-                            case let .failure(err):
-                                self.projects[index].connectionError = true
-                                self.projects[index].didLoad = false
-                                self.projects[index].error = err
-                                dispatchGroup.leave()
-                            }
-                        }
-                    }
-                }
-            }
+					if let index = projects.firstIndex(where: { $0.project.id == project.id }) {
+						DispatchQueue.global(qos: .background).async {
+							project.api!.loadProject { projectresponse in
+								switch projectresponse {
+								case let .success(networkproject):
+									self.projects[index].project.api!.project = networkproject
+									self.projects[index].project = networkproject
+									self.projects[index].connectionError = false
+									self.projects[index].didLoad = true
+									self.projects[index].error = nil
+									dispatchGroup.leave()
+								case let .failure(err):
+									self.projects[index].connectionError = true
+									self.projects[index].didLoad = false
+									self.projects[index].error = err
+									dispatchGroup.leave()
+								}
+							}
+						}
+					}
+				}
 
-            dispatchGroup.notify(queue: .main) { [self] in
-                // add them to shared array and send out notification
-                cloudAppSplitViewController.loadedProjects = projects.map { $0.project }
-                NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectlist"])
-				dataIsLoading = false
-                refreshControl.endRefreshing()
-            }
+				dispatchGroup.notify(queue: .main) { [self] in
+					// add them to shared array and send out notification
+					cloudAppSplitViewController.loadedProjects = projects.map { $0.project }
+					NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectlist"])
+					dataIsLoading = false
+					refreshControl.endRefreshing()
+				}
+			}
         }
     }
 
