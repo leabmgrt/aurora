@@ -67,7 +67,7 @@ struct ProjectFirewallDetailView: View {
                             Text("All outbound traffic is allowed.").italic()
                         }
                     }
-                }
+				}.listStyle(PlainListStyle())
             } else {
                 if controller.appliedServers().count != 0 {
                     List {
@@ -90,7 +90,7 @@ struct ProjectFirewallDetailView: View {
                                 }
                             }.padding([.top, .bottom], 4)
                         }
-                    }
+                    }.listStyle(PlainListStyle())
                 } else {
                     VStack {
                         Spacer()
