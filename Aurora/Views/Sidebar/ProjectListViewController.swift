@@ -18,6 +18,11 @@ class ProjectListViewController: UIViewController {
 
     var tableView: UITableView!
     var refreshControl: UIRefreshControl!
+	private var dataIsLoading: Bool = false {
+		didSet {
+			reloadTableView(sortProjects: true)
+		}
+	}
 
     override func viewWillAppear(_: Bool) {
         navigationItem.title = "Projects"
@@ -106,9 +111,6 @@ class ProjectListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ProjectListCell.self, forCellReuseIdentifier: "projectCell")
-        /* tableView.emptyDataSetSource = self
-         tableView.emptyDataSetDelegate = self
-         tableView.tableFooterView = UIView() */
         view.addSubview(tableView)
 
         refreshControl = .init()
@@ -130,6 +132,7 @@ class ProjectListViewController: UIViewController {
     }
 
     func loadProjects(_ ids: [UUID]? = nil) {
+		dataIsLoading = true
         DispatchQueue.global(qos: .background).async { [self] in
             let cachedProjects = HCAppCache.default.loadProjects()
             var projectsToLoad = [CloudProject]()
@@ -184,7 +187,7 @@ class ProjectListViewController: UIViewController {
                 // add them to shared array and send out notification
                 cloudAppSplitViewController.loadedProjects = projects.map { $0.project }
                 NotificationCenter.default.post(name: Notification.Name("ProjectArrayUpdatedNotification"), object: nil, userInfo: ["sender": "projectlist"])
-                reloadTableView(sortProjects: true)
+				dataIsLoading = false
                 refreshControl.endRefreshing()
             }
         }
@@ -251,7 +254,13 @@ extension ProjectListViewController: UITableViewDataSource {
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         if projects.isEmpty {
-            tableView.setEmptyMessage(message: "No projects", subtitle: "Try adding a project by clicking the \"+\" button above", navigationController: navigationController!)
+			if dataIsLoading {
+				tableView.setEmptyMessage(message: "Loading data...", subtitle: "The projects are currently being loaded", navigationController: navigationController!)
+			}
+			else {
+				tableView.setEmptyMessage(message: "No projects", subtitle: "Try adding a project by clicking the \"+\" button above", navigationController: navigationController!)
+			}
+            
         } else {
             tableView.restore()
         }
